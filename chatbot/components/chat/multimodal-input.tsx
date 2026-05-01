@@ -81,8 +81,8 @@ function PureMultimodalInput({
   sendMessage,
   className,
   selectedVisibilityType,
-  selectedModelId,
-  onModelChange,
+  selectedModelId: _selectedModelId,
+  onModelChange: _onModelChange,
   editingMessage,
   onCancelEdit,
   isLoading,
@@ -510,22 +510,18 @@ function PureMultimodalInput({
             }
           }}
           placeholder={
-            editingMessage ? "Edit your message..." : "Ask anything..."
+            editingMessage
+              ? "Edit your message..."
+              : "Ask about dishes, allergies, spice, pairings, or ordering..."
           }
           ref={textareaRef}
           value={input}
         />
         <PromptInputFooter className="px-3 pb-3">
           <PromptInputTools>
-            <AttachmentsButton
-              fileInputRef={fileInputRef}
-              selectedModelId={selectedModelId}
-              status={status}
-            />
-            <ModelSelectorCompact
-              onModelChange={onModelChange}
-              selectedModelId={selectedModelId}
-            />
+            <span className="text-muted-foreground/60 text-xs">
+              Table menu assistant
+            </span>
           </PromptInputTools>
 
           {status === "submitted" ? (

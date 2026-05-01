@@ -114,6 +114,6 @@ model = ChatOpenRouter(
 ```
 ### Chatbot Template: Vercel AI Chatbot (next.js + AI SDK) 
 Already downloaded as 'chatbot' in root directory
-### Vector Database: ChromaDB (locally on docker)
+### Vector Database: Supabase with PGvector extension
 ### Storage Database: Supabase
 Store conversations, orders associated with tables, etc.

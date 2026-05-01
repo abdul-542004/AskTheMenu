@@ -1,6 +1,9 @@
-import { type NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
-import { guestRegex, isDevelopmentEnvironment } from "./lib/constants";
+import { type NextRequest, NextResponse } from "next/server";
+import { guestRegex, isDevelopmentEnvironment } from "@/lib/constants";
+import { hasDatabaseUrl } from "@/lib/db/url";
+
+const hasDatabase = hasDatabaseUrl();
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -13,26 +16,34 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
+  if (!hasDatabase || pathname.startsWith("/api/")) {
+    return NextResponse.next();
+  }
+
   const token = await getToken({
     req: request,
     secret: process.env.AUTH_SECRET,
     secureCookie: !isDevelopmentEnvironment,
   });
 
-  const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-
-  if (!token) {
-    const redirectUrl = encodeURIComponent(new URL(request.url).pathname);
-
-    return NextResponse.redirect(
-      new URL(`${base}/api/auth/guest?redirectUrl=${redirectUrl}`, request.url)
-    );
-  }
-
   const isGuest = guestRegex.test(token?.email ?? "");
 
   if (token && !isGuest && ["/login", "/register"].includes(pathname)) {
-    return NextResponse.redirect(new URL(`${base}/`, request.url));
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  if (
+    pathname === "/" ||
+    pathname.startsWith("/chat/") ||
+    pathname.startsWith("/menu") ||
+    pathname.startsWith("/kitchen")
+  ) {
+    if (!token) {
+      const redirectUrl = `${pathname}${request.nextUrl.search}`;
+      const guestUrl = new URL("/api/auth/guest", request.url);
+      guestUrl.searchParams.set("redirectUrl", redirectUrl);
+      return NextResponse.redirect(guestUrl);
+    }
   }
 
   return NextResponse.next();

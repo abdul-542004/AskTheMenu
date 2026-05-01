@@ -23,7 +23,11 @@ import {
   chat,
   type DBMessage,
   document,
+  menuItem,
   message,
+  order,
+  orderItem,
+  restaurantTable,
   type Suggestion,
   stream,
   suggestion,
@@ -31,9 +35,19 @@ import {
   user,
   vote,
 } from "./schema";
+import { getDatabaseUrl, isSupabasePoolerUrl } from "./url";
 import { generateHashedPassword } from "./utils";
 
-const client = postgres(process.env.POSTGRES_URL ?? "");
+const databaseUrl = getDatabaseUrl();
+const isSupabasePooler = isSupabasePoolerUrl(databaseUrl);
+
+const client = postgres(
+  databaseUrl || "postgres://postgres:postgres@127.0.0.1:65432/postgres",
+  {
+    connect_timeout: 1,
+    prepare: databaseUrl ? !isSupabasePooler : false,
+  }
+);
 const db = drizzle(client);
 
 export async function getUser(email: string): Promise<User[]> {
@@ -628,5 +642,113 @@ export async function getStreamIdsByChatId({ chatId }: { chatId: string }) {
       "bad_request:database",
       "Failed to get stream ids by chat id"
     );
+  }
+}
+
+export async function getMenuItemsFromDatabase({
+  restaurantId,
+}: {
+  restaurantId?: string;
+} = {}) {
+  try {
+    const whereCondition = restaurantId
+      ? and(
+          eq(menuItem.restaurantId, restaurantId),
+          eq(menuItem.isAvailable, true)
+        )
+      : eq(menuItem.isAvailable, true);
+
+    return await db
+      .select()
+      .from(menuItem)
+      .where(whereCondition)
+      .orderBy(asc(menuItem.cuisineType), asc(menuItem.name));
+  } catch (_error) {
+    throw new ChatbotError("bad_request:database", "Failed to get menu items");
+  }
+}
+
+export type KitchenOrder = {
+  id: string;
+  status: "pending" | "accepted" | "preparing" | "served" | "cancelled";
+  tableLabel: string;
+  subtotalPkr: number;
+  gstAmountPkr: number;
+  totalPkr: number;
+  customerNote: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+  items: Array<{
+    id: string;
+    menuItemName: string;
+    quantity: number;
+    unitPricePkr: number;
+    notes: string | null;
+  }>;
+};
+
+export async function getKitchenOrders({
+  limit = 50,
+}: {
+  limit?: number;
+} = {}): Promise<KitchenOrder[]> {
+  try {
+    const rows = await db
+      .select({
+        orderId: order.id,
+        status: order.status,
+        tableLabel: restaurantTable.label,
+        subtotalPkr: order.subtotalPkr,
+        gstAmountPkr: order.gstAmountPkr,
+        totalPkr: order.totalPkr,
+        customerNote: order.customerNote,
+        createdAt: order.createdAt,
+        updatedAt: order.updatedAt,
+        orderItemId: orderItem.id,
+        menuItemName: menuItem.name,
+        quantity: orderItem.quantity,
+        unitPricePkr: orderItem.unitPricePkr,
+        itemNotes: orderItem.notes,
+      })
+      .from(order)
+      .innerJoin(restaurantTable, eq(order.tableId, restaurantTable.id))
+      .leftJoin(orderItem, eq(order.id, orderItem.orderId))
+      .leftJoin(menuItem, eq(orderItem.menuItemId, menuItem.id))
+      .orderBy(desc(order.createdAt), asc(orderItem.createdAt))
+      .limit(limit);
+
+    const grouped = new Map<string, KitchenOrder>();
+
+    for (const row of rows) {
+      const existing = grouped.get(row.orderId);
+      const current = existing ?? {
+        id: row.orderId,
+        status: row.status,
+        tableLabel: row.tableLabel,
+        subtotalPkr: row.subtotalPkr,
+        gstAmountPkr: row.gstAmountPkr,
+        totalPkr: row.totalPkr,
+        customerNote: row.customerNote,
+        createdAt: row.createdAt,
+        updatedAt: row.updatedAt,
+        items: [],
+      };
+
+      if (!(row.orderItemId === null || row.menuItemName === null)) {
+        current.items.push({
+          id: row.orderItemId,
+          menuItemName: row.menuItemName,
+          quantity: row.quantity ?? 1,
+          unitPricePkr: row.unitPricePkr ?? 0,
+          notes: row.itemNotes,
+        });
+      }
+
+      grouped.set(row.orderId, current);
+    }
+
+    return Array.from(grouped.values());
+  } catch (_error) {
+    throw new ChatbotError("bad_request:database", "Failed to get orders");
   }
 }

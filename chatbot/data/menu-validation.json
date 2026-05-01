@@ -1,0 +1,22 @@
+{
+  "itemCount": 100,
+  "cuisineCounts": {
+    "desi": 20,
+    "chinese": 20,
+    "continental": 20,
+    "fusion": 20,
+    "staple": 20
+  },
+  "sectionCounts": {
+    "Desi Cuisines": 20,
+    "Chinese": 20,
+    "Continental": 20,
+    "Fusion": 20,
+    "Staple": 20
+  },
+  "servingCounts": {
+    "single": 85,
+    "shareable": 15
+  },
+  "warnings": []
+}

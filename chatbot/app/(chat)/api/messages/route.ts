@@ -1,6 +1,9 @@
 import { auth } from "@/app/(auth)/auth";
 import { getChatById, getMessagesByChatId } from "@/lib/db/queries";
-import { convertToUIMessages } from "@/lib/utils";
+import { getDatabaseUrl } from "@/lib/db/url";
+import { convertToUIMessages, isUUID } from "@/lib/utils";
+
+const hasDatabase = Boolean(getDatabaseUrl());
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -8,6 +11,15 @@ export async function GET(request: Request) {
 
   if (!chatId) {
     return Response.json({ error: "chatId required" }, { status: 400 });
+  }
+
+  if (!hasDatabase || !isUUID(chatId)) {
+    return Response.json({
+      messages: [],
+      visibility: "private",
+      userId: null,
+      isReadonly: false,
+    });
   }
 
   const [session, chat, messages] = await Promise.all([

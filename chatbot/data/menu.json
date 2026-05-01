@@ -1,0 +1,2981 @@
+[
+  {
+    "id": "beef-biryani",
+    "name": "Beef Biryani",
+    "ingredients": [
+      "basmati rice",
+      "beef",
+      "onions",
+      "yogurt",
+      "tomatoes",
+      "ginger",
+      "garlic",
+      "green chilies",
+      "biryani spices (cumin",
+      "cardamom",
+      "cloves",
+      "cinnamon)",
+      "saffron",
+      "herbs"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "hot",
+    "cuisineType": "desi",
+    "specialty": true,
+    "pairings": [
+      "Mint Raita",
+      "Salad Bowl"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 400,
+      "unit": "plate",
+      "display": "PKR 400/plate"
+    },
+    "sourceSection": "Desi Cuisines"
+  },
+  {
+    "id": "chicken-handi",
+    "name": "Chicken Handi",
+    "ingredients": [
+      "chicken",
+      "tomatoes",
+      "ginger",
+      "garlic",
+      "green chilies",
+      "spices",
+      "cream"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "desi",
+    "specialty": true,
+    "pairings": [
+      "Plain Naan",
+      "Garlic Naan"
+    ],
+    "serving": "shareable",
+    "portionLabel": "2 - 3 persons",
+    "price": {
+      "currency": "PKR",
+      "amount": 1450,
+      "unit": "kg",
+      "display": "PKR 1,450/kg"
+    },
+    "sourceSection": "Desi Cuisines"
+  },
+  {
+    "id": "chicken-biryani",
+    "name": "Chicken Biryani",
+    "ingredients": [
+      "basmati rice",
+      "chicken",
+      "yogurt",
+      "onions",
+      "tomatoes",
+      "ginger",
+      "garlic",
+      "green chilies",
+      "biryani spices"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "hot",
+    "cuisineType": "desi",
+    "specialty": true,
+    "pairings": [
+      "Mint Raita",
+      "Salad Bowl"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 380,
+      "unit": "plate",
+      "display": "PKR 380/plate"
+    },
+    "sourceSection": "Desi Cuisines"
+  },
+  {
+    "id": "mutton-karahi",
+    "name": "Mutton Karahi",
+    "ingredients": [
+      "mutton",
+      "tomatoes",
+      "ginger",
+      "garlic",
+      "green chilies",
+      "coriander",
+      "spices"
+    ],
+    "allergens": [],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "hot",
+    "cuisineType": "desi",
+    "specialty": true,
+    "pairings": [
+      "Garlic Naan",
+      "Tandoori Roti"
+    ],
+    "serving": "shareable",
+    "portionLabel": "2 - 3 persons",
+    "price": {
+      "currency": "PKR",
+      "amount": 2200,
+      "unit": "kg",
+      "display": "PKR 2,200/kg"
+    },
+    "sourceSection": "Desi Cuisines"
+  },
+  {
+    "id": "chicken-karahi",
+    "name": "Chicken Karahi",
+    "ingredients": [
+      "chicken",
+      "tomatoes",
+      "ginger",
+      "garlic",
+      "green chilies",
+      "coriander",
+      "spices"
+    ],
+    "allergens": [],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "desi",
+    "specialty": true,
+    "pairings": [
+      "Garlic Naan",
+      "Tandoori Roti"
+    ],
+    "serving": "shareable",
+    "portionLabel": "2 - 3 persons",
+    "price": {
+      "currency": "PKR",
+      "amount": 1650,
+      "unit": "kg",
+      "display": "PKR 1,650/kg"
+    },
+    "sourceSection": "Desi Cuisines"
+  },
+  {
+    "id": "nihari",
+    "name": "Nihari",
+    "ingredients": [
+      "beef",
+      "wheat flour",
+      "ginger",
+      "garlic",
+      "spices",
+      "oil"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "desi",
+    "specialty": true,
+    "pairings": [
+      "Garlic Naan",
+      "Roghni Naan"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 450,
+      "unit": "plate",
+      "display": "PKR 450/plate"
+    },
+    "sourceSection": "Desi Cuisines"
+  },
+  {
+    "id": "haleem",
+    "name": "Haleem",
+    "ingredients": [
+      "wheat",
+      "barley",
+      "lentils",
+      "beef",
+      "spices",
+      "ghee"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "desi",
+    "specialty": true,
+    "pairings": [
+      "Garlic Naan",
+      "Fresh Lime Water"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 350,
+      "unit": "plate",
+      "display": "PKR 350/plate"
+    },
+    "sourceSection": "Desi Cuisines"
+  },
+  {
+    "id": "chicken-pulao",
+    "name": "Chicken Pulao",
+    "ingredients": [
+      "rice",
+      "chicken",
+      "whole spices",
+      "onions",
+      "garlic",
+      "ginger"
+    ],
+    "allergens": [],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "desi",
+    "specialty": false,
+    "pairings": [
+      "Mint Raita"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 320,
+      "unit": "plate",
+      "display": "PKR 320/plate"
+    },
+    "sourceSection": "Desi Cuisines"
+  },
+  {
+    "id": "seekh-kebab",
+    "name": "Seekh Kebab",
+    "ingredients": [
+      "minced beef",
+      "onions",
+      "green chilies",
+      "spices"
+    ],
+    "allergens": [],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "desi",
+    "specialty": true,
+    "pairings": [
+      "Garlic Naan",
+      "Ketchup & Dips Set"
+    ],
+    "serving": "single",
+    "portionLabel": "4 pieces",
+    "price": {
+      "currency": "PKR",
+      "amount": 500,
+      "unit": "serving",
+      "display": "PKR 500/serving"
+    },
+    "sourceSection": "Desi Cuisines"
+  },
+  {
+    "id": "chicken-tikka",
+    "name": "Chicken Tikka",
+    "ingredients": [
+      "chicken",
+      "yogurt",
+      "spices",
+      "lemon juice"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "desi",
+    "specialty": true,
+    "pairings": [
+      "Garlic Naan",
+      "Ketchup & Dips Set"
+    ],
+    "serving": "single",
+    "portionLabel": "quarter",
+    "price": {
+      "currency": "PKR",
+      "amount": 450,
+      "unit": "serving",
+      "display": "PKR 450/serving"
+    },
+    "sourceSection": "Desi Cuisines"
+  },
+  {
+    "id": "malai-boti",
+    "name": "Malai Boti",
+    "ingredients": [
+      "chicken",
+      "cream",
+      "cheese",
+      "spices"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "desi",
+    "specialty": true,
+    "pairings": [
+      "Garlic Naan",
+      "Ketchup & Dips Set"
+    ],
+    "serving": "single",
+    "portionLabel": "6 pieces",
+    "price": {
+      "currency": "PKR",
+      "amount": 600,
+      "unit": "serving",
+      "display": "PKR 600/serving"
+    },
+    "sourceSection": "Desi Cuisines"
+  },
+  {
+    "id": "chapli-kebab",
+    "name": "Chapli Kebab",
+    "ingredients": [
+      "minced beef",
+      "tomatoes",
+      "onions",
+      "spices"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "desi",
+    "specialty": true,
+    "pairings": [
+      "Garlic Naan",
+      "Mint Raita"
+    ],
+    "serving": "single",
+    "portionLabel": "2 pieces",
+    "price": {
+      "currency": "PKR",
+      "amount": 400,
+      "unit": "serving",
+      "display": "PKR 400/serving"
+    },
+    "sourceSection": "Desi Cuisines"
+  },
+  {
+    "id": "palak-paneer",
+    "name": "Palak Paneer",
+    "ingredients": [
+      "spinach",
+      "paneer",
+      "cream",
+      "spices"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "desi",
+    "specialty": false,
+    "pairings": [
+      "Garlic Naan"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 450,
+      "unit": "plate",
+      "display": "PKR 450/plate"
+    },
+    "sourceSection": "Desi Cuisines"
+  },
+  {
+    "id": "chicken-korma",
+    "name": "Chicken Korma",
+    "ingredients": [
+      "chicken",
+      "yogurt",
+      "cream",
+      "nuts",
+      "spices"
+    ],
+    "allergens": [
+      "dairy",
+      "nuts"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "desi",
+    "specialty": true,
+    "pairings": [
+      "Garlic Naan"
+    ],
+    "serving": "shareable",
+    "portionLabel": "2 persons",
+    "price": {
+      "currency": "PKR",
+      "amount": 1300,
+      "unit": "serving",
+      "display": "PKR 1,300/serving"
+    },
+    "sourceSection": "Desi Cuisines"
+  },
+  {
+    "id": "mutton-korma",
+    "name": "Mutton Korma",
+    "ingredients": [
+      "mutton",
+      "yogurt",
+      "cream",
+      "spices"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "desi",
+    "specialty": true,
+    "pairings": [
+      "Garlic Naan"
+    ],
+    "serving": "shareable",
+    "portionLabel": "2 persons",
+    "price": {
+      "currency": "PKR",
+      "amount": 1900,
+      "unit": "serving",
+      "display": "PKR 1,900/serving"
+    },
+    "sourceSection": "Desi Cuisines"
+  },
+  {
+    "id": "mix-sabzi",
+    "name": "Mix Sabzi",
+    "ingredients": [
+      "assorted vegetables",
+      "spices"
+    ],
+    "allergens": [],
+    "dietary": "vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "desi",
+    "specialty": false,
+    "pairings": [
+      "Tandoori Roti"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 280,
+      "unit": "plate",
+      "display": "PKR 280/plate"
+    },
+    "sourceSection": "Desi Cuisines"
+  },
+  {
+    "id": "fried-fish-desi-style",
+    "name": "Fried Fish (Desi Style)",
+    "ingredients": [
+      "fish",
+      "gram flour",
+      "spices",
+      "lemon"
+    ],
+    "allergens": [
+      "seafood",
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "desi",
+    "specialty": true,
+    "pairings": [
+      "Ketchup & Dips Set",
+      "Salad Bowl"
+    ],
+    "serving": "single",
+    "portionLabel": "4 pieces",
+    "price": {
+      "currency": "PKR",
+      "amount": 700,
+      "unit": "serving",
+      "display": "PKR 700/serving"
+    },
+    "sourceSection": "Desi Cuisines"
+  },
+  {
+    "id": "daal-makhni",
+    "name": "Daal Makhni",
+    "ingredients": [
+      "lentils",
+      "butter",
+      "cream",
+      "spices"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "desi",
+    "specialty": true,
+    "pairings": [
+      "Garlic Naan"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 400,
+      "unit": "plate",
+      "display": "PKR 400/plate"
+    },
+    "sourceSection": "Desi Cuisines"
+  },
+  {
+    "id": "chicken-kofta",
+    "name": "Chicken Kofta",
+    "ingredients": [
+      "chicken mince",
+      "spices",
+      "yogurt gravy"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "desi",
+    "specialty": false,
+    "pairings": [
+      "Garlic Naan"
+    ],
+    "serving": "shareable",
+    "portionLabel": "2 persons",
+    "price": {
+      "currency": "PKR",
+      "amount": 950,
+      "unit": "serving",
+      "display": "PKR 950/serving"
+    },
+    "sourceSection": "Desi Cuisines"
+  },
+  {
+    "id": "beef-kofta",
+    "name": "Beef Kofta",
+    "ingredients": [
+      "beef mince",
+      "spices",
+      "yogurt gravy"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "desi",
+    "specialty": false,
+    "pairings": [
+      "Garlic Naan"
+    ],
+    "serving": "shareable",
+    "portionLabel": "2 persons",
+    "price": {
+      "currency": "PKR",
+      "amount": 1050,
+      "unit": "serving",
+      "display": "PKR 1,050/serving"
+    },
+    "sourceSection": "Desi Cuisines"
+  },
+  {
+    "id": "chicken-chow-mein",
+    "name": "Chicken Chow Mein",
+    "ingredients": [
+      "noodles",
+      "chicken",
+      "cabbage",
+      "carrots",
+      "soy sauce",
+      "garlic",
+      "oil"
+    ],
+    "allergens": [
+      "gluten",
+      "soy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "chinese",
+    "specialty": true,
+    "pairings": [
+      "Spring Rolls"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 450,
+      "unit": "plate",
+      "display": "PKR 450/plate"
+    },
+    "sourceSection": "Chinese"
+  },
+  {
+    "id": "chicken-manchurian",
+    "name": "Chicken Manchurian",
+    "ingredients": [
+      "chicken",
+      "soy sauce",
+      "garlic",
+      "ginger",
+      "cornflour",
+      "chili sauce"
+    ],
+    "allergens": [
+      "gluten",
+      "soy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "chinese",
+    "specialty": true,
+    "pairings": [
+      "Egg Fried Rice"
+    ],
+    "serving": "shareable",
+    "portionLabel": "2 persons",
+    "price": {
+      "currency": "PKR",
+      "amount": 900,
+      "unit": "serving",
+      "display": "PKR 900/serving"
+    },
+    "sourceSection": "Chinese"
+  },
+  {
+    "id": "egg-fried-rice",
+    "name": "Egg Fried Rice",
+    "ingredients": [
+      "rice",
+      "eggs",
+      "soy sauce",
+      "spring onions",
+      "garlic"
+    ],
+    "allergens": [
+      "eggs",
+      "soy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "chinese",
+    "specialty": false,
+    "pairings": [
+      "Chicken Chili Dry"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 350,
+      "unit": "plate",
+      "display": "PKR 350/plate"
+    },
+    "sourceSection": "Chinese"
+  },
+  {
+    "id": "schezwan-fried-rice",
+    "name": "Schezwan Fried Rice",
+    "ingredients": [
+      "rice",
+      "chicken",
+      "schezwan sauce",
+      "garlic",
+      "vegetables"
+    ],
+    "allergens": [
+      "soy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "hot",
+    "cuisineType": "chinese",
+    "specialty": true,
+    "pairings": [
+      "Chicken Manchurian"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 500,
+      "unit": "plate",
+      "display": "PKR 500/plate"
+    },
+    "sourceSection": "Chinese"
+  },
+  {
+    "id": "chicken-chili-dry",
+    "name": "Chicken Chili Dry",
+    "ingredients": [
+      "chicken",
+      "soy sauce",
+      "green chilies",
+      "garlic",
+      "bell peppers"
+    ],
+    "allergens": [
+      "soy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "hot",
+    "cuisineType": "chinese",
+    "specialty": true,
+    "pairings": [
+      "Schezwan Fried Rice"
+    ],
+    "serving": "shareable",
+    "portionLabel": "2 persons",
+    "price": {
+      "currency": "PKR",
+      "amount": 850,
+      "unit": "serving",
+      "display": "PKR 850/serving"
+    },
+    "sourceSection": "Chinese"
+  },
+  {
+    "id": "hot-and-sour-soup",
+    "name": "Hot and Sour Soup",
+    "ingredients": [
+      "chicken",
+      "mushrooms",
+      "vinegar",
+      "soy sauce",
+      "eggs"
+    ],
+    "allergens": [
+      "eggs",
+      "soy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "hot",
+    "cuisineType": "chinese",
+    "specialty": true,
+    "pairings": [
+      "Chicken Nuggets"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 300,
+      "unit": "bowl",
+      "display": "PKR 300/bowl"
+    },
+    "sourceSection": "Chinese"
+  },
+  {
+    "id": "chicken-corn-soup",
+    "name": "Chicken Corn Soup",
+    "ingredients": [
+      "chicken",
+      "corn",
+      "eggs",
+      "cornflour"
+    ],
+    "allergens": [
+      "eggs"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "chinese",
+    "specialty": true,
+    "pairings": [
+      "Garlic Naan"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 280,
+      "unit": "bowl",
+      "display": "PKR 280/bowl"
+    },
+    "sourceSection": "Chinese"
+  },
+  {
+    "id": "spring-rolls",
+    "name": "Spring Rolls",
+    "ingredients": [
+      "pastry sheets",
+      "vegetables",
+      "soy sauce"
+    ],
+    "allergens": [
+      "gluten",
+      "soy"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "chinese",
+    "specialty": false,
+    "pairings": [
+      "Ketchup & Dips Set"
+    ],
+    "serving": "single",
+    "portionLabel": "4 pieces",
+    "price": {
+      "currency": "PKR",
+      "amount": 300,
+      "unit": "serving",
+      "display": "PKR 300/serving"
+    },
+    "sourceSection": "Chinese"
+  },
+  {
+    "id": "beef-chili-dry",
+    "name": "Beef Chili Dry",
+    "ingredients": [
+      "beef",
+      "soy sauce",
+      "green chilies",
+      "garlic",
+      "bell peppers"
+    ],
+    "allergens": [
+      "soy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "hot",
+    "cuisineType": "chinese",
+    "specialty": true,
+    "pairings": [
+      "Schezwan Fried Rice"
+    ],
+    "serving": "shareable",
+    "portionLabel": "2 persons",
+    "price": {
+      "currency": "PKR",
+      "amount": 950,
+      "unit": "serving",
+      "display": "PKR 950/serving"
+    },
+    "sourceSection": "Chinese"
+  },
+  {
+    "id": "garlic-chicken",
+    "name": "Garlic Chicken",
+    "ingredients": [
+      "chicken",
+      "garlic",
+      "soy sauce",
+      "oil"
+    ],
+    "allergens": [
+      "soy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "chinese",
+    "specialty": false,
+    "pairings": [
+      "Chicken Chow Mein"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 500,
+      "unit": "plate",
+      "display": "PKR 500/plate"
+    },
+    "sourceSection": "Chinese"
+  },
+  {
+    "id": "kung-pao-chicken",
+    "name": "Kung Pao Chicken",
+    "ingredients": [
+      "chicken",
+      "peanuts",
+      "soy sauce",
+      "chili peppers"
+    ],
+    "allergens": [
+      "nuts",
+      "soy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "chinese",
+    "specialty": true,
+    "pairings": [
+      "Egg Fried Rice"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 600,
+      "unit": "plate",
+      "display": "PKR 600/plate"
+    },
+    "sourceSection": "Chinese"
+  },
+  {
+    "id": "sweet-and-sour-chicken",
+    "name": "Sweet and Sour Chicken",
+    "ingredients": [
+      "chicken",
+      "pineapple",
+      "bell peppers",
+      "vinegar",
+      "sugar"
+    ],
+    "allergens": [],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "chinese",
+    "specialty": true,
+    "pairings": [
+      "Schezwan Fried Rice"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 550,
+      "unit": "plate",
+      "display": "PKR 550/plate"
+    },
+    "sourceSection": "Chinese"
+  },
+  {
+    "id": "stir-fry-vegetables",
+    "name": "Stir Fry Vegetables",
+    "ingredients": [
+      "broccoli",
+      "carrots",
+      "beans",
+      "soy sauce",
+      "garlic"
+    ],
+    "allergens": [
+      "soy"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "chinese",
+    "specialty": false,
+    "pairings": [
+      "Egg Fried Rice"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 350,
+      "unit": "plate",
+      "display": "PKR 350/plate"
+    },
+    "sourceSection": "Chinese"
+  },
+  {
+    "id": "prawn-fried-rice",
+    "name": "Prawn Fried Rice",
+    "ingredients": [
+      "rice",
+      "prawns",
+      "eggs",
+      "soy sauce",
+      "vegetables"
+    ],
+    "allergens": [
+      "seafood",
+      "eggs",
+      "soy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "chinese",
+    "specialty": true,
+    "pairings": [
+      "Fish in Hot Garlic Sauce"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 650,
+      "unit": "plate",
+      "display": "PKR 650/plate"
+    },
+    "sourceSection": "Chinese"
+  },
+  {
+    "id": "chili-garlic-noodles",
+    "name": "Chili Garlic Noodles",
+    "ingredients": [
+      "noodles",
+      "garlic",
+      "chili sauce",
+      "vegetables",
+      "soy sauce"
+    ],
+    "allergens": [
+      "gluten",
+      "soy"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "hot",
+    "cuisineType": "chinese",
+    "specialty": true,
+    "pairings": [
+      "Chicken Manchurian"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 420,
+      "unit": "plate",
+      "display": "PKR 420/plate"
+    },
+    "sourceSection": "Chinese"
+  },
+  {
+    "id": "chicken-shashlik",
+    "name": "Chicken Shashlik",
+    "ingredients": [
+      "chicken",
+      "bell peppers",
+      "onions",
+      "soy sauce",
+      "spices"
+    ],
+    "allergens": [
+      "soy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "chinese",
+    "specialty": true,
+    "pairings": [
+      "Schezwan Fried Rice"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 650,
+      "unit": "plate",
+      "display": "PKR 650/plate"
+    },
+    "sourceSection": "Chinese"
+  },
+  {
+    "id": "fish-in-hot-garlic-sauce",
+    "name": "Fish in Hot Garlic Sauce",
+    "ingredients": [
+      "fish",
+      "garlic",
+      "soy sauce",
+      "chili paste"
+    ],
+    "allergens": [
+      "seafood",
+      "soy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "hot",
+    "cuisineType": "chinese",
+    "specialty": true,
+    "pairings": [
+      "Egg Fried Rice"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 700,
+      "unit": "plate",
+      "display": "PKR 700/plate"
+    },
+    "sourceSection": "Chinese"
+  },
+  {
+    "id": "chicken-cashew-nuts",
+    "name": "Chicken Cashew Nuts",
+    "ingredients": [
+      "chicken",
+      "cashew nuts",
+      "soy sauce",
+      "vegetables"
+    ],
+    "allergens": [
+      "nuts",
+      "soy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "chinese",
+    "specialty": true,
+    "pairings": [
+      "Schezwan Fried Rice"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 680,
+      "unit": "plate",
+      "display": "PKR 680/plate"
+    },
+    "sourceSection": "Chinese"
+  },
+  {
+    "id": "black-pepper-beef",
+    "name": "Black Pepper Beef",
+    "ingredients": [
+      "beef",
+      "black pepper",
+      "soy sauce",
+      "onions"
+    ],
+    "allergens": [
+      "soy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "chinese",
+    "specialty": true,
+    "pairings": [
+      "Egg Fried Rice"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 750,
+      "unit": "plate",
+      "display": "PKR 750/plate"
+    },
+    "sourceSection": "Chinese"
+  },
+  {
+    "id": "dim-sum-chicken-dumplings",
+    "name": "Dim Sum (Chicken Dumplings)",
+    "ingredients": [
+      "chicken",
+      "flour wrappers",
+      "garlic",
+      "ginger"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "chinese",
+    "specialty": true,
+    "pairings": [
+      "Ketchup & Dips Set"
+    ],
+    "serving": "single",
+    "portionLabel": "6 pieces",
+    "price": {
+      "currency": "PKR",
+      "amount": 500,
+      "unit": "serving",
+      "display": "PKR 500/serving"
+    },
+    "sourceSection": "Chinese"
+  },
+  {
+    "id": "grilled-chicken-steak",
+    "name": "Grilled Chicken Steak",
+    "ingredients": [
+      "chicken breast",
+      "herbs",
+      "butter",
+      "black pepper"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "continental",
+    "specialty": true,
+    "pairings": [
+      "Masala Fries",
+      "Salad Bowl"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 950,
+      "unit": "plate",
+      "display": "PKR 950/plate"
+    },
+    "sourceSection": "Continental"
+  },
+  {
+    "id": "beef-tenderloin-steak",
+    "name": "Beef Tenderloin Steak",
+    "ingredients": [
+      "beef tenderloin",
+      "butter",
+      "garlic",
+      "herbs"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "continental",
+    "specialty": true,
+    "pairings": [
+      "Masala Fries",
+      "Salad Bowl"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 1800,
+      "unit": "plate",
+      "display": "PKR 1,800/plate"
+    },
+    "sourceSection": "Continental"
+  },
+  {
+    "id": "fish-and-chips",
+    "name": "Fish and Chips",
+    "ingredients": [
+      "fish fillet",
+      "potatoes",
+      "flour",
+      "oil"
+    ],
+    "allergens": [
+      "gluten",
+      "seafood"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "continental",
+    "specialty": true,
+    "pairings": [
+      "Ketchup & Dips Set"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 850,
+      "unit": "plate",
+      "display": "PKR 850/plate"
+    },
+    "sourceSection": "Continental"
+  },
+  {
+    "id": "chicken-alfredo-pasta",
+    "name": "Chicken Alfredo Pasta",
+    "ingredients": [
+      "pasta",
+      "chicken",
+      "cream",
+      "parmesan",
+      "garlic"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "continental",
+    "specialty": true,
+    "pairings": [
+      "Garlic Naan"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 780,
+      "unit": "plate",
+      "display": "PKR 780/plate"
+    },
+    "sourceSection": "Continental"
+  },
+  {
+    "id": "spaghetti-bolognese",
+    "name": "Spaghetti Bolognese",
+    "ingredients": [
+      "spaghetti",
+      "minced beef",
+      "tomato sauce",
+      "garlic"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "continental",
+    "specialty": true,
+    "pairings": [
+      "Garlic Naan"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 750,
+      "unit": "plate",
+      "display": "PKR 750/plate"
+    },
+    "sourceSection": "Continental"
+  },
+  {
+    "id": "lasagna",
+    "name": "Lasagna",
+    "ingredients": [
+      "pasta sheets",
+      "minced beef",
+      "cheese",
+      "tomato sauce"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "continental",
+    "specialty": true,
+    "pairings": [
+      "Salad Bowl"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 800,
+      "unit": "plate",
+      "display": "PKR 800/plate"
+    },
+    "sourceSection": "Continental"
+  },
+  {
+    "id": "chicken-parmesan",
+    "name": "Chicken Parmesan",
+    "ingredients": [
+      "chicken",
+      "breadcrumbs",
+      "cheese",
+      "tomato sauce"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "continental",
+    "specialty": true,
+    "pairings": [
+      "Spaghetti Bolognese"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 900,
+      "unit": "plate",
+      "display": "PKR 900/plate"
+    },
+    "sourceSection": "Continental"
+  },
+  {
+    "id": "beef-burger",
+    "name": "Beef Burger",
+    "ingredients": [
+      "beef patty",
+      "bun",
+      "lettuce",
+      "cheese",
+      "sauces"
+    ],
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "continental",
+    "specialty": false,
+    "pairings": [
+      "French Fries"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 600,
+      "unit": "serving",
+      "display": "PKR 600/serving"
+    },
+    "sourceSection": "Continental"
+  },
+  {
+    "id": "chicken-burger",
+    "name": "Chicken Burger",
+    "ingredients": [
+      "chicken patty",
+      "bun",
+      "lettuce",
+      "sauces"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "continental",
+    "specialty": false,
+    "pairings": [
+      "French Fries"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 550,
+      "unit": "serving",
+      "display": "PKR 550/serving"
+    },
+    "sourceSection": "Continental"
+  },
+  {
+    "id": "club-sandwich",
+    "name": "Club Sandwich",
+    "ingredients": [
+      "bread",
+      "chicken",
+      "eggs",
+      "lettuce",
+      "mayonnaise"
+    ],
+    "allergens": [
+      "gluten",
+      "eggs"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "continental",
+    "specialty": false,
+    "pairings": [
+      "French Fries"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 500,
+      "unit": "serving",
+      "display": "PKR 500/serving"
+    },
+    "sourceSection": "Continental"
+  },
+  {
+    "id": "caesar-salad",
+    "name": "Caesar Salad",
+    "ingredients": [
+      "lettuce",
+      "croutons",
+      "parmesan",
+      "caesar dressing"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "continental",
+    "specialty": true,
+    "pairings": [
+      "Grilled Chicken Steak"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 450,
+      "unit": "plate",
+      "display": "PKR 450/plate"
+    },
+    "sourceSection": "Continental"
+  },
+  {
+    "id": "cream-of-mushroom-soup",
+    "name": "Cream of Mushroom Soup",
+    "ingredients": [
+      "mushrooms",
+      "cream",
+      "butter",
+      "garlic"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "continental",
+    "specialty": true,
+    "pairings": [
+      "Garlic Naan"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 350,
+      "unit": "bowl",
+      "display": "PKR 350/bowl"
+    },
+    "sourceSection": "Continental"
+  },
+  {
+    "id": "tomato-basil-soup",
+    "name": "Tomato Basil Soup",
+    "ingredients": [
+      "tomatoes",
+      "basil",
+      "cream",
+      "garlic"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "continental",
+    "specialty": false,
+    "pairings": [
+      "Garlic Naan"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 300,
+      "unit": "bowl",
+      "display": "PKR 300/bowl"
+    },
+    "sourceSection": "Continental"
+  },
+  {
+    "id": "bbq-chicken-wings",
+    "name": "BBQ Chicken Wings",
+    "ingredients": [
+      "chicken wings",
+      "BBQ sauce",
+      "spices"
+    ],
+    "allergens": [],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "continental",
+    "specialty": true,
+    "pairings": [
+      "French Fries"
+    ],
+    "serving": "single",
+    "portionLabel": "6 pieces",
+    "price": {
+      "currency": "PKR",
+      "amount": 600,
+      "unit": "serving",
+      "display": "PKR 600/serving"
+    },
+    "sourceSection": "Continental"
+  },
+  {
+    "id": "grilled-salmon",
+    "name": "Grilled Salmon",
+    "ingredients": [
+      "salmon",
+      "lemon",
+      "herbs",
+      "butter"
+    ],
+    "allergens": [
+      "seafood",
+      "dairy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "continental",
+    "specialty": true,
+    "pairings": [
+      "Salad Bowl"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 1500,
+      "unit": "plate",
+      "display": "PKR 1,500/plate"
+    },
+    "sourceSection": "Continental"
+  },
+  {
+    "id": "mac-and-cheese",
+    "name": "Mac and Cheese",
+    "ingredients": [
+      "pasta",
+      "cheddar cheese",
+      "milk",
+      "butter"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "continental",
+    "specialty": true,
+    "pairings": [
+      "Garlic Naan"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 500,
+      "unit": "plate",
+      "display": "PKR 500/plate"
+    },
+    "sourceSection": "Continental"
+  },
+  {
+    "id": "stuffed-chicken-breast",
+    "name": "Stuffed Chicken Breast",
+    "ingredients": [
+      "chicken breast",
+      "cheese",
+      "spinach",
+      "herbs"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "continental",
+    "specialty": true,
+    "pairings": [
+      "Masala Fries"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 1100,
+      "unit": "plate",
+      "display": "PKR 1,100/plate"
+    },
+    "sourceSection": "Continental"
+  },
+  {
+    "id": "beef-meatballs",
+    "name": "Beef Meatballs",
+    "ingredients": [
+      "minced beef",
+      "breadcrumbs",
+      "herbs",
+      "tomato sauce"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "continental",
+    "specialty": false,
+    "pairings": [
+      "Spaghetti Bolognese"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 700,
+      "unit": "plate",
+      "display": "PKR 700/plate"
+    },
+    "sourceSection": "Continental"
+  },
+  {
+    "id": "chicken-quesadilla",
+    "name": "Chicken Quesadilla",
+    "ingredients": [
+      "tortilla",
+      "chicken",
+      "cheese",
+      "vegetables"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "continental",
+    "specialty": true,
+    "pairings": [
+      "Ketchup & Dips Set"
+    ],
+    "serving": "single",
+    "portionLabel": "4 slices",
+    "price": {
+      "currency": "PKR",
+      "amount": 650,
+      "unit": "serving",
+      "display": "PKR 650/serving"
+    },
+    "sourceSection": "Continental"
+  },
+  {
+    "id": "baked-potato-with-cheese",
+    "name": "Baked Potato with Cheese",
+    "ingredients": [
+      "potato",
+      "cheese",
+      "butter"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "continental",
+    "specialty": false,
+    "pairings": [
+      "Grilled Chicken Steak"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 400,
+      "unit": "plate",
+      "display": "PKR 400/plate"
+    },
+    "sourceSection": "Continental"
+  },
+  {
+    "id": "butter-chicken-pasta",
+    "name": "Butter Chicken Pasta",
+    "ingredients": [
+      "pasta",
+      "chicken",
+      "butter chicken sauce",
+      "cream",
+      "spices"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "fusion",
+    "specialty": true,
+    "pairings": [
+      "Garlic Naan"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 750,
+      "unit": "plate",
+      "display": "PKR 750/plate"
+    },
+    "sourceSection": "Fusion"
+  },
+  {
+    "id": "chicken-tikka-pizza",
+    "name": "Chicken Tikka Pizza",
+    "ingredients": [
+      "pizza dough",
+      "chicken tikka",
+      "cheese",
+      "tomato sauce"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "fusion",
+    "specialty": true,
+    "pairings": [
+      "Cold Drink (Coke)"
+    ],
+    "serving": "shareable",
+    "portionLabel": "medium (8 slices)",
+    "price": {
+      "currency": "PKR",
+      "amount": 1200,
+      "unit": "pizza",
+      "display": "PKR 1,200/pizza"
+    },
+    "sourceSection": "Fusion"
+  },
+  {
+    "id": "biryani-arancini",
+    "name": "Biryani Arancini",
+    "ingredients": [
+      "rice",
+      "chicken",
+      "cheese",
+      "breadcrumbs",
+      "spices"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "fusion",
+    "specialty": true,
+    "pairings": [
+      "Ketchup & Dips Set"
+    ],
+    "serving": "single",
+    "portionLabel": "4 pieces",
+    "price": {
+      "currency": "PKR",
+      "amount": 600,
+      "unit": "serving",
+      "display": "PKR 600/serving"
+    },
+    "sourceSection": "Fusion"
+  },
+  {
+    "id": "desi-chicken-chow-mein",
+    "name": "Desi Chicken Chow Mein",
+    "ingredients": [
+      "noodles",
+      "chicken",
+      "desi spices",
+      "soy sauce",
+      "vegetables"
+    ],
+    "allergens": [
+      "gluten",
+      "soy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "hot",
+    "cuisineType": "fusion",
+    "specialty": false,
+    "pairings": [
+      "Chicken Manchurian"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 500,
+      "unit": "plate",
+      "display": "PKR 500/plate"
+    },
+    "sourceSection": "Fusion"
+  },
+  {
+    "id": "tandoori-chicken-burger",
+    "name": "Tandoori Chicken Burger",
+    "ingredients": [
+      "chicken",
+      "burger bun",
+      "yogurt marinade",
+      "spices"
+    ],
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "fusion",
+    "specialty": true,
+    "pairings": [
+      "French Fries"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 650,
+      "unit": "serving",
+      "display": "PKR 650/serving"
+    },
+    "sourceSection": "Fusion"
+  },
+  {
+    "id": "nihari-tacos",
+    "name": "Nihari Tacos",
+    "ingredients": [
+      "beef nihari",
+      "tortillas",
+      "onions",
+      "herbs"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "hot",
+    "cuisineType": "fusion",
+    "specialty": true,
+    "pairings": [
+      "Lemon Soda"
+    ],
+    "serving": "single",
+    "portionLabel": "3 tacos",
+    "price": {
+      "currency": "PKR",
+      "amount": 700,
+      "unit": "serving",
+      "display": "PKR 700/serving"
+    },
+    "sourceSection": "Fusion"
+  },
+  {
+    "id": "chicken-karahi-pizza",
+    "name": "Chicken Karahi Pizza",
+    "ingredients": [
+      "pizza dough",
+      "chicken karahi",
+      "cheese",
+      "herbs"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "hot",
+    "cuisineType": "fusion",
+    "specialty": true,
+    "pairings": [
+      "Cold Drink (Coke)"
+    ],
+    "serving": "shareable",
+    "portionLabel": "medium (8 slices)",
+    "price": {
+      "currency": "PKR",
+      "amount": 1300,
+      "unit": "pizza",
+      "display": "PKR 1,300/pizza"
+    },
+    "sourceSection": "Fusion"
+  },
+  {
+    "id": "seekh-kebab-wrap",
+    "name": "Seekh Kebab Wrap",
+    "ingredients": [
+      "seekh kebab",
+      "tortilla",
+      "onions",
+      "chutney"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "fusion",
+    "specialty": false,
+    "pairings": [
+      "French Fries"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 450,
+      "unit": "serving",
+      "display": "PKR 450/serving"
+    },
+    "sourceSection": "Fusion"
+  },
+  {
+    "id": "butter-chicken-loaded-fries",
+    "name": "Butter Chicken Loaded Fries",
+    "ingredients": [
+      "fries",
+      "butter chicken",
+      "cheese",
+      "cream"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "fusion",
+    "specialty": true,
+    "pairings": [
+      "Cold Drink (Coke)"
+    ],
+    "serving": "shareable",
+    "portionLabel": "shareable",
+    "price": {
+      "currency": "PKR",
+      "amount": 650,
+      "unit": "plate",
+      "display": "PKR 650/plate"
+    },
+    "sourceSection": "Fusion"
+  },
+  {
+    "id": "paneer-tikka-quesadilla",
+    "name": "Paneer Tikka Quesadilla",
+    "ingredients": [
+      "tortilla",
+      "paneer tikka",
+      "cheese",
+      "vegetables"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "fusion",
+    "specialty": true,
+    "pairings": [
+      "Ketchup & Dips Set"
+    ],
+    "serving": "single",
+    "portionLabel": "4 slices",
+    "price": {
+      "currency": "PKR",
+      "amount": 600,
+      "unit": "serving",
+      "display": "PKR 600/serving"
+    },
+    "sourceSection": "Fusion"
+  },
+  {
+    "id": "chicken-manchurian-lasagna",
+    "name": "Chicken Manchurian Lasagna",
+    "ingredients": [
+      "pasta sheets",
+      "chicken manchurian",
+      "cheese",
+      "sauce"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten",
+      "soy"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "fusion",
+    "specialty": true,
+    "pairings": [
+      "Salad Bowl"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 800,
+      "unit": "plate",
+      "display": "PKR 800/plate"
+    },
+    "sourceSection": "Fusion"
+  },
+  {
+    "id": "bbq-biryani",
+    "name": "BBQ Biryani",
+    "ingredients": [
+      "rice",
+      "chicken tikka",
+      "spices",
+      "herbs"
+    ],
+    "allergens": [],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "fusion",
+    "specialty": true,
+    "pairings": [
+      "Mint Raita"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 550,
+      "unit": "plate",
+      "display": "PKR 550/plate"
+    },
+    "sourceSection": "Fusion"
+  },
+  {
+    "id": "sriracha-chicken-paratha-roll",
+    "name": "Sriracha Chicken Paratha Roll",
+    "ingredients": [
+      "paratha",
+      "chicken",
+      "sriracha sauce",
+      "vegetables"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "hot",
+    "cuisineType": "fusion",
+    "specialty": false,
+    "pairings": [
+      "French Fries"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 400,
+      "unit": "serving",
+      "display": "PKR 400/serving"
+    },
+    "sourceSection": "Fusion"
+  },
+  {
+    "id": "dynamite-chicken",
+    "name": "Dynamite Chicken",
+    "ingredients": [
+      "fried chicken",
+      "spicy mayo",
+      "chili sauce"
+    ],
+    "allergens": [
+      "eggs"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "hot",
+    "cuisineType": "fusion",
+    "specialty": true,
+    "pairings": [
+      "Coleslaw"
+    ],
+    "serving": "single",
+    "portionLabel": "6 pieces",
+    "price": {
+      "currency": "PKR",
+      "amount": 700,
+      "unit": "serving",
+      "display": "PKR 700/serving"
+    },
+    "sourceSection": "Fusion"
+  },
+  {
+    "id": "cheesy-seekh-kebab-sandwich",
+    "name": "Cheesy Seekh Kebab Sandwich",
+    "ingredients": [
+      "bread",
+      "seekh kebab",
+      "cheese",
+      "sauces"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "fusion",
+    "specialty": false,
+    "pairings": [
+      "French Fries"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 500,
+      "unit": "serving",
+      "display": "PKR 500/serving"
+    },
+    "sourceSection": "Fusion"
+  },
+  {
+    "id": "chicken-shawarma-pizza",
+    "name": "Chicken Shawarma Pizza",
+    "ingredients": [
+      "pizza dough",
+      "shawarma chicken",
+      "garlic sauce",
+      "cheese"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "fusion",
+    "specialty": true,
+    "pairings": [
+      "Cold Drink (Coke)"
+    ],
+    "serving": "shareable",
+    "portionLabel": "medium (8 slices)",
+    "price": {
+      "currency": "PKR",
+      "amount": 1250,
+      "unit": "pizza",
+      "display": "PKR 1,250/pizza"
+    },
+    "sourceSection": "Fusion"
+  },
+  {
+    "id": "masala-mac-and-cheese",
+    "name": "Masala Mac and Cheese",
+    "ingredients": [
+      "pasta",
+      "cheese",
+      "desi spices",
+      "milk"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "fusion",
+    "specialty": true,
+    "pairings": [
+      "Garlic Naan"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 550,
+      "unit": "plate",
+      "display": "PKR 550/plate"
+    },
+    "sourceSection": "Fusion"
+  },
+  {
+    "id": "tandoori-fish-burger",
+    "name": "Tandoori Fish Burger",
+    "ingredients": [
+      "fish fillet",
+      "bun",
+      "spices",
+      "sauces"
+    ],
+    "allergens": [
+      "seafood",
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "fusion",
+    "specialty": true,
+    "pairings": [
+      "French Fries"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 700,
+      "unit": "serving",
+      "display": "PKR 700/serving"
+    },
+    "sourceSection": "Fusion"
+  },
+  {
+    "id": "chicken-alfredo-paratha",
+    "name": "Chicken Alfredo Paratha",
+    "ingredients": [
+      "paratha",
+      "chicken",
+      "cream sauce",
+      "cheese"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "fusion",
+    "specialty": false,
+    "pairings": [
+      "Cold Drink (Coke)"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 500,
+      "unit": "serving",
+      "display": "PKR 500/serving"
+    },
+    "sourceSection": "Fusion"
+  },
+  {
+    "id": "spicy-honey-wings-desi-style",
+    "name": "Spicy Honey Wings (Desi Style)",
+    "ingredients": [
+      "chicken wings",
+      "honey",
+      "chili sauce",
+      "spices"
+    ],
+    "allergens": [],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "hot",
+    "cuisineType": "fusion",
+    "specialty": true,
+    "pairings": [
+      "French Fries"
+    ],
+    "serving": "single",
+    "portionLabel": "6 pieces",
+    "price": {
+      "currency": "PKR",
+      "amount": 650,
+      "unit": "serving",
+      "display": "PKR 650/serving"
+    },
+    "sourceSection": "Fusion"
+  },
+  {
+    "id": "plain-naan",
+    "name": "Plain Naan",
+    "ingredients": [
+      "wheat flour",
+      "water",
+      "yeast",
+      "salt"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "non-spicy",
+    "cuisineType": "staple",
+    "specialty": false,
+    "pairings": [
+      "Chicken Karahi"
+    ],
+    "serving": "single",
+    "portionLabel": "single piece",
+    "price": {
+      "currency": "PKR",
+      "amount": 40,
+      "unit": "piece",
+      "display": "PKR 40/piece"
+    },
+    "sourceSection": "Staple"
+  },
+  {
+    "id": "garlic-naan",
+    "name": "Garlic Naan",
+    "ingredients": [
+      "wheat flour",
+      "garlic",
+      "butter",
+      "yeast"
+    ],
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "staple",
+    "specialty": true,
+    "pairings": [
+      "Chicken Karahi",
+      "Chicken Handi",
+      "Seekh Kebab"
+    ],
+    "serving": "single",
+    "portionLabel": "single piece",
+    "price": {
+      "currency": "PKR",
+      "amount": 60,
+      "unit": "piece",
+      "display": "PKR 60/piece"
+    },
+    "sourceSection": "Staple"
+  },
+  {
+    "id": "roghni-naan",
+    "name": "Roghni Naan",
+    "ingredients": [
+      "wheat flour",
+      "milk",
+      "butter",
+      "sesame seeds"
+    ],
+    "allergens": [
+      "gluten",
+      "dairy",
+      "sesame"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "non-spicy",
+    "cuisineType": "staple",
+    "specialty": true,
+    "pairings": [
+      "Nihari",
+      "Chicken Korma"
+    ],
+    "serving": "single",
+    "portionLabel": "single piece",
+    "price": {
+      "currency": "PKR",
+      "amount": 70,
+      "unit": "piece",
+      "display": "PKR 70/piece"
+    },
+    "sourceSection": "Staple"
+  },
+  {
+    "id": "tandoori-roti",
+    "name": "Tandoori Roti",
+    "ingredients": [
+      "whole wheat flour",
+      "water",
+      "salt"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "non-spicy",
+    "cuisineType": "staple",
+    "specialty": false,
+    "pairings": [
+      "Daal Makhni",
+      "Mix Sabzi"
+    ],
+    "serving": "single",
+    "portionLabel": "single piece",
+    "price": {
+      "currency": "PKR",
+      "amount": 30,
+      "unit": "piece",
+      "display": "PKR 30/piece"
+    },
+    "sourceSection": "Staple"
+  },
+  {
+    "id": "mint-raita",
+    "name": "Mint Raita",
+    "ingredients": [
+      "yogurt",
+      "mint",
+      "salt",
+      "cumin"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "staple",
+    "specialty": true,
+    "pairings": [
+      "Chicken Biryani",
+      "Chicken Pulao",
+      "Chicken Chili Dry"
+    ],
+    "serving": "single",
+    "portionLabel": "single bowl",
+    "price": {
+      "currency": "PKR",
+      "amount": 100,
+      "unit": "bowl",
+      "display": "PKR 100/bowl"
+    },
+    "sourceSection": "Staple"
+  },
+  {
+    "id": "salad-bowl",
+    "name": "Salad Bowl",
+    "ingredients": [
+      "cucumber",
+      "tomato",
+      "onion",
+      "lemon",
+      "carrots"
+    ],
+    "allergens": [],
+    "dietary": "vegetarian",
+    "spiceLevel": "non-spicy",
+    "cuisineType": "staple",
+    "specialty": false,
+    "pairings": [
+      "Grilled Chicken Steak",
+      "Grilled Chicken Steak"
+    ],
+    "serving": "single",
+    "portionLabel": "single bowl",
+    "price": {
+      "currency": "PKR",
+      "amount": 120,
+      "unit": "bowl",
+      "display": "PKR 120/bowl"
+    },
+    "sourceSection": "Staple"
+  },
+  {
+    "id": "russian-salad",
+    "name": "Russian Salad",
+    "ingredients": [
+      "potatoes",
+      "peas",
+      "carrots",
+      "mayonnaise"
+    ],
+    "allergens": [
+      "eggs",
+      "dairy"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "non-spicy",
+    "cuisineType": "staple",
+    "specialty": true,
+    "pairings": [
+      "French Fries",
+      "Chicken Tikka"
+    ],
+    "serving": "single",
+    "portionLabel": "single bowl",
+    "price": {
+      "currency": "PKR",
+      "amount": 180,
+      "unit": "bowl",
+      "display": "PKR 180/bowl"
+    },
+    "sourceSection": "Staple"
+  },
+  {
+    "id": "coleslaw",
+    "name": "Coleslaw",
+    "ingredients": [
+      "cabbage",
+      "carrots",
+      "mayonnaise",
+      "vinegar"
+    ],
+    "allergens": [
+      "eggs"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "non-spicy",
+    "cuisineType": "staple",
+    "specialty": true,
+    "pairings": [
+      "Beef Burger",
+      "Spicy Honey Wings (Desi Style)"
+    ],
+    "serving": "single",
+    "portionLabel": "single bowl",
+    "price": {
+      "currency": "PKR",
+      "amount": 150,
+      "unit": "bowl",
+      "display": "PKR 150/bowl"
+    },
+    "sourceSection": "Staple"
+  },
+  {
+    "id": "french-fries",
+    "name": "French Fries",
+    "ingredients": [
+      "potatoes",
+      "salt",
+      "oil"
+    ],
+    "allergens": [],
+    "dietary": "vegetarian",
+    "spiceLevel": "non-spicy",
+    "cuisineType": "staple",
+    "specialty": false,
+    "pairings": [
+      "Beef Burger",
+      "Club Sandwich"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 200,
+      "unit": "serving",
+      "display": "PKR 200/serving"
+    },
+    "sourceSection": "Staple"
+  },
+  {
+    "id": "masala-fries",
+    "name": "Masala Fries",
+    "ingredients": [
+      "potatoes",
+      "chili powder",
+      "spices",
+      "salt"
+    ],
+    "allergens": [],
+    "dietary": "vegetarian",
+    "spiceLevel": "medium",
+    "cuisineType": "staple",
+    "specialty": true,
+    "pairings": [
+      "Beef Burger",
+      "Seekh Kebab Wrap"
+    ],
+    "serving": "single",
+    "portionLabel": "single",
+    "price": {
+      "currency": "PKR",
+      "amount": 220,
+      "unit": "serving",
+      "display": "PKR 220/serving"
+    },
+    "sourceSection": "Staple"
+  },
+  {
+    "id": "cold-drink-coke",
+    "name": "Cold Drink (Coke)",
+    "ingredients": [
+      "carbonated water",
+      "sugar",
+      "flavoring"
+    ],
+    "allergens": [],
+    "dietary": "vegetarian",
+    "spiceLevel": "non-spicy",
+    "cuisineType": "staple",
+    "specialty": false,
+    "pairings": [
+      "Beef Burger"
+    ],
+    "serving": "single",
+    "portionLabel": "single glass",
+    "price": {
+      "currency": "PKR",
+      "amount": 120,
+      "unit": "glass",
+      "display": "PKR 120/glass"
+    },
+    "sourceSection": "Staple"
+  },
+  {
+    "id": "lemon-soda",
+    "name": "Lemon Soda",
+    "ingredients": [
+      "soda water",
+      "lemon",
+      "salt",
+      "sugar"
+    ],
+    "allergens": [],
+    "dietary": "vegetarian",
+    "spiceLevel": "non-spicy",
+    "cuisineType": "staple",
+    "specialty": true,
+    "pairings": [
+      "Chicken Chili Dry",
+      "Chicken Tikka"
+    ],
+    "serving": "single",
+    "portionLabel": "single glass",
+    "price": {
+      "currency": "PKR",
+      "amount": 100,
+      "unit": "glass",
+      "display": "PKR 100/glass"
+    },
+    "sourceSection": "Staple"
+  },
+  {
+    "id": "mint-margarita",
+    "name": "Mint Margarita",
+    "ingredients": [
+      "mint",
+      "lemon",
+      "soda",
+      "sugar"
+    ],
+    "allergens": [],
+    "dietary": "vegetarian",
+    "spiceLevel": "non-spicy",
+    "cuisineType": "staple",
+    "specialty": true,
+    "pairings": [
+      "Chicken Tikka Pizza",
+      "Grilled Chicken Steak"
+    ],
+    "serving": "single",
+    "portionLabel": "single glass",
+    "price": {
+      "currency": "PKR",
+      "amount": 140,
+      "unit": "glass",
+      "display": "PKR 140/glass"
+    },
+    "sourceSection": "Staple"
+  },
+  {
+    "id": "fresh-lime-water",
+    "name": "Fresh Lime Water",
+    "ingredients": [
+      "water",
+      "lemon",
+      "salt",
+      "sugar"
+    ],
+    "allergens": [],
+    "dietary": "vegetarian",
+    "spiceLevel": "non-spicy",
+    "cuisineType": "staple",
+    "specialty": false,
+    "pairings": [
+      "Chicken Biryani"
+    ],
+    "serving": "single",
+    "portionLabel": "single glass",
+    "price": {
+      "currency": "PKR",
+      "amount": 80,
+      "unit": "glass",
+      "display": "PKR 80/glass"
+    },
+    "sourceSection": "Staple"
+  },
+  {
+    "id": "iced-tea",
+    "name": "Iced Tea",
+    "ingredients": [
+      "tea",
+      "lemon",
+      "sugar",
+      "ice"
+    ],
+    "allergens": [],
+    "dietary": "vegetarian",
+    "spiceLevel": "non-spicy",
+    "cuisineType": "staple",
+    "specialty": true,
+    "pairings": [
+      "Club Sandwich",
+      "French Fries"
+    ],
+    "serving": "single",
+    "portionLabel": "single glass",
+    "price": {
+      "currency": "PKR",
+      "amount": 150,
+      "unit": "glass",
+      "display": "PKR 150/glass"
+    },
+    "sourceSection": "Staple"
+  },
+  {
+    "id": "hot-tea",
+    "name": "Hot Tea",
+    "ingredients": [
+      "tea leaves",
+      "milk",
+      "sugar",
+      "water"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "non-spicy",
+    "cuisineType": "staple",
+    "specialty": false,
+    "pairings": [
+      "Hot Tea",
+      "French Fries"
+    ],
+    "serving": "single",
+    "portionLabel": "single cup",
+    "price": {
+      "currency": "PKR",
+      "amount": 80,
+      "unit": "cup",
+      "display": "PKR 80/cup"
+    },
+    "sourceSection": "Staple"
+  },
+  {
+    "id": "coffee",
+    "name": "Coffee",
+    "ingredients": [
+      "coffee beans",
+      "milk",
+      "sugar"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "non-spicy",
+    "cuisineType": "staple",
+    "specialty": true,
+    "pairings": [
+      "Coffee",
+      "Hot Tea"
+    ],
+    "serving": "single",
+    "portionLabel": "single cup",
+    "price": {
+      "currency": "PKR",
+      "amount": 180,
+      "unit": "cup",
+      "display": "PKR 180/cup"
+    },
+    "sourceSection": "Staple"
+  },
+  {
+    "id": "chicken-nuggets",
+    "name": "Chicken Nuggets",
+    "ingredients": [
+      "chicken",
+      "breadcrumbs",
+      "spices",
+      "oil"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "dietary": "non-vegetarian",
+    "spiceLevel": "mild",
+    "cuisineType": "staple",
+    "specialty": true,
+    "pairings": [
+      "French Fries",
+      "Ketchup & Dips Set"
+    ],
+    "serving": "single",
+    "portionLabel": "6 pieces",
+    "price": {
+      "currency": "PKR",
+      "amount": 400,
+      "unit": "serving",
+      "display": "PKR 400/serving"
+    },
+    "sourceSection": "Staple"
+  },
+  {
+    "id": "ketchup-and-dips-set",
+    "name": "Ketchup & Dips Set",
+    "ingredients": [
+      "tomato ketchup",
+      "chili garlic sauce",
+      "mayo"
+    ],
+    "allergens": [
+      "eggs (mayo)"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "non-spicy",
+    "cuisineType": "staple",
+    "specialty": false,
+    "pairings": [
+      "French Fries",
+      "Beef Burger",
+      "Chicken Nuggets"
+    ],
+    "serving": "shareable",
+    "portionLabel": "set",
+    "price": {
+      "currency": "PKR",
+      "amount": 100,
+      "unit": "set",
+      "display": "PKR 100/set"
+    },
+    "sourceSection": "Staple"
+  },
+  {
+    "id": "butter-portion",
+    "name": "Butter Portion",
+    "ingredients": [
+      "butter"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "dietary": "vegetarian",
+    "spiceLevel": "non-spicy",
+    "cuisineType": "staple",
+    "specialty": false,
+    "pairings": [
+      "Garlic Naan",
+      "Tandoori Roti",
+      "Sriracha Chicken Paratha Roll"
+    ],
+    "serving": "single",
+    "portionLabel": "small portion",
+    "price": {
+      "currency": "PKR",
+      "amount": 50,
+      "unit": "portion",
+      "display": "PKR 50/portion"
+    },
+    "sourceSection": "Staple"
+  }
+]

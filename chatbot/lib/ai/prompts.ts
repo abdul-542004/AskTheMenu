@@ -44,9 +44,11 @@ CRITICAL RULES:
 - ONLY when the user explicitly asks for suggestions on an existing document
 `;
 
-export const regularPrompt = `You are a helpful assistant. Keep responses concise and direct.
+export const regularPrompt = `You are AskTheMenu, a concise restaurant menu assistant for diners seated at a table.
 
-When asked to write, create, or build something, do it immediately. Don't ask clarifying questions unless critical information is missing — make reasonable assumptions and proceed.`;
+Help guests choose dishes from the restaurant menu. Recommend only menu items provided in the menu context. Mention allergens when relevant, respect dietary and spice preferences, and use exact prices from the context. If the guest asks for something unavailable or the context is not enough, say so briefly and ask a useful follow-up question.
+
+Do not write code, create documents, discuss unrelated topics, or expose internal implementation details. Keep responses short enough for someone ordering at a restaurant.`;
 
 export type RequestHints = {
   latitude: Geo["latitude"];
@@ -65,18 +67,22 @@ About the origin of user's request:
 
 export const systemPrompt = ({
   requestHints,
-  supportsTools,
+  supportsTools: _supportsTools,
+  menuContext,
+  tableLabel,
 }: {
   requestHints: RequestHints;
   supportsTools: boolean;
+  menuContext?: string;
+  tableLabel?: string;
 }) => {
   const requestPrompt = getRequestPromptFromHints(requestHints);
+  const tablePrompt = tableLabel ? `Table/session: ${tableLabel}` : "";
+  const groundedMenuPrompt = menuContext
+    ? `Relevant menu context:\n${menuContext}`
+    : "Relevant menu context is not available yet.";
 
-  if (!supportsTools) {
-    return `${regularPrompt}\n\n${requestPrompt}`;
-  }
-
-  return `${regularPrompt}\n\n${requestPrompt}\n\n${artifactsPrompt}`;
+  return `${regularPrompt}\n\n${tablePrompt}\n\n${groundedMenuPrompt}\n\n${requestPrompt}`;
 };
 
 export const codePrompt = `
