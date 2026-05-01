@@ -1,6 +1,6 @@
 import type { UseChatHelpers } from "@ai-sdk/react";
 import { ArrowDownIcon } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useMessages } from "@/hooks/use-messages";
 import type { Vote } from "@/lib/db/schema";
 import type { ChatMessage } from "@/lib/types";
@@ -51,6 +51,15 @@ function PureMessages({
 
   useDataStream();
 
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const hasMessages = isMounted && messages.length > 0;
+  const showGreeting = isMounted && messages.length === 0 && !isLoading;
+
   const prevChatIdRef = useRef(chatId);
   useEffect(() => {
     if (prevChatIdRef.current !== chatId) {
@@ -61,7 +70,7 @@ function PureMessages({
 
   return (
     <div className="relative flex-1 bg-background">
-      {messages.length === 0 && !isLoading && (
+      {showGreeting && (
         <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
           <Greeting />
         </div>
@@ -69,7 +78,7 @@ function PureMessages({
       <div
         className={cn(
           "absolute inset-0 touch-pan-y overflow-y-auto",
-          messages.length > 0 ? "bg-background" : "bg-transparent"
+          hasMessages ? "bg-background" : "bg-transparent"
         )}
         ref={messagesContainerRef}
         style={isArtifactVisible ? { scrollbarWidth: "none" } : undefined}

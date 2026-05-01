@@ -141,9 +141,8 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
         return {
           body: {
             id: request.id,
-            ...(isToolApprovalContinuation
-              ? { messages: request.messages }
-              : { message: lastMessage }),
+            messages: request.messages,
+            ...(!isToolApprovalContinuation && { message: lastMessage }),
             selectedChatModel: currentModelIdRef.current,
             selectedVisibilityType: visibility,
             ...request.body,

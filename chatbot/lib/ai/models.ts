@@ -1,4 +1,4 @@
-export const DEFAULT_CHAT_MODEL = "moonshotai/kimi-k2.5";
+export const DEFAULT_CHAT_MODEL = "google/gemma-3-27b-it:free";
 
 export const titleModel = {
   id: "mistral/mistral-small",
@@ -24,6 +24,24 @@ export type ChatModel = {
 };
 
 export const chatModels: ChatModel[] = [
+  {
+    id: "openrouter/free",
+    name: "OpenRouter Free",
+    provider: "openrouter",
+    description: "OpenRouter free-tier routing option",
+  },
+  {
+    id: "google/gemma-3-27b-it:free",
+    name: "Gemma 3 27B Instruct (Free)",
+    provider: "google",
+    description: "Google Gemma 27B free-tier instruct model",
+  },
+  {
+    id: "z-ai/glm-4.5-air:free",
+    name: "GLM 4.5 Air (Free)",
+    provider: "zai",
+    description: "Z.AI fast free-tier model",
+  },
   {
     id: "deepseek/deepseek-v3.2",
     name: "DeepSeek V3.2",

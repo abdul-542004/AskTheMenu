@@ -32,8 +32,8 @@ import {
   updateChatTitleById,
   updateMessage,
 } from "@/lib/db/queries";
-import { getDatabaseUrl } from "@/lib/db/url";
 import type { DBMessage } from "@/lib/db/schema";
+import { getDatabaseUrl } from "@/lib/db/url";
 import { ChatbotError } from "@/lib/errors";
 import { buildMenuContext } from "@/lib/menu/search";
 import { checkIpRateLimit } from "@/lib/ratelimit";
@@ -104,7 +104,13 @@ export async function POST(request: Request) {
       }
     }
 
-    const isToolApprovalFlow = Boolean(messages);
+    const hasToolApprovalContinuation =
+      messages?.some((msg) =>
+        msg.parts?.some((part: Record<string, unknown>) => {
+          const state = part.state;
+          return state === "approval-responded" || state === "output-denied";
+        })
+      ) ?? false;
 
     const chat = shouldPersistChat ? await getChatById({ id }) : null;
     let messagesFromDb: DBMessage[] = [];
@@ -127,7 +133,7 @@ export async function POST(request: Request) {
 
     let uiMessages: ChatMessage[];
 
-    if (isToolApprovalFlow && messages) {
+    if (hasToolApprovalContinuation && messages) {
       const dbMessages = convertToUIMessages(messagesFromDb);
       const approvalStates = new Map(
         messages.flatMap(
@@ -144,7 +150,9 @@ export async function POST(request: Request) {
               ]) ?? []
         )
       );
-      uiMessages = dbMessages.map((msg) => ({
+      const baseMessages =
+        dbMessages.length > 0 ? dbMessages : (messages as ChatMessage[]);
+      uiMessages = baseMessages.map((msg) => ({
         ...msg,
         parts: msg.parts.map((part) => {
           if (
@@ -156,6 +164,8 @@ export async function POST(request: Request) {
           return part;
         }),
       })) as ChatMessage[];
+    } else if (messages && messagesFromDb.length === 0) {
+      uiMessages = messages as ChatMessage[];
     } else {
       uiMessages = [
         ...convertToUIMessages(messagesFromDb),
@@ -195,11 +205,13 @@ export async function POST(request: Request) {
 
     const modelMessages = await convertToModelMessages(uiMessages);
     const latestMessage = message ?? uiMessages.at(-1);
-    const latestUserText = latestMessage ? getTextFromMessage(latestMessage) : "";
+    const latestUserText = latestMessage
+      ? getTextFromMessage(latestMessage)
+      : "";
     const menuContext = await buildMenuContext(latestUserText);
 
     const stream = createUIMessageStream({
-      originalMessages: isToolApprovalFlow ? uiMessages : undefined,
+      originalMessages: hasToolApprovalContinuation ? uiMessages : undefined,
       execute: async ({ writer: dataStream }) => {
         const result = streamText({
           model: getLanguageModel(chatModel),
@@ -245,7 +257,7 @@ export async function POST(request: Request) {
           return;
         }
 
-        if (isToolApprovalFlow) {
+        if (hasToolApprovalContinuation) {
           for (const finishedMsg of finishedMessages) {
             const existingMsg = uiMessages.find((m) => m.id === finishedMsg.id);
             if (existingMsg) {
