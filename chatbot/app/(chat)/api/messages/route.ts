@@ -1,5 +1,6 @@
 import { auth } from "@/app/(auth)/auth";
 import { getChatById, getMessagesByChatId } from "@/lib/db/queries";
+import { getAnonymousUserId } from "@/lib/db/anonymous-user";
 import { getDatabaseUrl } from "@/lib/db/url";
 import { convertToUIMessages, isUUID } from "@/lib/utils";
 
@@ -23,7 +24,7 @@ export async function GET(request: Request) {
   }
 
   const [session, chat, messages] = await Promise.all([
-    auth(),
+    auth().catch(() => null),
     getChatById({ id: chatId }),
     getMessagesByChatId({ id: chatId }),
   ]);
@@ -37,14 +38,14 @@ export async function GET(request: Request) {
     });
   }
 
-  if (
-    chat.visibility === "private" &&
-    (!session?.user || session.user.id !== chat.userId)
-  ) {
+  // Resolve the current user: authenticated or anonymous
+  const currentUserId = session?.user?.id ?? (await getAnonymousUserId());
+
+  if (chat.visibility === "private" && currentUserId !== chat.userId) {
     return Response.json({ error: "forbidden" }, { status: 403 });
   }
 
-  const isReadonly = !session?.user || session.user.id !== chat.userId;
+  const isReadonly = currentUserId !== chat.userId;
 
   return Response.json({
     messages: convertToUIMessages(messages),

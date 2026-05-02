@@ -1,0 +1,22 @@
+User: I am craving for some dish that has nuts in it
+
+AI: You have three options with nuts:
+
+    Chicken Cashew Nuts (PKR 680/plate) - chinese, non-vegetarian, mild spice, allergens nuts, soy
+    Kung Pao Chicken (PKR 600/plate) - chinese, non-vegetarian, medium spice, allergens nuts, soy
+    Chicken Korma (PKR 1300/serving) - desi, non-vegetarian, mild spice, allergens dairy, nuts
+
+These dishes can be paired with Schezwan Fried Rice, Egg Fried Rice, or Garlic Naan.
+
+I cant decide between chicken cashew nuts and korma. What do you suggest? Which one of them is your restaurant speciality
+
+Both Chicken Cashew Nuts and Chicken Korma are our specialty dishes.
+
+    Chicken Cashew Nuts is a Chinese dish with mild spice, containing nuts, and priced at PKR 680/plate.
+    Chicken Korma is a Desi dish with mild spice, containing nuts and dairy, and priced at PKR 1300/serving. Both are specialty dishes, so it depends on your preference for Chinese or Desi cuisine.
+
+User: what should i order along with the cashew nuts
+
+AI: Based on our menu, I suggest ordering the Chicken Cashew Nuts, as it's one of our specialty dishes. Unfortunately, we don't have Korma on our menu.
+
+To go along with the Chicken Cashew Nuts, I recommend ordering the Schezwan Fried Rice, as it's a suggested pairing. The price for the Chicken Cashew Nuts is PKR 680/plate, and the Schezwan Fried Rice is PKR 500/plate.

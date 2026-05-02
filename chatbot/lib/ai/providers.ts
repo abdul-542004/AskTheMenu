@@ -1,7 +1,10 @@
 import { createOpenAI } from "@ai-sdk/openai";
-import { customProvider, gateway } from "ai";
+import { customProvider } from "ai";
 import { isTestEnvironment } from "../constants";
 import { titleModel } from "./models";
+
+export const GROQ_CONFIGURATION_ERROR =
+  "GROQ_API_KEY is required. Add it to chatbot/.env.local to send chat requests through Groq.";
 
 export const myProvider = isTestEnvironment
   ? (() => {
@@ -15,24 +18,42 @@ export const myProvider = isTestEnvironment
     })()
   : null;
 
-const openRouterProvider = process.env.OPENROUTER_API_KEY
+const groqProvider = process.env.GROQ_API_KEY
   ? createOpenAI({
-      name: "openrouter",
-      apiKey: process.env.OPENROUTER_API_KEY,
-      baseURL: process.env.OPENROUTER_BASE_URL ?? "https://openrouter.ai/api/v1",
+      name: "groq",
+      apiKey: process.env.GROQ_API_KEY,
+      baseURL: process.env.GROQ_BASE_URL ?? "https://api.groq.com/openai/v1",
     })
   : null;
+
+function getGroqProvider() {
+  if (!groqProvider) {
+    throw new Error(GROQ_CONFIGURATION_ERROR);
+  }
+
+  return groqProvider;
+}
+
+export function assertGroqConfigured() {
+  if (isTestEnvironment) {
+    return;
+  }
+
+  getGroqProvider();
+}
+
+export function isGroqConfigurationError(error: unknown) {
+  return (
+    error instanceof Error && error.message.includes(GROQ_CONFIGURATION_ERROR)
+  );
+}
 
 export function getLanguageModel(modelId: string) {
   if (isTestEnvironment && myProvider) {
     return myProvider.languageModel(modelId);
   }
 
-  if (openRouterProvider) {
-    return openRouterProvider.languageModel(modelId);
-  }
-
-  return gateway.languageModel(modelId);
+  return getGroqProvider().languageModel(modelId);
 }
 
 export function getTitleModel() {
@@ -40,9 +61,5 @@ export function getTitleModel() {
     return myProvider.languageModel("title-model");
   }
 
-  if (openRouterProvider) {
-    return openRouterProvider.languageModel(titleModel.id);
-  }
-
-  return gateway.languageModel(titleModel.id);
+  return getGroqProvider().languageModel(titleModel.id);
 }

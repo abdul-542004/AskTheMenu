@@ -30,6 +30,7 @@ import { fetcher, fetchWithErrorHandlers, generateUUID } from "@/lib/utils";
 
 type ActiveChatContextValue = {
   chatId: string;
+  tableSlug: string | null;
   messages: ChatMessage[];
   setMessages: UseChatHelpers<ChatMessage>["setMessages"];
   sendMessage: UseChatHelpers<ChatMessage>["sendMessage"];
@@ -45,8 +46,8 @@ type ActiveChatContextValue = {
   votes: Vote[] | undefined;
   currentModelId: string;
   setCurrentModelId: (id: string) => void;
-  showCreditCardAlert: boolean;
-  setShowCreditCardAlert: Dispatch<SetStateAction<boolean>>;
+  showGroqKeyAlert: boolean;
+  setShowGroqKeyAlert: Dispatch<SetStateAction<boolean>>;
 };
 
 const ActiveChatContext = createContext<ActiveChatContextValue | null>(null);
@@ -54,6 +55,54 @@ const ActiveChatContext = createContext<ActiveChatContextValue | null>(null);
 function extractChatId(pathname: string): string | null {
   const match = pathname.match(/\/chat\/([^/]+)/);
   return match ? match[1] : null;
+}
+
+/**
+ * Returns true if the path segment is a table slug (not a UUID).
+ * Table slugs look like "table-1", "table-2", etc.
+ */
+function isTableSlug(id: string): boolean {
+  return !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
+    id
+  );
+}
+
+/** localStorage key for mapping a table slug to a chat UUID */
+function tableSessionKey(slug: string): string {
+  return `askthemenu:table-session:${slug}`;
+}
+
+/**
+ * Gets or creates a UUID chat ID for a given table slug.
+ * The mapping is persisted in localStorage so the conversation
+ * survives page refreshes.
+ */
+function getOrCreateChatIdForTable(slug: string): string {
+  if (typeof window === "undefined") {
+    return generateUUID();
+  }
+
+  const key = tableSessionKey(slug);
+  const existing = localStorage.getItem(key);
+  if (existing) {
+    return existing;
+  }
+
+  const newId = generateUUID();
+  localStorage.setItem(key, newId);
+  return newId;
+}
+
+/**
+ * Clears the stored session for a table slug, so the next visit
+ * creates a fresh conversation.
+ */
+export function startNewTableConversation(slug: string): void {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  localStorage.removeItem(tableSessionKey(slug));
 }
 
 export function ActiveChatProvider({ children }: { children: ReactNode }) {
@@ -71,7 +120,14 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
   }
   prevPathnameRef.current = pathname;
 
-  const chatId = chatIdFromUrl ?? newChatIdRef.current;
+  // For table slugs, resolve to a persistent UUID chat ID
+  const tableSlug =
+    chatIdFromUrl && isTableSlug(chatIdFromUrl) ? chatIdFromUrl : null;
+  const resolvedChatId = tableSlug
+    ? getOrCreateChatIdForTable(tableSlug)
+    : chatIdFromUrl;
+
+  const chatId = resolvedChatId ?? newChatIdRef.current;
 
   const [currentModelId, setCurrentModelId] = useState(DEFAULT_CHAT_MODEL);
   const currentModelIdRef = useRef(currentModelId);
@@ -80,7 +136,7 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
   }, [currentModelId]);
 
   const [input, setInput] = useState("");
-  const [showCreditCardAlert, setShowCreditCardAlert] = useState(false);
+  const [showGroqKeyAlert, setShowGroqKeyAlert] = useState(false);
 
   const { data: chatData, isLoading } = useSWR(
     isNewChat
@@ -141,6 +197,7 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
         return {
           body: {
             id: request.id,
+            ...(tableSlug && { tableSlug }),
             messages: request.messages,
             ...(!isToolApprovalContinuation && { message: lastMessage }),
             selectedChatModel: currentModelIdRef.current,
@@ -157,8 +214,8 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
       mutate(unstable_serialize(getChatHistoryPaginationKey));
     },
     onError: (error) => {
-      if (error.message?.includes("AI Gateway requires a valid credit card")) {
-        setShowCreditCardAlert(true);
+      if (error instanceof ChatbotError && error.surface === "groq") {
+        setShowGroqKeyAlert(true);
       } else if (error instanceof ChatbotError) {
         toast({ type: "error", description: error.message });
       } else {
@@ -240,6 +297,7 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
   const value = useMemo<ActiveChatContextValue>(
     () => ({
       chatId,
+      tableSlug,
       messages,
       setMessages,
       sendMessage,
@@ -255,11 +313,12 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
       votes,
       currentModelId,
       setCurrentModelId,
-      showCreditCardAlert,
-      setShowCreditCardAlert,
+      showGroqKeyAlert,
+      setShowGroqKeyAlert,
     }),
     [
       chatId,
+      tableSlug,
       messages,
       setMessages,
       sendMessage,
@@ -274,7 +333,7 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
       isLoading,
       votes,
       currentModelId,
-      showCreditCardAlert,
+      showGroqKeyAlert,
     ]
   );
 

@@ -38,17 +38,42 @@ import {
 import { getDatabaseUrl, isSupabasePoolerUrl } from "./url";
 import { generateHashedPassword } from "./utils";
 
-const databaseUrl = getDatabaseUrl();
-const isSupabasePooler = isSupabasePoolerUrl(databaseUrl);
+// Lazy-initialize the Postgres client and Drizzle `db` to avoid opening
+// a connection at module import time (prevents blocking routes).
+let __db: ReturnType<typeof drizzle> | undefined;
+function initDb() {
+  if (__db) return __db;
 
-const client = postgres(
-  databaseUrl || "postgres://postgres:postgres@127.0.0.1:65432/postgres",
+  const databaseUrl = getDatabaseUrl();
+  const isSupabasePooler = isSupabasePoolerUrl(databaseUrl);
+
+  const client = postgres(
+    databaseUrl || "postgres://postgres:postgres@127.0.0.1:65432/postgres",
+    {
+      connect_timeout: 1,
+      prepare: databaseUrl ? !isSupabasePooler : false,
+    }
+  );
+
+  __db = drizzle(client);
+  return __db;
+}
+
+const db = new Proxy(
+  {},
   {
-    connect_timeout: 1,
-    prepare: databaseUrl ? !isSupabasePooler : false,
+    get(_, prop) {
+      const real = initDb();
+      // @ts-expect-error dynamic proxy
+      return (real as any)[prop];
+    },
+    apply(_, thisArg, args) {
+      const real = initDb();
+      // @ts-expect-error dynamic proxy
+      return (real as any).apply(thisArg, args);
+    },
   }
-);
-const db = drizzle(client);
+) as unknown as ReturnType<typeof drizzle>;
 
 export async function getUser(email: string): Promise<User[]> {
   try {

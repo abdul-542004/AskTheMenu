@@ -16,7 +16,7 @@ export type Surface =
   | "vote"
   | "document"
   | "suggestions"
-  | "activate_gateway";
+  | "groq";
 
 export type ErrorCode = `${ErrorType}:${Surface}`;
 
@@ -32,7 +32,7 @@ export const visibilityBySurface: Record<Surface, ErrorVisibility> = {
   vote: "response",
   document: "response",
   suggestions: "response",
-  activate_gateway: "response",
+  groq: "response",
 };
 
 export class ChatbotError extends Error {
@@ -84,8 +84,8 @@ export function getMessageByErrorCode(errorCode: ErrorCode): string {
     case "bad_request:api":
       return "The request couldn't be processed. Please check your input and try again.";
 
-    case "bad_request:activate_gateway":
-      return "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits.";
+    case "bad_request:groq":
+      return "Groq is not configured. Add GROQ_API_KEY to chatbot/.env.local and restart the dev server.";
 
     case "unauthorized:auth":
       return "You need to sign in before continuing.";

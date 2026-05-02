@@ -1,11 +1,10 @@
-export const DEFAULT_CHAT_MODEL = "google/gemma-3-27b-it:free";
+export const DEFAULT_CHAT_MODEL = "llama-3.3-70b-versatile";
 
 export const titleModel = {
-  id: "mistral/mistral-small",
-  name: "Mistral Small",
-  provider: "mistral",
-  description: "Fast model for title generation",
-  gatewayOrder: ["mistral"],
+  id: DEFAULT_CHAT_MODEL,
+  name: "Llama 3.3 70B Versatile",
+  provider: "groq",
+  description: "Default model for title generation",
 };
 
 export type ModelCapabilities = {
@@ -19,166 +18,36 @@ export type ChatModel = {
   name: string;
   provider: string;
   description: string;
-  gatewayOrder?: string[];
-  reasoningEffort?: "none" | "minimal" | "low" | "medium" | "high";
 };
 
 export const chatModels: ChatModel[] = [
   {
-    id: "openrouter/free",
-    name: "OpenRouter Free",
-    provider: "openrouter",
-    description: "OpenRouter free-tier routing option",
-  },
-  {
-    id: "google/gemma-3-27b-it:free",
-    name: "Gemma 3 27B Instruct (Free)",
-    provider: "google",
-    description: "Google Gemma 27B free-tier instruct model",
-  },
-  {
-    id: "z-ai/glm-4.5-air:free",
-    name: "GLM 4.5 Air (Free)",
-    provider: "zai",
-    description: "Z.AI fast free-tier model",
-  },
-  {
-    id: "deepseek/deepseek-v3.2",
-    name: "DeepSeek V3.2",
-    provider: "deepseek",
-    description: "Fast and capable model with tool use",
-    gatewayOrder: ["bedrock", "deepinfra"],
-  },
-  {
-    id: "mistral/codestral",
-    name: "Codestral",
-    provider: "mistral",
-    description: "Code-focused model with tool use",
-    gatewayOrder: ["mistral"],
-  },
-  {
-    id: "mistral/mistral-small",
-    name: "Mistral Small",
-    provider: "mistral",
-    description: "Fast vision model with tool use",
-    gatewayOrder: ["mistral"],
-  },
-  {
-    id: "moonshotai/kimi-k2.5",
-    name: "Kimi K2.5",
-    provider: "moonshotai",
-    description: "Moonshot AI flagship model",
-    gatewayOrder: ["fireworks", "bedrock"],
-  },
-  {
-    id: "openai/gpt-oss-20b",
-    name: "GPT OSS 20B",
-    provider: "openai",
-    description: "Compact reasoning model",
-    gatewayOrder: ["groq", "bedrock"],
-    reasoningEffort: "low",
-  },
-  {
-    id: "openai/gpt-oss-120b",
-    name: "GPT OSS 120B",
-    provider: "openai",
-    description: "Open-source 120B parameter model",
-    gatewayOrder: ["fireworks", "bedrock"],
-    reasoningEffort: "low",
-  },
-  {
-    id: "xai/grok-4.1-fast-non-reasoning",
-    name: "Grok 4.1 Fast",
-    provider: "xai",
-    description: "Fast non-reasoning model with tool use",
-    gatewayOrder: ["xai"],
+    id: "llama-3.3-70b-versatile",
+    name: "Llama 3.3 70B Versatile",
+    provider: "groq",
+    description: "Groq-hosted Llama 3.3 70B model",
   },
 ];
 
-export async function getCapabilities(): Promise<
-  Record<string, ModelCapabilities>
-> {
-  const results = await Promise.all(
-    chatModels.map(async (model) => {
-      try {
-        const res = await fetch(
-          `https://ai-gateway.vercel.sh/v1/models/${model.id}/endpoints`,
-          { next: { revalidate: 86_400 } }
-        );
-        if (!res.ok) {
-          return [model.id, { tools: false, vision: false, reasoning: false }];
-        }
+export const modelCapabilities: Record<string, ModelCapabilities> = {
+  "llama-3.3-70b-versatile": {
+    tools: false,
+    vision: false,
+    reasoning: false,
+  },
+};
 
-        const json = await res.json();
-        const endpoints = json.data?.endpoints ?? [];
-        const params = new Set(
-          endpoints.flatMap(
-            (e: { supported_parameters?: string[] }) =>
-              e.supported_parameters ?? []
-          )
-        );
-        const inputModalities = new Set(
-          json.data?.architecture?.input_modalities ?? []
-        );
-
-        return [
-          model.id,
-          {
-            tools: params.has("tools"),
-            vision: inputModalities.has("image"),
-            reasoning: params.has("reasoning"),
-          },
-        ];
-      } catch {
-        return [model.id, { tools: false, vision: false, reasoning: false }];
-      }
-    })
+export function getCapabilities(): Record<string, ModelCapabilities> {
+  return Object.fromEntries(
+    chatModels.map((model) => [
+      model.id,
+      modelCapabilities[model.id] ?? {
+        tools: false,
+        vision: false,
+        reasoning: false,
+      },
+    ])
   );
-
-  return Object.fromEntries(results);
-}
-
-export const isDemo = process.env.IS_DEMO === "1";
-
-type GatewayModel = {
-  id: string;
-  name: string;
-  type?: string;
-  tags?: string[];
-};
-
-export type GatewayModelWithCapabilities = ChatModel & {
-  capabilities: ModelCapabilities;
-};
-
-export async function getAllGatewayModels(): Promise<
-  GatewayModelWithCapabilities[]
-> {
-  try {
-    const res = await fetch("https://ai-gateway.vercel.sh/v1/models", {
-      next: { revalidate: 86_400 },
-    });
-    if (!res.ok) {
-      return [];
-    }
-
-    const json = await res.json();
-    return (json.data ?? [])
-      .filter((m: GatewayModel) => m.type === "language")
-      .map((m: GatewayModel) => ({
-        id: m.id,
-        name: m.name,
-        provider: m.id.split("/")[0],
-        description: "",
-        capabilities: {
-          tools: m.tags?.includes("tool-use") ?? false,
-          vision: m.tags?.includes("vision") ?? false,
-          reasoning: m.tags?.includes("reasoning") ?? false,
-        },
-      }));
-  } catch {
-    return [];
-  }
 }
 
 export function getActiveModels(): ChatModel[] {

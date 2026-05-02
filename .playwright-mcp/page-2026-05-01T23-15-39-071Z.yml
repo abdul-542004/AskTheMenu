@@ -1,0 +1,30 @@
+- generic [ref=e1]:
+  - alert [ref=e2]
+  - main [ref=e3]:
+    - region "Notifications alt+T"
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - generic [ref=e8]: AskTheMenu
+          - generic [ref=e9]: Table 1
+        - generic [ref=e10]:
+          - button "New chat" [ref=e11]
+          - link "View menu" [ref=e12] [cursor=pointer]:
+            - /url: /menu
+      - generic [ref=e13]:
+        - generic [ref=e14]:
+          - button "Scroll to bottom":
+            - img
+        - generic [ref=e19]:
+          - button "Choose File"
+          - group [ref=e21]:
+            - textbox "Ask about dishes, allergies, spice, pairings, or ordering..." [active] [ref=e22]
+            - group [ref=e23]:
+              - generic [ref=e25]:
+                - button "llama-3.3-70b-versatile logo Llama 3.3 70B Versatile" [ref=e26]:
+                  - img "llama-3.3-70b-versatile logo" [ref=e27]
+                  - generic [ref=e28]: Llama 3.3 70B Versatile
+                - button [disabled]:
+                  - img
+              - button "Submit" [disabled]:
+                - img

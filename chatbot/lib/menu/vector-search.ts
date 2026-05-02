@@ -2,6 +2,7 @@ import "server-only";
 
 import { GoogleGenAI } from "@google/genai";
 import postgres from "postgres";
+import { traceError, traceLog } from "@/lib/ai/trace";
 import { getDatabaseUrl, isSupabasePoolerUrl } from "@/lib/db/url";
 
 const EMBEDDING_MODEL = "gemini-embedding-2-preview";
@@ -43,6 +44,13 @@ function getGenAI(): GoogleGenAI {
 async function embedQuery(queryText: string): Promise<number[]> {
   const client = getGenAI();
 
+  traceLog("model.gemini.request", {
+    operation: "query_embedding",
+    model: EMBEDDING_MODEL,
+    taskType: "RETRIEVAL_QUERY",
+    input: queryText,
+  });
+
   const response = await client.models.embedContent({
     model: EMBEDDING_MODEL,
     contents: queryText,
@@ -55,6 +63,13 @@ async function embedQuery(queryText: string): Promise<number[]> {
   if (!embedding) {
     throw new Error("Failed to generate query embedding");
   }
+
+  traceLog("model.gemini.response", {
+    operation: "query_embedding",
+    model: EMBEDDING_MODEL,
+    dimensions: embedding.length,
+    used: true,
+  });
 
   return embedding;
 }
@@ -90,6 +105,13 @@ export async function searchMenuByVector(
   restaurantId?: string,
   limit: number = DEFAULT_LIMIT
 ): Promise<VectorSearchResult[]> {
+  traceLog("retrieval.vector_search.started", {
+    query,
+    restaurantId,
+    limit,
+    embeddingModel: EMBEDDING_MODEL,
+  });
+
   // Generate embedding for the user's query
   const queryVector = await embedQuery(query);
   const vectorLiteral = `[${queryVector.join(",")}]`;
@@ -144,7 +166,7 @@ export async function searchMenuByVector(
         LIMIT ${limit}
       `;
 
-  return results.map((row) => ({
+  const mappedResults = results.map((row) => ({
     id: row.id,
     name: row.name,
     ingredients: row.ingredients ?? [],
@@ -159,32 +181,127 @@ export async function searchMenuByVector(
     serving: row.serving,
     similarity: Number.parseFloat(row.similarity),
   }));
+
+  traceLog("retrieval.vector_search.completed", {
+    query,
+    restaurantId,
+    limit,
+    resultCount: mappedResults.length,
+    results: mappedResults.map((item) => ({
+      name: item.name,
+      similarity: item.similarity,
+      pricePkr: item.pricePkr,
+      dietary: item.dietary,
+      allergens: item.allergens,
+    })),
+  });
+
+  return mappedResults;
 }
 
 /**
  * Build a formatted menu context string from vector search results,
  * suitable for injecting into an LLM system prompt.
+ *
+ * Returns the formatted context string or throws an error if vector search fails.
  */
 export async function buildVectorMenuContext(
   query: string,
   restaurantId?: string,
   limit: number = DEFAULT_LIMIT
 ): Promise<string | null> {
-  try {
-    const results = await searchMenuByVector(query, restaurantId, limit);
+  const results = await searchMenuByVector(query, restaurantId, limit);
 
-    if (results.length === 0) {
-      return null;
-    }
-
-    return results
-      .map(
-        (item) =>
-          `- ${item.name}: ${item.cuisineType}, ${item.dietary}, spice ${item.spiceLevel}, allergens ${item.allergens.length ? item.allergens.join(", ") : "none"}, ingredients ${item.ingredients.join(", ")}, pairings ${item.pairings.join(", ") || "none"}, serving ${item.serving}${item.unitLabel !== item.serving ? ` (${item.unitLabel})` : ""}, price PKR ${item.pricePkr}/${item.unitLabel}${item.specialty ? ", specialty" : ""}`
-      )
-      .join("\n");
-  } catch (error) {
-    console.error("Vector search failed:", error);
+  if (results.length === 0) {
     return null;
   }
+
+  return results
+    .map(
+      (item) =>
+        `- ${item.name}: ${item.cuisineType}, ${item.dietary}, spice ${item.spiceLevel}, allergens ${item.allergens.length ? item.allergens.join(", ") : "none"}, ingredients ${item.ingredients.join(", ")}, pairings ${item.pairings.join(", ") || "none"}, serving ${item.serving}${item.unitLabel !== item.serving ? ` (${item.unitLabel})` : ""}, price PKR ${item.pricePkr}/${item.unitLabel}${item.specialty ? ", specialty" : ""}`
+    )
+    .join("\n");
 }
+
+// ── Name-based Recall Lookup ────────────────────────────────────────────────
+
+const MAX_RECALL_ITEMS = 5;
+
+/**
+ * Fetch menu items by exact name (case-insensitive).
+ *
+ * Used to recall previously-discussed dishes without an embedding call.
+ * Returns the same `VectorSearchResult` shape with `similarity` set to 1.0.
+ */
+export async function fetchMenuItemsByName(
+  names: string[],
+  restaurantId?: string
+): Promise<VectorSearchResult[]> {
+  if (names.length === 0) return [];
+
+  // Deduplicate & cap
+  const uniqueNames = [...new Set(names)].slice(0, MAX_RECALL_ITEMS);
+
+  traceLog("retrieval.name_lookup.started", {
+    names: uniqueNames,
+    restaurantId,
+  });
+
+  try {
+    const results = restaurantId
+      ? await sql`
+          SELECT
+            "id", "name", "ingredients", "allergens", "dietary",
+            "spiceLevel", "cuisineType", "specialty", "pairings",
+            "pricePkr", "unitLabel", "serving"
+          FROM "MenuItem"
+          WHERE "name" ILIKE ANY(${uniqueNames})
+            AND "isAvailable" = true
+            AND "restaurantId" = ${restaurantId}
+          LIMIT ${MAX_RECALL_ITEMS}
+        `
+      : await sql`
+          SELECT
+            "id", "name", "ingredients", "allergens", "dietary",
+            "spiceLevel", "cuisineType", "specialty", "pairings",
+            "pricePkr", "unitLabel", "serving"
+          FROM "MenuItem"
+          WHERE "name" ILIKE ANY(${uniqueNames})
+            AND "isAvailable" = true
+          LIMIT ${MAX_RECALL_ITEMS}
+        `;
+
+    const mapped = results.map((row) => ({
+      id: row.id,
+      name: row.name,
+      ingredients: row.ingredients ?? [],
+      allergens: row.allergens ?? [],
+      dietary: row.dietary,
+      spiceLevel: row.spiceLevel,
+      cuisineType: row.cuisineType,
+      specialty: row.specialty ?? false,
+      pairings: row.pairings ?? [],
+      pricePkr: row.pricePkr,
+      unitLabel: row.unitLabel ?? "serving",
+      serving: row.serving,
+      similarity: 1.0, // exact match by name
+    }));
+
+    traceLog("retrieval.name_lookup.completed", {
+      requestedNames: uniqueNames,
+      foundCount: mapped.length,
+      foundNames: mapped.map((m) => m.name),
+    });
+
+    return mapped;
+  } catch (error) {
+    traceError("retrieval.name_lookup.failed", {
+      names: uniqueNames,
+      restaurantId,
+      error,
+    });
+    return [];
+  }
+}
+

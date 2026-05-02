@@ -1,0 +1,41 @@
+- generic [active] [ref=e1]:
+  - alert [ref=e2]
+  - main [ref=e3]:
+    - region "Notifications alt+T"
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - generic [ref=e8]: AskTheMenu
+          - generic [ref=e9]: Eb9e4aa6 4398 4758 B0ad F0bf5b8fc072
+        - link "View menu" [ref=e12] [cursor=pointer]:
+          - /url: /menu
+      - generic [ref=e13]:
+        - generic [ref=e14]:
+          - generic [ref=e16]:
+            - generic [ref=e39]:
+              - paragraph [ref=e42]: What is your best spicy chicken dish?
+              - generic [ref=e44]:
+                - button "Edit" [ref=e45]:
+                  - img
+                  - generic [ref=e46]: Edit
+                - button "Copy" [ref=e47]:
+                  - img
+                  - generic [ref=e48]: Copy
+            - generic [ref=e50]:
+              - img [ref=e53]
+              - paragraph [ref=e58]: Thinking...
+          - button "Scroll to bottom":
+            - img
+        - generic [ref=e19]:
+          - button "Choose File"
+          - group [ref=e21]:
+            - textbox "Ask about dishes, allergies, spice, pairings, or ordering..." [ref=e22]
+            - group [ref=e23]:
+              - generic [ref=e25]:
+                - button "llama-3.3-70b-versatile logo Llama 3.3 70B Versatile" [ref=e26]:
+                  - img "llama-3.3-70b-versatile logo" [ref=e27]
+                  - generic [ref=e28]: Llama 3.3 70B Versatile
+                - button [disabled]:
+                  - img
+              - button [ref=e59]:
+                - img

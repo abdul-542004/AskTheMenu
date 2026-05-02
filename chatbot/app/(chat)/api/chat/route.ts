@@ -14,13 +14,19 @@ import { auth, type UserType } from "@/app/(auth)/auth";
 import { entitlementsByUserType } from "@/lib/ai/entitlements";
 import {
   allowedModelIds,
-  chatModels,
   DEFAULT_CHAT_MODEL,
   getCapabilities,
 } from "@/lib/ai/models";
 import { type RequestHints, systemPrompt } from "@/lib/ai/prompts";
-import { getLanguageModel } from "@/lib/ai/providers";
+import {
+  assertGroqConfigured,
+  getLanguageModel,
+  isGroqConfigurationError,
+} from "@/lib/ai/providers";
+import { rewriteQueryForRetrieval } from "@/lib/ai/rewrite-query";
+import { traceError, traceLog } from "@/lib/ai/trace";
 import { isProductionEnvironment } from "@/lib/constants";
+import { getAnonymousUserId } from "@/lib/db/anonymous-user";
 import {
   createStreamId,
   deleteChatById,
@@ -72,22 +78,42 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { id, message, messages, selectedChatModel, selectedVisibilityType } =
-      requestBody;
+    const {
+      id,
+      tableSlug,
+      message,
+      messages,
+      selectedChatModel,
+      selectedVisibilityType,
+    } = requestBody;
     const shouldPersistChat = hasDatabase && isUUID(id);
-
-    const [, session] = await Promise.all([
-      checkBotId().catch(() => null),
-      shouldPersistChat ? auth() : Promise.resolve(null),
-    ]);
-
-    if (shouldPersistChat && !session?.user) {
-      return new ChatbotError("unauthorized:chat").toResponse();
-    }
-
     const chatModel = allowedModelIds.has(selectedChatModel)
       ? selectedChatModel
       : DEFAULT_CHAT_MODEL;
+
+    traceLog("chat.request.received", {
+      chatId: id,
+      tableSlug,
+      selectedChatModel,
+      effectiveChatModel: chatModel,
+      selectedVisibilityType,
+      hasIncomingMessages: Boolean(messages?.length),
+      incomingMessage: message,
+    });
+
+    assertGroqConfigured();
+
+    // Bot check (non-blocking)
+    checkBotId().catch(() => null);
+
+    // Try to get an authenticated session; fall back to anonymous for diners
+    const session = shouldPersistChat ? await auth().catch(() => null) : null;
+
+    // Resolve the user ID: authenticated user or anonymous diner
+    let userId: string | null = session?.user?.id ?? null;
+    if (shouldPersistChat && !userId) {
+      userId = await getAnonymousUserId();
+    }
 
     await checkIpRateLimit(ipAddress(request));
 
@@ -117,14 +143,17 @@ export async function POST(request: Request) {
     let titlePromise: Promise<string> | null = null;
 
     if (chat) {
-      if (chat.userId !== session?.user.id) {
+      // Allow access if the chat belongs to the authenticated user or the anonymous user
+      const isOwner =
+        chat.userId === session?.user?.id || chat.userId === userId;
+      if (!isOwner) {
         return new ChatbotError("forbidden:chat").toResponse();
       }
       messagesFromDb = await getMessagesByChatId({ id });
-    } else if (shouldPersistChat && session?.user && message?.role === "user") {
+    } else if (shouldPersistChat && userId && message?.role === "user") {
       await saveChat({
         id,
-        userId: session.user.id,
+        userId,
         title: "New chat",
         visibility: selectedVisibilityType,
       });
@@ -197,7 +226,6 @@ export async function POST(request: Request) {
       });
     }
 
-    const modelConfig = chatModels.find((m) => m.id === chatModel);
     const modelCapabilities = await getCapabilities();
     const capabilities = modelCapabilities[chatModel];
     const isReasoningModel = capabilities?.reasoning === true;
@@ -208,34 +236,87 @@ export async function POST(request: Request) {
     const latestUserText = latestMessage
       ? getTextFromMessage(latestMessage)
       : "";
-    const menuContext = await buildMenuContext(latestUserText);
+
+    // Rewrite the query with conversation context for better RAG retrieval
+    const { searchQuery, recallItems } = await rewriteQueryForRetrieval(
+      latestUserText,
+      modelMessages
+    );
+    const menuContext = await buildMenuContext(searchQuery, recallItems);
+
+    // Use the table slug for the system prompt label (e.g. "Table 1")
+    const effectiveTableLabel = tableSlug ?? id;
+    const chatSystemPrompt = systemPrompt({
+      requestHints,
+      supportsTools,
+      menuContext,
+      tableLabel: effectiveTableLabel,
+    });
+
+    traceLog("model.groq.request", {
+      operation: "chat_response",
+      model: chatModel,
+      provider: "groq",
+      latestUserText,
+      searchQuery,
+      recallItems,
+      system: chatSystemPrompt,
+      messages: modelMessages,
+      settings: {
+        stopWhen: "stepCountIs(5)",
+        tools: {},
+        activeTools: [],
+        sendReasoning: isReasoningModel,
+      },
+    });
 
     const stream = createUIMessageStream({
       originalMessages: hasToolApprovalContinuation ? uiMessages : undefined,
       execute: async ({ writer: dataStream }) => {
         const result = streamText({
           model: getLanguageModel(chatModel),
-          system: systemPrompt({
-            requestHints,
-            supportsTools,
-            menuContext,
-            tableLabel: id,
-          }),
+          system: chatSystemPrompt,
           messages: modelMessages,
           stopWhen: stepCountIs(5),
           experimental_activeTools: [],
-          providerOptions: {
-            ...(modelConfig?.gatewayOrder && {
-              gateway: { order: modelConfig.gatewayOrder },
-            }),
-            ...(modelConfig?.reasoningEffort && {
-              openai: { reasoningEffort: modelConfig.reasoningEffort },
-            }),
-          },
           tools: {},
           experimental_telemetry: {
             isEnabled: isProductionEnvironment,
             functionId: "stream-text",
+          },
+          onFinish: (event) => {
+            traceLog("model.groq.response", {
+              operation: "chat_response",
+              model: chatModel,
+              providerModel: event.model,
+              ok: true,
+              finishReason: event.finishReason,
+              rawFinishReason: event.rawFinishReason,
+              output: event.text,
+              usage: event.usage,
+              totalUsage: event.totalUsage,
+              warnings: event.warnings,
+              responseId: event.response?.id,
+              responseTimestamp: event.response?.timestamp,
+              steps: event.steps.map((step) => ({
+                stepNumber: step.stepNumber,
+                model: step.model,
+                finishReason: step.finishReason,
+                rawFinishReason: step.rawFinishReason,
+                text: step.text,
+                usage: step.usage,
+                warnings: step.warnings,
+                toolCalls: step.toolCalls,
+                toolResults: step.toolResults,
+              })),
+            });
+          },
+          onError: ({ error }) => {
+            traceError("model.groq.error", {
+              operation: "chat_response",
+              model: chatModel,
+              error,
+            });
           },
         });
 
@@ -253,6 +334,13 @@ export async function POST(request: Request) {
       },
       generateId: generateUUID,
       onFinish: async ({ messages: finishedMessages }) => {
+        traceLog("chat.ui_stream.finished", {
+          chatId: id,
+          shouldPersistChat,
+          messageCount: finishedMessages.length,
+          messages: finishedMessages,
+        });
+
         if (!shouldPersistChat) {
           return;
         }
@@ -294,13 +382,13 @@ export async function POST(request: Request) {
         }
       },
       onError: (error) => {
-        if (
-          error instanceof Error &&
-          error.message?.includes(
-            "AI Gateway requires a valid credit card on file to service requests"
-          )
-        ) {
-          return "AI Gateway requires a valid credit card on file to service requests. Please visit https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card to add a card and unlock your free credits.";
+        traceError("chat.ui_stream.error", {
+          chatId: id,
+          error,
+        });
+
+        if (isGroqConfigurationError(error)) {
+          return "Groq is not configured. Add GROQ_API_KEY to chatbot/.env.local and restart the dev server.";
         }
         return "Oops, an error occurred!";
       },
@@ -330,17 +418,17 @@ export async function POST(request: Request) {
   } catch (error) {
     const vercelId = request.headers.get("x-vercel-id");
 
+    traceError("chat.request.failed", {
+      vercelId,
+      error,
+    });
+
     if (error instanceof ChatbotError) {
       return error.toResponse();
     }
 
-    if (
-      error instanceof Error &&
-      error.message?.includes(
-        "AI Gateway requires a valid credit card on file to service requests"
-      )
-    ) {
-      return new ChatbotError("bad_request:activate_gateway").toResponse();
+    if (isGroqConfigurationError(error)) {
+      return new ChatbotError("bad_request:groq").toResponse();
     }
 
     console.error("Unhandled error in chat API:", error, { vercelId });

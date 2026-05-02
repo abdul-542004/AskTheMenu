@@ -28,6 +28,7 @@ const toolApprovalMessageSchema = z.object({
 
 export const postRequestBodySchema = z.object({
   id: z.string().min(1).max(120),
+  tableSlug: z.string().min(1).max(120).optional(),
   message: userMessageSchema.optional(),
   messages: z.array(toolApprovalMessageSchema).optional(),
   selectedChatModel: z.string(),

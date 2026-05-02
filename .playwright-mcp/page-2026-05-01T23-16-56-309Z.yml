@@ -1,0 +1,58 @@
+- generic [ref=e1]:
+  - alert [ref=e2]
+  - main [ref=e3]:
+    - region "Notifications alt+T"
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - generic [ref=e8]: AskTheMenu
+          - generic [ref=e9]: Eb9e4aa6 4398 4758 B0ad F0bf5b8fc072
+        - link "View menu" [ref=e12] [cursor=pointer]:
+          - /url: /menu
+      - generic [ref=e13]:
+        - generic [ref=e14]:
+          - generic [ref=e16]:
+            - generic [ref=e39]:
+              - paragraph [ref=e42]: What is your best spicy chicken dish?
+              - generic [ref=e44]:
+                - button "Edit" [ref=e45]:
+                  - img
+                  - generic [ref=e46]: Edit
+                - button "Copy" [ref=e47]:
+                  - img
+                  - generic [ref=e48]: Copy
+            - generic [ref=e61]:
+              - img [ref=e64]
+              - generic [ref=e68]:
+                - generic [ref=e70]:
+                  - paragraph [ref=e71]: "Our top spicy chicken dishes are:"
+                  - list [ref=e72]:
+                    - listitem [ref=e73]: Dynamite Chicken (PKR 700/serving) - fusion, hot, with spicy mayo and chili sauce
+                    - listitem [ref=e74]: Spicy Honey Wings (Desi Style) (PKR 650/serving) - fusion, hot, with honey and chili sauce
+                    - listitem [ref=e75]: Chicken Chili Dry (PKR 850/serving) - chinese, hot, with soy sauce and green chilies
+                    - listitem [ref=e76]: Fish in Hot Garlic Sauce is not a chicken dish, and other options like Schezwan Fried Rice, Hot and Sour Soup are not solely chicken dishes. These are our specialty spicy chicken dishes.
+                - generic [ref=e77]:
+                  - button "Copy" [ref=e78]:
+                    - img
+                    - generic [ref=e79]: Copy
+                  - button "Upvote Response" [ref=e80]:
+                    - img
+                    - generic [ref=e81]: Upvote Response
+                  - button "Downvote Response" [ref=e82]:
+                    - img
+                    - generic [ref=e83]: Downvote Response
+          - button "Scroll to bottom":
+            - img
+        - generic [ref=e19]:
+          - button "Choose File"
+          - group [ref=e21]:
+            - textbox "Ask about dishes, allergies, spice, pairings, or ordering..." [active] [ref=e22]
+            - group [ref=e23]:
+              - generic [ref=e25]:
+                - button "llama-3.3-70b-versatile logo Llama 3.3 70B Versatile" [ref=e26]:
+                  - img "llama-3.3-70b-versatile logo" [ref=e27]
+                  - generic [ref=e28]: Llama 3.3 70B Versatile
+                - button [disabled]:
+                  - img
+              - button "Submit" [disabled]:
+                - img

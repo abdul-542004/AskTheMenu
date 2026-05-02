@@ -27,6 +27,7 @@ import { MultimodalInput } from "./multimodal-input";
 export function ChatShell() {
   const {
     chatId,
+    tableSlug,
     messages,
     setMessages,
     sendMessage,
@@ -42,8 +43,8 @@ export function ChatShell() {
     votes,
     currentModelId,
     setCurrentModelId,
-    showCreditCardAlert,
-    setShowCreditCardAlert,
+    showGroqKeyAlert,
+    setShowGroqKeyAlert,
   } = useActiveChat();
 
   const [editingMessage, setEditingMessage] = useState<ChatMessage | null>(
@@ -70,13 +71,12 @@ export function ChatShell() {
   return (
     <>
       <div className="flex h-dvh w-full flex-row overflow-hidden">
-        <div
-          className="flex w-full min-w-0 flex-col bg-sidebar transition-[width] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
-        >
+        <div className="flex w-full min-w-0 flex-col bg-sidebar transition-[width] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]">
           <ChatHeader
             chatId={chatId}
             isReadonly={isReadonly}
             selectedVisibilityType={visibilityType}
+            tableSlug={tableSlug}
           />
 
           <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden bg-background md:rounded-tl-[12px] md:border-t md:border-l md:border-border/40">
@@ -147,31 +147,25 @@ export function ChatShell() {
 
       <DataStreamHandler />
 
-      <AlertDialog
-        onOpenChange={setShowCreditCardAlert}
-        open={showCreditCardAlert}
-      >
+      <AlertDialog onOpenChange={setShowGroqKeyAlert} open={showGroqKeyAlert}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Activate AI Gateway</AlertDialogTitle>
+            <AlertDialogTitle>Configure Groq</AlertDialogTitle>
             <AlertDialogDescription>
               This application requires{" "}
               {process.env.NODE_ENV === "production" ? "the owner" : "you"} to
-              activate Vercel AI Gateway.
+              set GROQ_API_KEY before chat requests can be sent.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => {
-                window.open(
-                  "https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card",
-                  "_blank"
-                );
+                window.open("https://console.groq.com/keys", "_blank");
                 window.location.href = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/`;
               }}
             >
-              Activate
+              Open Keys
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

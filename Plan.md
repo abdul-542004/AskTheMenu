@@ -191,6 +191,8 @@ Done when the chatbot can answer:
 “What should two people order?”
 ```
 
+--- done ---
+
 **Phase 6: Ordering Flow**
 
 Goal: let the chatbot turn conversation into a real order.

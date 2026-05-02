@@ -1,0 +1,145 @@
+- generic [ref=e1]:
+  - alert [ref=e2]
+  - main [ref=e3]:
+    - region "Notifications alt+T"
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - generic [ref=e8]: AskTheMenu
+          - generic [ref=e9]: Eb9e4aa6 4398 4758 B0ad F0bf5b8fc072
+        - link "View menu" [ref=e12] [cursor=pointer]:
+          - /url: /menu
+      - generic [ref=e13]:
+        - generic [ref=e14]:
+          - generic [ref=e16]:
+            - generic [ref=e39]:
+              - paragraph [ref=e42]: What is your best spicy chicken dish?
+              - generic [ref=e44]:
+                - button "Edit" [ref=e45]:
+                  - img
+                  - generic [ref=e46]: Edit
+                - button "Copy" [ref=e47]:
+                  - img
+                  - generic [ref=e48]: Copy
+            - generic [ref=e61]:
+              - img [ref=e64]
+              - generic [ref=e68]:
+                - generic [ref=e70]:
+                  - paragraph [ref=e71]: "Our top spicy chicken dishes are:"
+                  - list [ref=e72]:
+                    - listitem [ref=e73]: Dynamite Chicken (PKR 700/serving) - fusion, hot, with spicy mayo and chili sauce
+                    - listitem [ref=e74]: Spicy Honey Wings (Desi Style) (PKR 650/serving) - fusion, hot, with honey and chili sauce
+                    - listitem [ref=e75]: Chicken Chili Dry (PKR 850/serving) - chinese, hot, with soy sauce and green chilies
+                    - listitem [ref=e76]: Fish in Hot Garlic Sauce is not a chicken dish, and other options like Schezwan Fried Rice, Hot and Sour Soup are not solely chicken dishes. These are our specialty spicy chicken dishes.
+                - generic [ref=e77]:
+                  - button "Copy" [ref=e78]:
+                    - img
+                    - generic [ref=e79]: Copy
+                  - button "Upvote Response" [ref=e80]:
+                    - img
+                    - generic [ref=e81]: Upvote Response
+                  - button "Downvote Response" [ref=e82]:
+                    - img
+                    - generic [ref=e83]: Downvote Response
+            - generic [ref=e86]:
+              - paragraph [ref=e89]: Between the chicken options you mentioned, which one has less dairy?
+              - generic [ref=e91]:
+                - button "Edit" [ref=e92]:
+                  - img
+                  - generic [ref=e93]: Edit
+                - button "Copy" [ref=e94]:
+                  - img
+                  - generic [ref=e95]: Copy
+            - generic [ref=e97]:
+              - img [ref=e100]
+              - generic [ref=e104]:
+                - generic [ref=e106]:
+                  - paragraph [ref=e107]: "For spicy chicken with less dairy, consider:"
+                  - list [ref=e108]:
+                    - listitem [ref=e109]: Dynamite Chicken (no dairy, PKR 700/serving, spice hot)
+                    - listitem [ref=e110]: Spicy Honey Wings (Desi Style) (no dairy, PKR 650/serving, spice hot)
+                    - listitem [ref=e111]: Chicken Chili Dry (no dairy, PKR 850/serving, spice hot) These options have either no or less dairy compared to other menu items.
+                - generic [ref=e112]:
+                  - button "Copy" [ref=e113]:
+                    - img
+                    - generic [ref=e114]: Copy
+                  - button "Upvote Response" [ref=e115]:
+                    - img
+                    - generic [ref=e116]: Upvote Response
+                  - button "Downvote Response" [ref=e117]:
+                    - img
+                    - generic [ref=e118]: Downvote Response
+            - generic [ref=e121]:
+              - paragraph [ref=e124]: What mild vegetarian options can we order under 500 PKR per person for 4 people?
+              - generic [ref=e126]:
+                - button "Edit" [ref=e127]:
+                  - img
+                  - generic [ref=e128]: Edit
+                - button "Copy" [ref=e129]:
+                  - img
+                  - generic [ref=e130]: Copy
+            - generic [ref=e143]:
+              - img [ref=e146]
+              - generic [ref=e150]:
+                - generic [ref=e152]:
+                  - paragraph [ref=e153]: "For mild vegetarian options under 500 PKR per person for 4 people, consider:"
+                  - list [ref=e154]:
+                    - listitem [ref=e155]: Spring Rolls (PKR 300/serving)
+                    - listitem [ref=e156]: Mix Sabzi (PKR 280/plate)
+                    - listitem [ref=e157]: "Palak Paneer (PKR 450/plate, note: contains dairy)"
+                    - listitem [ref=e158]: "Daal Makhni (PKR 400/plate, note: contains dairy)"
+                - generic [ref=e159]:
+                  - button "Copy" [ref=e160]:
+                    - img
+                    - generic [ref=e161]: Copy
+                  - button "Upvote Response" [ref=e162]:
+                    - img
+                    - generic [ref=e163]: Upvote Response
+                  - button "Downvote Response" [ref=e164]:
+                    - img
+                    - generic [ref=e165]: Downvote Response
+            - generic [ref=e168]:
+              - paragraph [ref=e171]: Which of the vegetarian options are nut-free? My friend has a severe peanut allergy.
+              - generic [ref=e173]:
+                - button "Edit" [ref=e174]:
+                  - img
+                  - generic [ref=e175]: Edit
+                - button "Copy" [ref=e176]:
+                  - img
+                  - generic [ref=e177]: Copy
+            - generic [ref=e190]:
+              - img [ref=e193]
+              - generic [ref=e197]:
+                - generic [ref=e199]:
+                  - paragraph [ref=e200]: "For nut-free vegetarian options, consider:"
+                  - list [ref=e201]:
+                    - listitem [ref=e202]: Mix Sabzi (PKR 280/plate) - no nuts, mild, and vegetarian
+                    - listitem [ref=e203]: French Fries (PKR 200/serving) - no nuts, non-spicy, and vegetarian
+                    - listitem [ref=e204]: Russian Salad (PKR 180/bowl) - no nuts, non-spicy, and vegetarian, but contains dairy and eggs
+                    - listitem [ref=e205]: Tomato Basil Soup (PKR 300/bowl) - no nuts, mild, and vegetarian, but contains dairy
+                    - listitem [ref=e206]: Plain Naan (PKR 40/piece) - no nuts, non-spicy, and vegetarian, but contains gluten
+                - generic [ref=e207]:
+                  - button "Copy" [ref=e208]:
+                    - img
+                    - generic [ref=e209]: Copy
+                  - button "Upvote Response" [ref=e210]:
+                    - img
+                    - generic [ref=e211]: Upvote Response
+                  - button "Downvote Response" [ref=e212]:
+                    - img
+                    - generic [ref=e213]: Downvote Response
+          - button "Scroll to bottom":
+            - img
+        - generic [ref=e19]:
+          - button "Choose File"
+          - group [ref=e21]:
+            - textbox "Ask about dishes, allergies, spice, pairings, or ordering..." [active] [ref=e22]
+            - group [ref=e23]:
+              - generic [ref=e25]:
+                - button "llama-3.3-70b-versatile logo Llama 3.3 70B Versatile" [ref=e26]:
+                  - img "llama-3.3-70b-versatile logo" [ref=e27]
+                  - generic [ref=e28]: Llama 3.3 70B Versatile
+                - button [disabled]:
+                  - img
+              - button "Submit" [disabled]:
+                - img
