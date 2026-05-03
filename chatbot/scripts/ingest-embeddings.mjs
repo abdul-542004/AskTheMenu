@@ -11,8 +11,8 @@
 
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { config } from "dotenv";
 import { GoogleGenAI } from "@google/genai";
+import { config } from "dotenv";
 import postgres from "postgres";
 
 // ── Config ──────────────────────────────────────────────────────────────────
@@ -144,7 +144,9 @@ async function main() {
   console.log("Phase 4: Embedding Ingestion");
   console.log(`Model: ${EMBEDDING_MODEL} (${EMBEDDING_DIMENSIONS}d)`);
   console.log(`Batch size: ${BATCH_SIZE}, delay: ${BATCH_DELAY_MS}ms`);
-  if (isDryRun) console.log("DRY RUN — no database writes");
+  if (isDryRun) {
+    console.log("DRY RUN — no database writes");
+  }
   console.log("");
 
   // 1. Get restaurant
@@ -156,7 +158,9 @@ async function main() {
   `;
 
   if (restaurants.length === 0) {
-    console.error(`Restaurant "${RESTAURANT_NAME}" not found. Run db:seed first.`);
+    console.error(
+      `Restaurant "${RESTAURANT_NAME}" not found. Run db:seed first.`
+    );
     process.exit(1);
   }
 
@@ -191,7 +195,9 @@ async function main() {
       console.log(text);
       console.log("---");
     }
-    console.log(`\nDry run complete. ${itemsWithText.length} items would be embedded.`);
+    console.log(
+      `\nDry run complete. ${itemsWithText.length} items would be embedded.`
+    );
     return;
   }
 
@@ -210,9 +216,7 @@ async function main() {
 
     try {
       // Generate and upsert embeddings individually within the batch
-      for (let j = 0; j < batch.length; j++) {
-        const { item, text } = batch[j];
-
+      for (const { item, text } of batch) {
         try {
           const vector = await generateEmbeddingSingle(text);
 
@@ -270,7 +274,7 @@ async function main() {
   // 5. Summary
   console.log("");
   console.log("═══════════════════════════════════════");
-  console.log(`Ingestion complete`);
+  console.log("Ingestion complete");
   console.log(`  Embedded: ${totalEmbedded}/${menuItems.length}`);
   console.log(`  Errors:   ${totalErrors}`);
 

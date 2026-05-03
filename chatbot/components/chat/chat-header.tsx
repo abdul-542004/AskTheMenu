@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { memo, useCallback } from "react";
 import { startNewTableConversation } from "@/hooks/use-active-chat";
 import type { VisibilityType } from "./visibility-selector";
@@ -17,8 +16,6 @@ function PureChatHeader({
   selectedVisibilityType: VisibilityType;
   isReadonly: boolean;
 }) {
-  const router = useRouter();
-
   const tableLabel = (tableSlug ?? chatId)
     .split("-")
     .filter(Boolean)

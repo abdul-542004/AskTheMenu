@@ -18,17 +18,12 @@
       "saffron",
       "herbs"
     ],
-    "allergens": [
-      "dairy"
-    ],
+    "allergens": ["dairy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "hot",
     "cuisineType": "desi",
     "specialty": true,
-    "pairings": [
-      "Mint Raita",
-      "Salad Bowl"
-    ],
+    "pairings": ["Mint Raita", "Salad Bowl"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -51,17 +46,12 @@
       "spices",
       "cream"
     ],
-    "allergens": [
-      "dairy"
-    ],
+    "allergens": ["dairy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "desi",
     "specialty": true,
-    "pairings": [
-      "Plain Naan",
-      "Garlic Naan"
-    ],
+    "pairings": ["Plain Naan", "Garlic Naan"],
     "serving": "shareable",
     "portionLabel": "2 - 3 persons",
     "price": {
@@ -86,17 +76,12 @@
       "green chilies",
       "biryani spices"
     ],
-    "allergens": [
-      "dairy"
-    ],
+    "allergens": ["dairy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "hot",
     "cuisineType": "desi",
     "specialty": true,
-    "pairings": [
-      "Mint Raita",
-      "Salad Bowl"
-    ],
+    "pairings": ["Mint Raita", "Salad Bowl"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -124,10 +109,7 @@
     "spiceLevel": "hot",
     "cuisineType": "desi",
     "specialty": true,
-    "pairings": [
-      "Garlic Naan",
-      "Tandoori Roti"
-    ],
+    "pairings": ["Garlic Naan", "Tandoori Roti"],
     "serving": "shareable",
     "portionLabel": "2 - 3 persons",
     "price": {
@@ -155,10 +137,7 @@
     "spiceLevel": "medium",
     "cuisineType": "desi",
     "specialty": true,
-    "pairings": [
-      "Garlic Naan",
-      "Tandoori Roti"
-    ],
+    "pairings": ["Garlic Naan", "Tandoori Roti"],
     "serving": "shareable",
     "portionLabel": "2 - 3 persons",
     "price": {
@@ -172,25 +151,13 @@
   {
     "id": "nihari",
     "name": "Nihari",
-    "ingredients": [
-      "beef",
-      "wheat flour",
-      "ginger",
-      "garlic",
-      "spices",
-      "oil"
-    ],
-    "allergens": [
-      "gluten"
-    ],
+    "ingredients": ["beef", "wheat flour", "ginger", "garlic", "spices", "oil"],
+    "allergens": ["gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "desi",
     "specialty": true,
-    "pairings": [
-      "Garlic Naan",
-      "Roghni Naan"
-    ],
+    "pairings": ["Garlic Naan", "Roghni Naan"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -204,25 +171,13 @@
   {
     "id": "haleem",
     "name": "Haleem",
-    "ingredients": [
-      "wheat",
-      "barley",
-      "lentils",
-      "beef",
-      "spices",
-      "ghee"
-    ],
-    "allergens": [
-      "gluten"
-    ],
+    "ingredients": ["wheat", "barley", "lentils", "beef", "spices", "ghee"],
+    "allergens": ["gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "desi",
     "specialty": true,
-    "pairings": [
-      "Garlic Naan",
-      "Fresh Lime Water"
-    ],
+    "pairings": ["Garlic Naan", "Fresh Lime Water"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -249,9 +204,7 @@
     "spiceLevel": "mild",
     "cuisineType": "desi",
     "specialty": false,
-    "pairings": [
-      "Mint Raita"
-    ],
+    "pairings": ["Mint Raita"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -265,21 +218,13 @@
   {
     "id": "seekh-kebab",
     "name": "Seekh Kebab",
-    "ingredients": [
-      "minced beef",
-      "onions",
-      "green chilies",
-      "spices"
-    ],
+    "ingredients": ["minced beef", "onions", "green chilies", "spices"],
     "allergens": [],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "desi",
     "specialty": true,
-    "pairings": [
-      "Garlic Naan",
-      "Ketchup & Dips Set"
-    ],
+    "pairings": ["Garlic Naan", "Ketchup & Dips Set"],
     "serving": "single",
     "portionLabel": "4 pieces",
     "price": {
@@ -293,23 +238,13 @@
   {
     "id": "chicken-tikka",
     "name": "Chicken Tikka",
-    "ingredients": [
-      "chicken",
-      "yogurt",
-      "spices",
-      "lemon juice"
-    ],
-    "allergens": [
-      "dairy"
-    ],
+    "ingredients": ["chicken", "yogurt", "spices", "lemon juice"],
+    "allergens": ["dairy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "desi",
     "specialty": true,
-    "pairings": [
-      "Garlic Naan",
-      "Ketchup & Dips Set"
-    ],
+    "pairings": ["Garlic Naan", "Ketchup & Dips Set"],
     "serving": "single",
     "portionLabel": "quarter",
     "price": {
@@ -323,23 +258,13 @@
   {
     "id": "malai-boti",
     "name": "Malai Boti",
-    "ingredients": [
-      "chicken",
-      "cream",
-      "cheese",
-      "spices"
-    ],
-    "allergens": [
-      "dairy"
-    ],
+    "ingredients": ["chicken", "cream", "cheese", "spices"],
+    "allergens": ["dairy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "desi",
     "specialty": true,
-    "pairings": [
-      "Garlic Naan",
-      "Ketchup & Dips Set"
-    ],
+    "pairings": ["Garlic Naan", "Ketchup & Dips Set"],
     "serving": "single",
     "portionLabel": "6 pieces",
     "price": {
@@ -353,23 +278,13 @@
   {
     "id": "chapli-kebab",
     "name": "Chapli Kebab",
-    "ingredients": [
-      "minced beef",
-      "tomatoes",
-      "onions",
-      "spices"
-    ],
-    "allergens": [
-      "gluten"
-    ],
+    "ingredients": ["minced beef", "tomatoes", "onions", "spices"],
+    "allergens": ["gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "desi",
     "specialty": true,
-    "pairings": [
-      "Garlic Naan",
-      "Mint Raita"
-    ],
+    "pairings": ["Garlic Naan", "Mint Raita"],
     "serving": "single",
     "portionLabel": "2 pieces",
     "price": {
@@ -383,22 +298,13 @@
   {
     "id": "palak-paneer",
     "name": "Palak Paneer",
-    "ingredients": [
-      "spinach",
-      "paneer",
-      "cream",
-      "spices"
-    ],
-    "allergens": [
-      "dairy"
-    ],
+    "ingredients": ["spinach", "paneer", "cream", "spices"],
+    "allergens": ["dairy"],
     "dietary": "vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "desi",
     "specialty": false,
-    "pairings": [
-      "Garlic Naan"
-    ],
+    "pairings": ["Garlic Naan"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -412,24 +318,13 @@
   {
     "id": "chicken-korma",
     "name": "Chicken Korma",
-    "ingredients": [
-      "chicken",
-      "yogurt",
-      "cream",
-      "nuts",
-      "spices"
-    ],
-    "allergens": [
-      "dairy",
-      "nuts"
-    ],
+    "ingredients": ["chicken", "yogurt", "cream", "nuts", "spices"],
+    "allergens": ["dairy", "nuts"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "desi",
     "specialty": true,
-    "pairings": [
-      "Garlic Naan"
-    ],
+    "pairings": ["Garlic Naan"],
     "serving": "shareable",
     "portionLabel": "2 persons",
     "price": {
@@ -443,22 +338,13 @@
   {
     "id": "mutton-korma",
     "name": "Mutton Korma",
-    "ingredients": [
-      "mutton",
-      "yogurt",
-      "cream",
-      "spices"
-    ],
-    "allergens": [
-      "dairy"
-    ],
+    "ingredients": ["mutton", "yogurt", "cream", "spices"],
+    "allergens": ["dairy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "desi",
     "specialty": true,
-    "pairings": [
-      "Garlic Naan"
-    ],
+    "pairings": ["Garlic Naan"],
     "serving": "shareable",
     "portionLabel": "2 persons",
     "price": {
@@ -472,18 +358,13 @@
   {
     "id": "mix-sabzi",
     "name": "Mix Sabzi",
-    "ingredients": [
-      "assorted vegetables",
-      "spices"
-    ],
+    "ingredients": ["assorted vegetables", "spices"],
     "allergens": [],
     "dietary": "vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "desi",
     "specialty": false,
-    "pairings": [
-      "Tandoori Roti"
-    ],
+    "pairings": ["Tandoori Roti"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -497,24 +378,13 @@
   {
     "id": "fried-fish-desi-style",
     "name": "Fried Fish (Desi Style)",
-    "ingredients": [
-      "fish",
-      "gram flour",
-      "spices",
-      "lemon"
-    ],
-    "allergens": [
-      "seafood",
-      "gluten"
-    ],
+    "ingredients": ["fish", "gram flour", "spices", "lemon"],
+    "allergens": ["seafood", "gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "desi",
     "specialty": true,
-    "pairings": [
-      "Ketchup & Dips Set",
-      "Salad Bowl"
-    ],
+    "pairings": ["Ketchup & Dips Set", "Salad Bowl"],
     "serving": "single",
     "portionLabel": "4 pieces",
     "price": {
@@ -528,22 +398,13 @@
   {
     "id": "daal-makhni",
     "name": "Daal Makhni",
-    "ingredients": [
-      "lentils",
-      "butter",
-      "cream",
-      "spices"
-    ],
-    "allergens": [
-      "dairy"
-    ],
+    "ingredients": ["lentils", "butter", "cream", "spices"],
+    "allergens": ["dairy"],
     "dietary": "vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "desi",
     "specialty": true,
-    "pairings": [
-      "Garlic Naan"
-    ],
+    "pairings": ["Garlic Naan"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -557,21 +418,13 @@
   {
     "id": "chicken-kofta",
     "name": "Chicken Kofta",
-    "ingredients": [
-      "chicken mince",
-      "spices",
-      "yogurt gravy"
-    ],
-    "allergens": [
-      "dairy"
-    ],
+    "ingredients": ["chicken mince", "spices", "yogurt gravy"],
+    "allergens": ["dairy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "desi",
     "specialty": false,
-    "pairings": [
-      "Garlic Naan"
-    ],
+    "pairings": ["Garlic Naan"],
     "serving": "shareable",
     "portionLabel": "2 persons",
     "price": {
@@ -585,21 +438,13 @@
   {
     "id": "beef-kofta",
     "name": "Beef Kofta",
-    "ingredients": [
-      "beef mince",
-      "spices",
-      "yogurt gravy"
-    ],
-    "allergens": [
-      "dairy"
-    ],
+    "ingredients": ["beef mince", "spices", "yogurt gravy"],
+    "allergens": ["dairy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "desi",
     "specialty": false,
-    "pairings": [
-      "Garlic Naan"
-    ],
+    "pairings": ["Garlic Naan"],
     "serving": "shareable",
     "portionLabel": "2 persons",
     "price": {
@@ -622,17 +467,12 @@
       "garlic",
       "oil"
     ],
-    "allergens": [
-      "gluten",
-      "soy"
-    ],
+    "allergens": ["gluten", "soy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "chinese",
     "specialty": true,
-    "pairings": [
-      "Spring Rolls"
-    ],
+    "pairings": ["Spring Rolls"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -654,17 +494,12 @@
       "cornflour",
       "chili sauce"
     ],
-    "allergens": [
-      "gluten",
-      "soy"
-    ],
+    "allergens": ["gluten", "soy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "chinese",
     "specialty": true,
-    "pairings": [
-      "Egg Fried Rice"
-    ],
+    "pairings": ["Egg Fried Rice"],
     "serving": "shareable",
     "portionLabel": "2 persons",
     "price": {
@@ -678,24 +513,13 @@
   {
     "id": "egg-fried-rice",
     "name": "Egg Fried Rice",
-    "ingredients": [
-      "rice",
-      "eggs",
-      "soy sauce",
-      "spring onions",
-      "garlic"
-    ],
-    "allergens": [
-      "eggs",
-      "soy"
-    ],
+    "ingredients": ["rice", "eggs", "soy sauce", "spring onions", "garlic"],
+    "allergens": ["eggs", "soy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "chinese",
     "specialty": false,
-    "pairings": [
-      "Chicken Chili Dry"
-    ],
+    "pairings": ["Chicken Chili Dry"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -716,16 +540,12 @@
       "garlic",
       "vegetables"
     ],
-    "allergens": [
-      "soy"
-    ],
+    "allergens": ["soy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "hot",
     "cuisineType": "chinese",
     "specialty": true,
-    "pairings": [
-      "Chicken Manchurian"
-    ],
+    "pairings": ["Chicken Manchurian"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -746,16 +566,12 @@
       "garlic",
       "bell peppers"
     ],
-    "allergens": [
-      "soy"
-    ],
+    "allergens": ["soy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "hot",
     "cuisineType": "chinese",
     "specialty": true,
-    "pairings": [
-      "Schezwan Fried Rice"
-    ],
+    "pairings": ["Schezwan Fried Rice"],
     "serving": "shareable",
     "portionLabel": "2 persons",
     "price": {
@@ -769,24 +585,13 @@
   {
     "id": "hot-and-sour-soup",
     "name": "Hot and Sour Soup",
-    "ingredients": [
-      "chicken",
-      "mushrooms",
-      "vinegar",
-      "soy sauce",
-      "eggs"
-    ],
-    "allergens": [
-      "eggs",
-      "soy"
-    ],
+    "ingredients": ["chicken", "mushrooms", "vinegar", "soy sauce", "eggs"],
+    "allergens": ["eggs", "soy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "hot",
     "cuisineType": "chinese",
     "specialty": true,
-    "pairings": [
-      "Chicken Nuggets"
-    ],
+    "pairings": ["Chicken Nuggets"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -800,22 +605,13 @@
   {
     "id": "chicken-corn-soup",
     "name": "Chicken Corn Soup",
-    "ingredients": [
-      "chicken",
-      "corn",
-      "eggs",
-      "cornflour"
-    ],
-    "allergens": [
-      "eggs"
-    ],
+    "ingredients": ["chicken", "corn", "eggs", "cornflour"],
+    "allergens": ["eggs"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "chinese",
     "specialty": true,
-    "pairings": [
-      "Garlic Naan"
-    ],
+    "pairings": ["Garlic Naan"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -829,22 +625,13 @@
   {
     "id": "spring-rolls",
     "name": "Spring Rolls",
-    "ingredients": [
-      "pastry sheets",
-      "vegetables",
-      "soy sauce"
-    ],
-    "allergens": [
-      "gluten",
-      "soy"
-    ],
+    "ingredients": ["pastry sheets", "vegetables", "soy sauce"],
+    "allergens": ["gluten", "soy"],
     "dietary": "vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "chinese",
     "specialty": false,
-    "pairings": [
-      "Ketchup & Dips Set"
-    ],
+    "pairings": ["Ketchup & Dips Set"],
     "serving": "single",
     "portionLabel": "4 pieces",
     "price": {
@@ -865,16 +652,12 @@
       "garlic",
       "bell peppers"
     ],
-    "allergens": [
-      "soy"
-    ],
+    "allergens": ["soy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "hot",
     "cuisineType": "chinese",
     "specialty": true,
-    "pairings": [
-      "Schezwan Fried Rice"
-    ],
+    "pairings": ["Schezwan Fried Rice"],
     "serving": "shareable",
     "portionLabel": "2 persons",
     "price": {
@@ -888,22 +671,13 @@
   {
     "id": "garlic-chicken",
     "name": "Garlic Chicken",
-    "ingredients": [
-      "chicken",
-      "garlic",
-      "soy sauce",
-      "oil"
-    ],
-    "allergens": [
-      "soy"
-    ],
+    "ingredients": ["chicken", "garlic", "soy sauce", "oil"],
+    "allergens": ["soy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "chinese",
     "specialty": false,
-    "pairings": [
-      "Chicken Chow Mein"
-    ],
+    "pairings": ["Chicken Chow Mein"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -917,23 +691,13 @@
   {
     "id": "kung-pao-chicken",
     "name": "Kung Pao Chicken",
-    "ingredients": [
-      "chicken",
-      "peanuts",
-      "soy sauce",
-      "chili peppers"
-    ],
-    "allergens": [
-      "nuts",
-      "soy"
-    ],
+    "ingredients": ["chicken", "peanuts", "soy sauce", "chili peppers"],
+    "allergens": ["nuts", "soy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "chinese",
     "specialty": true,
-    "pairings": [
-      "Egg Fried Rice"
-    ],
+    "pairings": ["Egg Fried Rice"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -947,21 +711,13 @@
   {
     "id": "sweet-and-sour-chicken",
     "name": "Sweet and Sour Chicken",
-    "ingredients": [
-      "chicken",
-      "pineapple",
-      "bell peppers",
-      "vinegar",
-      "sugar"
-    ],
+    "ingredients": ["chicken", "pineapple", "bell peppers", "vinegar", "sugar"],
     "allergens": [],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "chinese",
     "specialty": true,
-    "pairings": [
-      "Schezwan Fried Rice"
-    ],
+    "pairings": ["Schezwan Fried Rice"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -975,23 +731,13 @@
   {
     "id": "stir-fry-vegetables",
     "name": "Stir Fry Vegetables",
-    "ingredients": [
-      "broccoli",
-      "carrots",
-      "beans",
-      "soy sauce",
-      "garlic"
-    ],
-    "allergens": [
-      "soy"
-    ],
+    "ingredients": ["broccoli", "carrots", "beans", "soy sauce", "garlic"],
+    "allergens": ["soy"],
     "dietary": "vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "chinese",
     "specialty": false,
-    "pairings": [
-      "Egg Fried Rice"
-    ],
+    "pairings": ["Egg Fried Rice"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1005,25 +751,13 @@
   {
     "id": "prawn-fried-rice",
     "name": "Prawn Fried Rice",
-    "ingredients": [
-      "rice",
-      "prawns",
-      "eggs",
-      "soy sauce",
-      "vegetables"
-    ],
-    "allergens": [
-      "seafood",
-      "eggs",
-      "soy"
-    ],
+    "ingredients": ["rice", "prawns", "eggs", "soy sauce", "vegetables"],
+    "allergens": ["seafood", "eggs", "soy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "chinese",
     "specialty": true,
-    "pairings": [
-      "Fish in Hot Garlic Sauce"
-    ],
+    "pairings": ["Fish in Hot Garlic Sauce"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1044,17 +778,12 @@
       "vegetables",
       "soy sauce"
     ],
-    "allergens": [
-      "gluten",
-      "soy"
-    ],
+    "allergens": ["gluten", "soy"],
     "dietary": "vegetarian",
     "spiceLevel": "hot",
     "cuisineType": "chinese",
     "specialty": true,
-    "pairings": [
-      "Chicken Manchurian"
-    ],
+    "pairings": ["Chicken Manchurian"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1068,23 +797,13 @@
   {
     "id": "chicken-shashlik",
     "name": "Chicken Shashlik",
-    "ingredients": [
-      "chicken",
-      "bell peppers",
-      "onions",
-      "soy sauce",
-      "spices"
-    ],
-    "allergens": [
-      "soy"
-    ],
+    "ingredients": ["chicken", "bell peppers", "onions", "soy sauce", "spices"],
+    "allergens": ["soy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "chinese",
     "specialty": true,
-    "pairings": [
-      "Schezwan Fried Rice"
-    ],
+    "pairings": ["Schezwan Fried Rice"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1098,23 +817,13 @@
   {
     "id": "fish-in-hot-garlic-sauce",
     "name": "Fish in Hot Garlic Sauce",
-    "ingredients": [
-      "fish",
-      "garlic",
-      "soy sauce",
-      "chili paste"
-    ],
-    "allergens": [
-      "seafood",
-      "soy"
-    ],
+    "ingredients": ["fish", "garlic", "soy sauce", "chili paste"],
+    "allergens": ["seafood", "soy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "hot",
     "cuisineType": "chinese",
     "specialty": true,
-    "pairings": [
-      "Egg Fried Rice"
-    ],
+    "pairings": ["Egg Fried Rice"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1128,23 +837,13 @@
   {
     "id": "chicken-cashew-nuts",
     "name": "Chicken Cashew Nuts",
-    "ingredients": [
-      "chicken",
-      "cashew nuts",
-      "soy sauce",
-      "vegetables"
-    ],
-    "allergens": [
-      "nuts",
-      "soy"
-    ],
+    "ingredients": ["chicken", "cashew nuts", "soy sauce", "vegetables"],
+    "allergens": ["nuts", "soy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "chinese",
     "specialty": true,
-    "pairings": [
-      "Schezwan Fried Rice"
-    ],
+    "pairings": ["Schezwan Fried Rice"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1158,22 +857,13 @@
   {
     "id": "black-pepper-beef",
     "name": "Black Pepper Beef",
-    "ingredients": [
-      "beef",
-      "black pepper",
-      "soy sauce",
-      "onions"
-    ],
-    "allergens": [
-      "soy"
-    ],
+    "ingredients": ["beef", "black pepper", "soy sauce", "onions"],
+    "allergens": ["soy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "chinese",
     "specialty": true,
-    "pairings": [
-      "Egg Fried Rice"
-    ],
+    "pairings": ["Egg Fried Rice"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1187,22 +877,13 @@
   {
     "id": "dim-sum-chicken-dumplings",
     "name": "Dim Sum (Chicken Dumplings)",
-    "ingredients": [
-      "chicken",
-      "flour wrappers",
-      "garlic",
-      "ginger"
-    ],
-    "allergens": [
-      "gluten"
-    ],
+    "ingredients": ["chicken", "flour wrappers", "garlic", "ginger"],
+    "allergens": ["gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "chinese",
     "specialty": true,
-    "pairings": [
-      "Ketchup & Dips Set"
-    ],
+    "pairings": ["Ketchup & Dips Set"],
     "serving": "single",
     "portionLabel": "6 pieces",
     "price": {
@@ -1216,23 +897,13 @@
   {
     "id": "grilled-chicken-steak",
     "name": "Grilled Chicken Steak",
-    "ingredients": [
-      "chicken breast",
-      "herbs",
-      "butter",
-      "black pepper"
-    ],
-    "allergens": [
-      "dairy"
-    ],
+    "ingredients": ["chicken breast", "herbs", "butter", "black pepper"],
+    "allergens": ["dairy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "continental",
     "specialty": true,
-    "pairings": [
-      "Masala Fries",
-      "Salad Bowl"
-    ],
+    "pairings": ["Masala Fries", "Salad Bowl"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1246,23 +917,13 @@
   {
     "id": "beef-tenderloin-steak",
     "name": "Beef Tenderloin Steak",
-    "ingredients": [
-      "beef tenderloin",
-      "butter",
-      "garlic",
-      "herbs"
-    ],
-    "allergens": [
-      "dairy"
-    ],
+    "ingredients": ["beef tenderloin", "butter", "garlic", "herbs"],
+    "allergens": ["dairy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "continental",
     "specialty": true,
-    "pairings": [
-      "Masala Fries",
-      "Salad Bowl"
-    ],
+    "pairings": ["Masala Fries", "Salad Bowl"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1276,23 +937,13 @@
   {
     "id": "fish-and-chips",
     "name": "Fish and Chips",
-    "ingredients": [
-      "fish fillet",
-      "potatoes",
-      "flour",
-      "oil"
-    ],
-    "allergens": [
-      "gluten",
-      "seafood"
-    ],
+    "ingredients": ["fish fillet", "potatoes", "flour", "oil"],
+    "allergens": ["gluten", "seafood"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "continental",
     "specialty": true,
-    "pairings": [
-      "Ketchup & Dips Set"
-    ],
+    "pairings": ["Ketchup & Dips Set"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1306,24 +957,13 @@
   {
     "id": "chicken-alfredo-pasta",
     "name": "Chicken Alfredo Pasta",
-    "ingredients": [
-      "pasta",
-      "chicken",
-      "cream",
-      "parmesan",
-      "garlic"
-    ],
-    "allergens": [
-      "dairy",
-      "gluten"
-    ],
+    "ingredients": ["pasta", "chicken", "cream", "parmesan", "garlic"],
+    "allergens": ["dairy", "gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "continental",
     "specialty": true,
-    "pairings": [
-      "Garlic Naan"
-    ],
+    "pairings": ["Garlic Naan"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1337,22 +977,13 @@
   {
     "id": "spaghetti-bolognese",
     "name": "Spaghetti Bolognese",
-    "ingredients": [
-      "spaghetti",
-      "minced beef",
-      "tomato sauce",
-      "garlic"
-    ],
-    "allergens": [
-      "gluten"
-    ],
+    "ingredients": ["spaghetti", "minced beef", "tomato sauce", "garlic"],
+    "allergens": ["gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "continental",
     "specialty": true,
-    "pairings": [
-      "Garlic Naan"
-    ],
+    "pairings": ["Garlic Naan"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1366,23 +997,13 @@
   {
     "id": "lasagna",
     "name": "Lasagna",
-    "ingredients": [
-      "pasta sheets",
-      "minced beef",
-      "cheese",
-      "tomato sauce"
-    ],
-    "allergens": [
-      "dairy",
-      "gluten"
-    ],
+    "ingredients": ["pasta sheets", "minced beef", "cheese", "tomato sauce"],
+    "allergens": ["dairy", "gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "continental",
     "specialty": true,
-    "pairings": [
-      "Salad Bowl"
-    ],
+    "pairings": ["Salad Bowl"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1396,23 +1017,13 @@
   {
     "id": "chicken-parmesan",
     "name": "Chicken Parmesan",
-    "ingredients": [
-      "chicken",
-      "breadcrumbs",
-      "cheese",
-      "tomato sauce"
-    ],
-    "allergens": [
-      "dairy",
-      "gluten"
-    ],
+    "ingredients": ["chicken", "breadcrumbs", "cheese", "tomato sauce"],
+    "allergens": ["dairy", "gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "continental",
     "specialty": true,
-    "pairings": [
-      "Spaghetti Bolognese"
-    ],
+    "pairings": ["Spaghetti Bolognese"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1426,24 +1037,13 @@
   {
     "id": "beef-burger",
     "name": "Beef Burger",
-    "ingredients": [
-      "beef patty",
-      "bun",
-      "lettuce",
-      "cheese",
-      "sauces"
-    ],
-    "allergens": [
-      "gluten",
-      "dairy"
-    ],
+    "ingredients": ["beef patty", "bun", "lettuce", "cheese", "sauces"],
+    "allergens": ["gluten", "dairy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "continental",
     "specialty": false,
-    "pairings": [
-      "French Fries"
-    ],
+    "pairings": ["French Fries"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1457,22 +1057,13 @@
   {
     "id": "chicken-burger",
     "name": "Chicken Burger",
-    "ingredients": [
-      "chicken patty",
-      "bun",
-      "lettuce",
-      "sauces"
-    ],
-    "allergens": [
-      "gluten"
-    ],
+    "ingredients": ["chicken patty", "bun", "lettuce", "sauces"],
+    "allergens": ["gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "continental",
     "specialty": false,
-    "pairings": [
-      "French Fries"
-    ],
+    "pairings": ["French Fries"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1486,24 +1077,13 @@
   {
     "id": "club-sandwich",
     "name": "Club Sandwich",
-    "ingredients": [
-      "bread",
-      "chicken",
-      "eggs",
-      "lettuce",
-      "mayonnaise"
-    ],
-    "allergens": [
-      "gluten",
-      "eggs"
-    ],
+    "ingredients": ["bread", "chicken", "eggs", "lettuce", "mayonnaise"],
+    "allergens": ["gluten", "eggs"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "continental",
     "specialty": false,
-    "pairings": [
-      "French Fries"
-    ],
+    "pairings": ["French Fries"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1517,23 +1097,13 @@
   {
     "id": "caesar-salad",
     "name": "Caesar Salad",
-    "ingredients": [
-      "lettuce",
-      "croutons",
-      "parmesan",
-      "caesar dressing"
-    ],
-    "allergens": [
-      "dairy",
-      "gluten"
-    ],
+    "ingredients": ["lettuce", "croutons", "parmesan", "caesar dressing"],
+    "allergens": ["dairy", "gluten"],
     "dietary": "vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "continental",
     "specialty": true,
-    "pairings": [
-      "Grilled Chicken Steak"
-    ],
+    "pairings": ["Grilled Chicken Steak"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1547,22 +1117,13 @@
   {
     "id": "cream-of-mushroom-soup",
     "name": "Cream of Mushroom Soup",
-    "ingredients": [
-      "mushrooms",
-      "cream",
-      "butter",
-      "garlic"
-    ],
-    "allergens": [
-      "dairy"
-    ],
+    "ingredients": ["mushrooms", "cream", "butter", "garlic"],
+    "allergens": ["dairy"],
     "dietary": "vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "continental",
     "specialty": true,
-    "pairings": [
-      "Garlic Naan"
-    ],
+    "pairings": ["Garlic Naan"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1576,22 +1137,13 @@
   {
     "id": "tomato-basil-soup",
     "name": "Tomato Basil Soup",
-    "ingredients": [
-      "tomatoes",
-      "basil",
-      "cream",
-      "garlic"
-    ],
-    "allergens": [
-      "dairy"
-    ],
+    "ingredients": ["tomatoes", "basil", "cream", "garlic"],
+    "allergens": ["dairy"],
     "dietary": "vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "continental",
     "specialty": false,
-    "pairings": [
-      "Garlic Naan"
-    ],
+    "pairings": ["Garlic Naan"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1605,19 +1157,13 @@
   {
     "id": "bbq-chicken-wings",
     "name": "BBQ Chicken Wings",
-    "ingredients": [
-      "chicken wings",
-      "BBQ sauce",
-      "spices"
-    ],
+    "ingredients": ["chicken wings", "BBQ sauce", "spices"],
     "allergens": [],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "continental",
     "specialty": true,
-    "pairings": [
-      "French Fries"
-    ],
+    "pairings": ["French Fries"],
     "serving": "single",
     "portionLabel": "6 pieces",
     "price": {
@@ -1631,23 +1177,13 @@
   {
     "id": "grilled-salmon",
     "name": "Grilled Salmon",
-    "ingredients": [
-      "salmon",
-      "lemon",
-      "herbs",
-      "butter"
-    ],
-    "allergens": [
-      "seafood",
-      "dairy"
-    ],
+    "ingredients": ["salmon", "lemon", "herbs", "butter"],
+    "allergens": ["seafood", "dairy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "continental",
     "specialty": true,
-    "pairings": [
-      "Salad Bowl"
-    ],
+    "pairings": ["Salad Bowl"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1661,23 +1197,13 @@
   {
     "id": "mac-and-cheese",
     "name": "Mac and Cheese",
-    "ingredients": [
-      "pasta",
-      "cheddar cheese",
-      "milk",
-      "butter"
-    ],
-    "allergens": [
-      "dairy",
-      "gluten"
-    ],
+    "ingredients": ["pasta", "cheddar cheese", "milk", "butter"],
+    "allergens": ["dairy", "gluten"],
     "dietary": "vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "continental",
     "specialty": true,
-    "pairings": [
-      "Garlic Naan"
-    ],
+    "pairings": ["Garlic Naan"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1691,22 +1217,13 @@
   {
     "id": "stuffed-chicken-breast",
     "name": "Stuffed Chicken Breast",
-    "ingredients": [
-      "chicken breast",
-      "cheese",
-      "spinach",
-      "herbs"
-    ],
-    "allergens": [
-      "dairy"
-    ],
+    "ingredients": ["chicken breast", "cheese", "spinach", "herbs"],
+    "allergens": ["dairy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "continental",
     "specialty": true,
-    "pairings": [
-      "Masala Fries"
-    ],
+    "pairings": ["Masala Fries"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1720,22 +1237,13 @@
   {
     "id": "beef-meatballs",
     "name": "Beef Meatballs",
-    "ingredients": [
-      "minced beef",
-      "breadcrumbs",
-      "herbs",
-      "tomato sauce"
-    ],
-    "allergens": [
-      "gluten"
-    ],
+    "ingredients": ["minced beef", "breadcrumbs", "herbs", "tomato sauce"],
+    "allergens": ["gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "continental",
     "specialty": false,
-    "pairings": [
-      "Spaghetti Bolognese"
-    ],
+    "pairings": ["Spaghetti Bolognese"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1749,23 +1257,13 @@
   {
     "id": "chicken-quesadilla",
     "name": "Chicken Quesadilla",
-    "ingredients": [
-      "tortilla",
-      "chicken",
-      "cheese",
-      "vegetables"
-    ],
-    "allergens": [
-      "dairy",
-      "gluten"
-    ],
+    "ingredients": ["tortilla", "chicken", "cheese", "vegetables"],
+    "allergens": ["dairy", "gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "continental",
     "specialty": true,
-    "pairings": [
-      "Ketchup & Dips Set"
-    ],
+    "pairings": ["Ketchup & Dips Set"],
     "serving": "single",
     "portionLabel": "4 slices",
     "price": {
@@ -1779,21 +1277,13 @@
   {
     "id": "baked-potato-with-cheese",
     "name": "Baked Potato with Cheese",
-    "ingredients": [
-      "potato",
-      "cheese",
-      "butter"
-    ],
-    "allergens": [
-      "dairy"
-    ],
+    "ingredients": ["potato", "cheese", "butter"],
+    "allergens": ["dairy"],
     "dietary": "vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "continental",
     "specialty": false,
-    "pairings": [
-      "Grilled Chicken Steak"
-    ],
+    "pairings": ["Grilled Chicken Steak"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1814,17 +1304,12 @@
       "cream",
       "spices"
     ],
-    "allergens": [
-      "dairy",
-      "gluten"
-    ],
+    "allergens": ["dairy", "gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "fusion",
     "specialty": true,
-    "pairings": [
-      "Garlic Naan"
-    ],
+    "pairings": ["Garlic Naan"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1838,23 +1323,13 @@
   {
     "id": "chicken-tikka-pizza",
     "name": "Chicken Tikka Pizza",
-    "ingredients": [
-      "pizza dough",
-      "chicken tikka",
-      "cheese",
-      "tomato sauce"
-    ],
-    "allergens": [
-      "dairy",
-      "gluten"
-    ],
+    "ingredients": ["pizza dough", "chicken tikka", "cheese", "tomato sauce"],
+    "allergens": ["dairy", "gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "fusion",
     "specialty": true,
-    "pairings": [
-      "Cold Drink (Coke)"
-    ],
+    "pairings": ["Cold Drink (Coke)"],
     "serving": "shareable",
     "portionLabel": "medium (8 slices)",
     "price": {
@@ -1868,24 +1343,13 @@
   {
     "id": "biryani-arancini",
     "name": "Biryani Arancini",
-    "ingredients": [
-      "rice",
-      "chicken",
-      "cheese",
-      "breadcrumbs",
-      "spices"
-    ],
-    "allergens": [
-      "dairy",
-      "gluten"
-    ],
+    "ingredients": ["rice", "chicken", "cheese", "breadcrumbs", "spices"],
+    "allergens": ["dairy", "gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "fusion",
     "specialty": true,
-    "pairings": [
-      "Ketchup & Dips Set"
-    ],
+    "pairings": ["Ketchup & Dips Set"],
     "serving": "single",
     "portionLabel": "4 pieces",
     "price": {
@@ -1906,17 +1370,12 @@
       "soy sauce",
       "vegetables"
     ],
-    "allergens": [
-      "gluten",
-      "soy"
-    ],
+    "allergens": ["gluten", "soy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "hot",
     "cuisineType": "fusion",
     "specialty": false,
-    "pairings": [
-      "Chicken Manchurian"
-    ],
+    "pairings": ["Chicken Manchurian"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1930,23 +1389,13 @@
   {
     "id": "tandoori-chicken-burger",
     "name": "Tandoori Chicken Burger",
-    "ingredients": [
-      "chicken",
-      "burger bun",
-      "yogurt marinade",
-      "spices"
-    ],
-    "allergens": [
-      "gluten",
-      "dairy"
-    ],
+    "ingredients": ["chicken", "burger bun", "yogurt marinade", "spices"],
+    "allergens": ["gluten", "dairy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "fusion",
     "specialty": true,
-    "pairings": [
-      "French Fries"
-    ],
+    "pairings": ["French Fries"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -1960,22 +1409,13 @@
   {
     "id": "nihari-tacos",
     "name": "Nihari Tacos",
-    "ingredients": [
-      "beef nihari",
-      "tortillas",
-      "onions",
-      "herbs"
-    ],
-    "allergens": [
-      "gluten"
-    ],
+    "ingredients": ["beef nihari", "tortillas", "onions", "herbs"],
+    "allergens": ["gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "hot",
     "cuisineType": "fusion",
     "specialty": true,
-    "pairings": [
-      "Lemon Soda"
-    ],
+    "pairings": ["Lemon Soda"],
     "serving": "single",
     "portionLabel": "3 tacos",
     "price": {
@@ -1989,23 +1429,13 @@
   {
     "id": "chicken-karahi-pizza",
     "name": "Chicken Karahi Pizza",
-    "ingredients": [
-      "pizza dough",
-      "chicken karahi",
-      "cheese",
-      "herbs"
-    ],
-    "allergens": [
-      "dairy",
-      "gluten"
-    ],
+    "ingredients": ["pizza dough", "chicken karahi", "cheese", "herbs"],
+    "allergens": ["dairy", "gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "hot",
     "cuisineType": "fusion",
     "specialty": true,
-    "pairings": [
-      "Cold Drink (Coke)"
-    ],
+    "pairings": ["Cold Drink (Coke)"],
     "serving": "shareable",
     "portionLabel": "medium (8 slices)",
     "price": {
@@ -2019,22 +1449,13 @@
   {
     "id": "seekh-kebab-wrap",
     "name": "Seekh Kebab Wrap",
-    "ingredients": [
-      "seekh kebab",
-      "tortilla",
-      "onions",
-      "chutney"
-    ],
-    "allergens": [
-      "gluten"
-    ],
+    "ingredients": ["seekh kebab", "tortilla", "onions", "chutney"],
+    "allergens": ["gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "fusion",
     "specialty": false,
-    "pairings": [
-      "French Fries"
-    ],
+    "pairings": ["French Fries"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -2048,22 +1469,13 @@
   {
     "id": "butter-chicken-loaded-fries",
     "name": "Butter Chicken Loaded Fries",
-    "ingredients": [
-      "fries",
-      "butter chicken",
-      "cheese",
-      "cream"
-    ],
-    "allergens": [
-      "dairy"
-    ],
+    "ingredients": ["fries", "butter chicken", "cheese", "cream"],
+    "allergens": ["dairy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "fusion",
     "specialty": true,
-    "pairings": [
-      "Cold Drink (Coke)"
-    ],
+    "pairings": ["Cold Drink (Coke)"],
     "serving": "shareable",
     "portionLabel": "shareable",
     "price": {
@@ -2077,23 +1489,13 @@
   {
     "id": "paneer-tikka-quesadilla",
     "name": "Paneer Tikka Quesadilla",
-    "ingredients": [
-      "tortilla",
-      "paneer tikka",
-      "cheese",
-      "vegetables"
-    ],
-    "allergens": [
-      "dairy",
-      "gluten"
-    ],
+    "ingredients": ["tortilla", "paneer tikka", "cheese", "vegetables"],
+    "allergens": ["dairy", "gluten"],
     "dietary": "vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "fusion",
     "specialty": true,
-    "pairings": [
-      "Ketchup & Dips Set"
-    ],
+    "pairings": ["Ketchup & Dips Set"],
     "serving": "single",
     "portionLabel": "4 slices",
     "price": {
@@ -2107,24 +1509,13 @@
   {
     "id": "chicken-manchurian-lasagna",
     "name": "Chicken Manchurian Lasagna",
-    "ingredients": [
-      "pasta sheets",
-      "chicken manchurian",
-      "cheese",
-      "sauce"
-    ],
-    "allergens": [
-      "dairy",
-      "gluten",
-      "soy"
-    ],
+    "ingredients": ["pasta sheets", "chicken manchurian", "cheese", "sauce"],
+    "allergens": ["dairy", "gluten", "soy"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "fusion",
     "specialty": true,
-    "pairings": [
-      "Salad Bowl"
-    ],
+    "pairings": ["Salad Bowl"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -2138,20 +1529,13 @@
   {
     "id": "bbq-biryani",
     "name": "BBQ Biryani",
-    "ingredients": [
-      "rice",
-      "chicken tikka",
-      "spices",
-      "herbs"
-    ],
+    "ingredients": ["rice", "chicken tikka", "spices", "herbs"],
     "allergens": [],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "fusion",
     "specialty": true,
-    "pairings": [
-      "Mint Raita"
-    ],
+    "pairings": ["Mint Raita"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -2165,22 +1549,13 @@
   {
     "id": "sriracha-chicken-paratha-roll",
     "name": "Sriracha Chicken Paratha Roll",
-    "ingredients": [
-      "paratha",
-      "chicken",
-      "sriracha sauce",
-      "vegetables"
-    ],
-    "allergens": [
-      "gluten"
-    ],
+    "ingredients": ["paratha", "chicken", "sriracha sauce", "vegetables"],
+    "allergens": ["gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "hot",
     "cuisineType": "fusion",
     "specialty": false,
-    "pairings": [
-      "French Fries"
-    ],
+    "pairings": ["French Fries"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -2194,21 +1569,13 @@
   {
     "id": "dynamite-chicken",
     "name": "Dynamite Chicken",
-    "ingredients": [
-      "fried chicken",
-      "spicy mayo",
-      "chili sauce"
-    ],
-    "allergens": [
-      "eggs"
-    ],
+    "ingredients": ["fried chicken", "spicy mayo", "chili sauce"],
+    "allergens": ["eggs"],
     "dietary": "non-vegetarian",
     "spiceLevel": "hot",
     "cuisineType": "fusion",
     "specialty": true,
-    "pairings": [
-      "Coleslaw"
-    ],
+    "pairings": ["Coleslaw"],
     "serving": "single",
     "portionLabel": "6 pieces",
     "price": {
@@ -2222,23 +1589,13 @@
   {
     "id": "cheesy-seekh-kebab-sandwich",
     "name": "Cheesy Seekh Kebab Sandwich",
-    "ingredients": [
-      "bread",
-      "seekh kebab",
-      "cheese",
-      "sauces"
-    ],
-    "allergens": [
-      "dairy",
-      "gluten"
-    ],
+    "ingredients": ["bread", "seekh kebab", "cheese", "sauces"],
+    "allergens": ["dairy", "gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "fusion",
     "specialty": false,
-    "pairings": [
-      "French Fries"
-    ],
+    "pairings": ["French Fries"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -2258,17 +1615,12 @@
       "garlic sauce",
       "cheese"
     ],
-    "allergens": [
-      "dairy",
-      "gluten"
-    ],
+    "allergens": ["dairy", "gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "fusion",
     "specialty": true,
-    "pairings": [
-      "Cold Drink (Coke)"
-    ],
+    "pairings": ["Cold Drink (Coke)"],
     "serving": "shareable",
     "portionLabel": "medium (8 slices)",
     "price": {
@@ -2282,23 +1634,13 @@
   {
     "id": "masala-mac-and-cheese",
     "name": "Masala Mac and Cheese",
-    "ingredients": [
-      "pasta",
-      "cheese",
-      "desi spices",
-      "milk"
-    ],
-    "allergens": [
-      "dairy",
-      "gluten"
-    ],
+    "ingredients": ["pasta", "cheese", "desi spices", "milk"],
+    "allergens": ["dairy", "gluten"],
     "dietary": "vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "fusion",
     "specialty": true,
-    "pairings": [
-      "Garlic Naan"
-    ],
+    "pairings": ["Garlic Naan"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -2312,23 +1654,13 @@
   {
     "id": "tandoori-fish-burger",
     "name": "Tandoori Fish Burger",
-    "ingredients": [
-      "fish fillet",
-      "bun",
-      "spices",
-      "sauces"
-    ],
-    "allergens": [
-      "seafood",
-      "gluten"
-    ],
+    "ingredients": ["fish fillet", "bun", "spices", "sauces"],
+    "allergens": ["seafood", "gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "fusion",
     "specialty": true,
-    "pairings": [
-      "French Fries"
-    ],
+    "pairings": ["French Fries"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -2342,23 +1674,13 @@
   {
     "id": "chicken-alfredo-paratha",
     "name": "Chicken Alfredo Paratha",
-    "ingredients": [
-      "paratha",
-      "chicken",
-      "cream sauce",
-      "cheese"
-    ],
-    "allergens": [
-      "dairy",
-      "gluten"
-    ],
+    "ingredients": ["paratha", "chicken", "cream sauce", "cheese"],
+    "allergens": ["dairy", "gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "fusion",
     "specialty": false,
-    "pairings": [
-      "Cold Drink (Coke)"
-    ],
+    "pairings": ["Cold Drink (Coke)"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -2372,20 +1694,13 @@
   {
     "id": "spicy-honey-wings-desi-style",
     "name": "Spicy Honey Wings (Desi Style)",
-    "ingredients": [
-      "chicken wings",
-      "honey",
-      "chili sauce",
-      "spices"
-    ],
+    "ingredients": ["chicken wings", "honey", "chili sauce", "spices"],
     "allergens": [],
     "dietary": "non-vegetarian",
     "spiceLevel": "hot",
     "cuisineType": "fusion",
     "specialty": true,
-    "pairings": [
-      "French Fries"
-    ],
+    "pairings": ["French Fries"],
     "serving": "single",
     "portionLabel": "6 pieces",
     "price": {
@@ -2399,22 +1714,13 @@
   {
     "id": "plain-naan",
     "name": "Plain Naan",
-    "ingredients": [
-      "wheat flour",
-      "water",
-      "yeast",
-      "salt"
-    ],
-    "allergens": [
-      "gluten"
-    ],
+    "ingredients": ["wheat flour", "water", "yeast", "salt"],
+    "allergens": ["gluten"],
     "dietary": "vegetarian",
     "spiceLevel": "non-spicy",
     "cuisineType": "staple",
     "specialty": false,
-    "pairings": [
-      "Chicken Karahi"
-    ],
+    "pairings": ["Chicken Karahi"],
     "serving": "single",
     "portionLabel": "single piece",
     "price": {
@@ -2428,25 +1734,13 @@
   {
     "id": "garlic-naan",
     "name": "Garlic Naan",
-    "ingredients": [
-      "wheat flour",
-      "garlic",
-      "butter",
-      "yeast"
-    ],
-    "allergens": [
-      "gluten",
-      "dairy"
-    ],
+    "ingredients": ["wheat flour", "garlic", "butter", "yeast"],
+    "allergens": ["gluten", "dairy"],
     "dietary": "vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "staple",
     "specialty": true,
-    "pairings": [
-      "Chicken Karahi",
-      "Chicken Handi",
-      "Seekh Kebab"
-    ],
+    "pairings": ["Chicken Karahi", "Chicken Handi", "Seekh Kebab"],
     "serving": "single",
     "portionLabel": "single piece",
     "price": {
@@ -2460,25 +1754,13 @@
   {
     "id": "roghni-naan",
     "name": "Roghni Naan",
-    "ingredients": [
-      "wheat flour",
-      "milk",
-      "butter",
-      "sesame seeds"
-    ],
-    "allergens": [
-      "gluten",
-      "dairy",
-      "sesame"
-    ],
+    "ingredients": ["wheat flour", "milk", "butter", "sesame seeds"],
+    "allergens": ["gluten", "dairy", "sesame"],
     "dietary": "vegetarian",
     "spiceLevel": "non-spicy",
     "cuisineType": "staple",
     "specialty": true,
-    "pairings": [
-      "Nihari",
-      "Chicken Korma"
-    ],
+    "pairings": ["Nihari", "Chicken Korma"],
     "serving": "single",
     "portionLabel": "single piece",
     "price": {
@@ -2492,22 +1774,13 @@
   {
     "id": "tandoori-roti",
     "name": "Tandoori Roti",
-    "ingredients": [
-      "whole wheat flour",
-      "water",
-      "salt"
-    ],
-    "allergens": [
-      "gluten"
-    ],
+    "ingredients": ["whole wheat flour", "water", "salt"],
+    "allergens": ["gluten"],
     "dietary": "vegetarian",
     "spiceLevel": "non-spicy",
     "cuisineType": "staple",
     "specialty": false,
-    "pairings": [
-      "Daal Makhni",
-      "Mix Sabzi"
-    ],
+    "pairings": ["Daal Makhni", "Mix Sabzi"],
     "serving": "single",
     "portionLabel": "single piece",
     "price": {
@@ -2521,24 +1794,13 @@
   {
     "id": "mint-raita",
     "name": "Mint Raita",
-    "ingredients": [
-      "yogurt",
-      "mint",
-      "salt",
-      "cumin"
-    ],
-    "allergens": [
-      "dairy"
-    ],
+    "ingredients": ["yogurt", "mint", "salt", "cumin"],
+    "allergens": ["dairy"],
     "dietary": "vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "staple",
     "specialty": true,
-    "pairings": [
-      "Chicken Biryani",
-      "Chicken Pulao",
-      "Chicken Chili Dry"
-    ],
+    "pairings": ["Chicken Biryani", "Chicken Pulao", "Chicken Chili Dry"],
     "serving": "single",
     "portionLabel": "single bowl",
     "price": {
@@ -2552,22 +1814,13 @@
   {
     "id": "salad-bowl",
     "name": "Salad Bowl",
-    "ingredients": [
-      "cucumber",
-      "tomato",
-      "onion",
-      "lemon",
-      "carrots"
-    ],
+    "ingredients": ["cucumber", "tomato", "onion", "lemon", "carrots"],
     "allergens": [],
     "dietary": "vegetarian",
     "spiceLevel": "non-spicy",
     "cuisineType": "staple",
     "specialty": false,
-    "pairings": [
-      "Grilled Chicken Steak",
-      "Grilled Chicken Steak"
-    ],
+    "pairings": ["Grilled Chicken Steak", "Grilled Chicken Steak"],
     "serving": "single",
     "portionLabel": "single bowl",
     "price": {
@@ -2581,24 +1834,13 @@
   {
     "id": "russian-salad",
     "name": "Russian Salad",
-    "ingredients": [
-      "potatoes",
-      "peas",
-      "carrots",
-      "mayonnaise"
-    ],
-    "allergens": [
-      "eggs",
-      "dairy"
-    ],
+    "ingredients": ["potatoes", "peas", "carrots", "mayonnaise"],
+    "allergens": ["eggs", "dairy"],
     "dietary": "vegetarian",
     "spiceLevel": "non-spicy",
     "cuisineType": "staple",
     "specialty": true,
-    "pairings": [
-      "French Fries",
-      "Chicken Tikka"
-    ],
+    "pairings": ["French Fries", "Chicken Tikka"],
     "serving": "single",
     "portionLabel": "single bowl",
     "price": {
@@ -2612,23 +1854,13 @@
   {
     "id": "coleslaw",
     "name": "Coleslaw",
-    "ingredients": [
-      "cabbage",
-      "carrots",
-      "mayonnaise",
-      "vinegar"
-    ],
-    "allergens": [
-      "eggs"
-    ],
+    "ingredients": ["cabbage", "carrots", "mayonnaise", "vinegar"],
+    "allergens": ["eggs"],
     "dietary": "vegetarian",
     "spiceLevel": "non-spicy",
     "cuisineType": "staple",
     "specialty": true,
-    "pairings": [
-      "Beef Burger",
-      "Spicy Honey Wings (Desi Style)"
-    ],
+    "pairings": ["Beef Burger", "Spicy Honey Wings (Desi Style)"],
     "serving": "single",
     "portionLabel": "single bowl",
     "price": {
@@ -2642,20 +1874,13 @@
   {
     "id": "french-fries",
     "name": "French Fries",
-    "ingredients": [
-      "potatoes",
-      "salt",
-      "oil"
-    ],
+    "ingredients": ["potatoes", "salt", "oil"],
     "allergens": [],
     "dietary": "vegetarian",
     "spiceLevel": "non-spicy",
     "cuisineType": "staple",
     "specialty": false,
-    "pairings": [
-      "Beef Burger",
-      "Club Sandwich"
-    ],
+    "pairings": ["Beef Burger", "Club Sandwich"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -2669,21 +1894,13 @@
   {
     "id": "masala-fries",
     "name": "Masala Fries",
-    "ingredients": [
-      "potatoes",
-      "chili powder",
-      "spices",
-      "salt"
-    ],
+    "ingredients": ["potatoes", "chili powder", "spices", "salt"],
     "allergens": [],
     "dietary": "vegetarian",
     "spiceLevel": "medium",
     "cuisineType": "staple",
     "specialty": true,
-    "pairings": [
-      "Beef Burger",
-      "Seekh Kebab Wrap"
-    ],
+    "pairings": ["Beef Burger", "Seekh Kebab Wrap"],
     "serving": "single",
     "portionLabel": "single",
     "price": {
@@ -2697,19 +1914,13 @@
   {
     "id": "cold-drink-coke",
     "name": "Cold Drink (Coke)",
-    "ingredients": [
-      "carbonated water",
-      "sugar",
-      "flavoring"
-    ],
+    "ingredients": ["carbonated water", "sugar", "flavoring"],
     "allergens": [],
     "dietary": "vegetarian",
     "spiceLevel": "non-spicy",
     "cuisineType": "staple",
     "specialty": false,
-    "pairings": [
-      "Beef Burger"
-    ],
+    "pairings": ["Beef Burger"],
     "serving": "single",
     "portionLabel": "single glass",
     "price": {
@@ -2723,21 +1934,13 @@
   {
     "id": "lemon-soda",
     "name": "Lemon Soda",
-    "ingredients": [
-      "soda water",
-      "lemon",
-      "salt",
-      "sugar"
-    ],
+    "ingredients": ["soda water", "lemon", "salt", "sugar"],
     "allergens": [],
     "dietary": "vegetarian",
     "spiceLevel": "non-spicy",
     "cuisineType": "staple",
     "specialty": true,
-    "pairings": [
-      "Chicken Chili Dry",
-      "Chicken Tikka"
-    ],
+    "pairings": ["Chicken Chili Dry", "Chicken Tikka"],
     "serving": "single",
     "portionLabel": "single glass",
     "price": {
@@ -2751,21 +1954,13 @@
   {
     "id": "mint-margarita",
     "name": "Mint Margarita",
-    "ingredients": [
-      "mint",
-      "lemon",
-      "soda",
-      "sugar"
-    ],
+    "ingredients": ["mint", "lemon", "soda", "sugar"],
     "allergens": [],
     "dietary": "vegetarian",
     "spiceLevel": "non-spicy",
     "cuisineType": "staple",
     "specialty": true,
-    "pairings": [
-      "Chicken Tikka Pizza",
-      "Grilled Chicken Steak"
-    ],
+    "pairings": ["Chicken Tikka Pizza", "Grilled Chicken Steak"],
     "serving": "single",
     "portionLabel": "single glass",
     "price": {
@@ -2779,20 +1974,13 @@
   {
     "id": "fresh-lime-water",
     "name": "Fresh Lime Water",
-    "ingredients": [
-      "water",
-      "lemon",
-      "salt",
-      "sugar"
-    ],
+    "ingredients": ["water", "lemon", "salt", "sugar"],
     "allergens": [],
     "dietary": "vegetarian",
     "spiceLevel": "non-spicy",
     "cuisineType": "staple",
     "specialty": false,
-    "pairings": [
-      "Chicken Biryani"
-    ],
+    "pairings": ["Chicken Biryani"],
     "serving": "single",
     "portionLabel": "single glass",
     "price": {
@@ -2806,21 +1994,13 @@
   {
     "id": "iced-tea",
     "name": "Iced Tea",
-    "ingredients": [
-      "tea",
-      "lemon",
-      "sugar",
-      "ice"
-    ],
+    "ingredients": ["tea", "lemon", "sugar", "ice"],
     "allergens": [],
     "dietary": "vegetarian",
     "spiceLevel": "non-spicy",
     "cuisineType": "staple",
     "specialty": true,
-    "pairings": [
-      "Club Sandwich",
-      "French Fries"
-    ],
+    "pairings": ["Club Sandwich", "French Fries"],
     "serving": "single",
     "portionLabel": "single glass",
     "price": {
@@ -2834,23 +2014,13 @@
   {
     "id": "hot-tea",
     "name": "Hot Tea",
-    "ingredients": [
-      "tea leaves",
-      "milk",
-      "sugar",
-      "water"
-    ],
-    "allergens": [
-      "dairy"
-    ],
+    "ingredients": ["tea leaves", "milk", "sugar", "water"],
+    "allergens": ["dairy"],
     "dietary": "vegetarian",
     "spiceLevel": "non-spicy",
     "cuisineType": "staple",
     "specialty": false,
-    "pairings": [
-      "Hot Tea",
-      "French Fries"
-    ],
+    "pairings": ["Hot Tea", "French Fries"],
     "serving": "single",
     "portionLabel": "single cup",
     "price": {
@@ -2864,22 +2034,13 @@
   {
     "id": "coffee",
     "name": "Coffee",
-    "ingredients": [
-      "coffee beans",
-      "milk",
-      "sugar"
-    ],
-    "allergens": [
-      "dairy"
-    ],
+    "ingredients": ["coffee beans", "milk", "sugar"],
+    "allergens": ["dairy"],
     "dietary": "vegetarian",
     "spiceLevel": "non-spicy",
     "cuisineType": "staple",
     "specialty": true,
-    "pairings": [
-      "Coffee",
-      "Hot Tea"
-    ],
+    "pairings": ["Coffee", "Hot Tea"],
     "serving": "single",
     "portionLabel": "single cup",
     "price": {
@@ -2893,23 +2054,13 @@
   {
     "id": "chicken-nuggets",
     "name": "Chicken Nuggets",
-    "ingredients": [
-      "chicken",
-      "breadcrumbs",
-      "spices",
-      "oil"
-    ],
-    "allergens": [
-      "gluten"
-    ],
+    "ingredients": ["chicken", "breadcrumbs", "spices", "oil"],
+    "allergens": ["gluten"],
     "dietary": "non-vegetarian",
     "spiceLevel": "mild",
     "cuisineType": "staple",
     "specialty": true,
-    "pairings": [
-      "French Fries",
-      "Ketchup & Dips Set"
-    ],
+    "pairings": ["French Fries", "Ketchup & Dips Set"],
     "serving": "single",
     "portionLabel": "6 pieces",
     "price": {
@@ -2923,23 +2074,13 @@
   {
     "id": "ketchup-and-dips-set",
     "name": "Ketchup & Dips Set",
-    "ingredients": [
-      "tomato ketchup",
-      "chili garlic sauce",
-      "mayo"
-    ],
-    "allergens": [
-      "eggs (mayo)"
-    ],
+    "ingredients": ["tomato ketchup", "chili garlic sauce", "mayo"],
+    "allergens": ["eggs (mayo)"],
     "dietary": "vegetarian",
     "spiceLevel": "non-spicy",
     "cuisineType": "staple",
     "specialty": false,
-    "pairings": [
-      "French Fries",
-      "Beef Burger",
-      "Chicken Nuggets"
-    ],
+    "pairings": ["French Fries", "Beef Burger", "Chicken Nuggets"],
     "serving": "shareable",
     "portionLabel": "set",
     "price": {
@@ -2953,12 +2094,8 @@
   {
     "id": "butter-portion",
     "name": "Butter Portion",
-    "ingredients": [
-      "butter"
-    ],
-    "allergens": [
-      "dairy"
-    ],
+    "ingredients": ["butter"],
+    "allergens": ["dairy"],
     "dietary": "vegetarian",
     "spiceLevel": "non-spicy",
     "cuisineType": "staple",

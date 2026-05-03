@@ -257,12 +257,16 @@ function parseMenu(markdown) {
         id: slugify(current.name),
         name: current.name,
         ingredients: splitList(current.fields.Ingredients ?? ""),
-        allergens: normalizeAllergens(splitList(current.fields.Allergens ?? "")),
+        allergens: normalizeAllergens(
+          splitList(current.fields.Allergens ?? "")
+        ),
         dietary: normalizeDietary(
           (current.fields.Dietary ?? "").trim(),
           current.fields.Ingredients ?? ""
         ),
-        spiceLevel: normalizeSpiceLevel((current.fields["Spice Level"] ?? "").trim()),
+        spiceLevel: normalizeSpiceLevel(
+          (current.fields["Spice Level"] ?? "").trim()
+        ),
         cuisineType: normalizeCuisineType(
           (current.fields["Cuisine Type"] ?? "").trim(),
           current.sourceSection

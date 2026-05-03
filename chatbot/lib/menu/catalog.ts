@@ -1,10 +1,10 @@
 import rawMenuItems from "@/data/menu.json";
 import rawValidationReport from "@/data/menu-validation.json";
 import {
-  menuItemsSchema,
-  menuValidationReportSchema,
   type MenuItem,
   type MenuValidationReport,
+  menuItemsSchema,
+  menuValidationReportSchema,
 } from "./schema";
 
 export const menuValidationReport: MenuValidationReport =

@@ -31,7 +31,7 @@ export const chatModels: ChatModel[] = [
 
 export const modelCapabilities: Record<string, ModelCapabilities> = {
   "llama-3.3-70b-versatile": {
-    tools: false,
+    tools: true,
     vision: false,
     reasoning: false,
   },

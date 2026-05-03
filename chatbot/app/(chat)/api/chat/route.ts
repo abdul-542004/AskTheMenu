@@ -24,6 +24,7 @@ import {
   isGroqConfigurationError,
 } from "@/lib/ai/providers";
 import { rewriteQueryForRetrieval } from "@/lib/ai/rewrite-query";
+import { placeOrder } from "@/lib/ai/tools/place-order";
 import { traceError, traceLog } from "@/lib/ai/trace";
 import { isProductionEnvironment } from "@/lib/constants";
 import { getAnonymousUserId } from "@/lib/db/anonymous-user";
@@ -242,7 +243,7 @@ export async function POST(request: Request) {
       latestUserText,
       modelMessages
     );
-    const menuContext = await buildMenuContext(searchQuery, recallItems);
+    const menuContext = await buildMenuContext(searchQuery);
 
     // Use the table slug for the system prompt label (e.g. "Table 1")
     const effectiveTableLabel = tableSlug ?? id;
@@ -252,6 +253,15 @@ export async function POST(request: Request) {
       menuContext,
       tableLabel: effectiveTableLabel,
     });
+
+    // Build tools - placeOrder is only available for table-scoped chats.
+    const chatTools =
+      supportsTools && tableSlug
+        ? {
+            placeOrder: placeOrder({ tableSlug }),
+          }
+        : undefined;
+    const activeToolNames: "placeOrder"[] = chatTools ? ["placeOrder"] : [];
 
     traceLog("model.groq.request", {
       operation: "chat_response",
@@ -264,8 +274,8 @@ export async function POST(request: Request) {
       messages: modelMessages,
       settings: {
         stopWhen: "stepCountIs(5)",
-        tools: {},
-        activeTools: [],
+        tools: Object.keys(chatTools ?? {}),
+        activeTools: activeToolNames,
         sendReasoning: isReasoningModel,
       },
     });
@@ -278,8 +288,8 @@ export async function POST(request: Request) {
           system: chatSystemPrompt,
           messages: modelMessages,
           stopWhen: stepCountIs(5),
-          experimental_activeTools: [],
-          tools: {},
+          experimental_activeTools: activeToolNames,
+          tools: chatTools,
           experimental_telemetry: {
             isEnabled: isProductionEnvironment,
             functionId: "stream-text",

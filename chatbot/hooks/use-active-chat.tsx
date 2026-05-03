@@ -109,6 +109,7 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const { setDataStream } = useDataStream();
   const { mutate } = useSWRConfig();
+  const autoApprovedToolCallsRef = useRef(new Set<string>());
 
   const chatIdFromUrl = extractChatId(pathname);
   const isNewChat = !chatIdFromUrl;
@@ -168,15 +169,50 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
     generateId: generateUUID,
     sendAutomaticallyWhen: ({ messages: currentMessages }) => {
       const lastMessage = currentMessages.at(-1);
-      return (
-        lastMessage?.parts?.some(
-          (part) =>
-            "state" in part &&
-            part.state === "approval-responded" &&
-            "approval" in part &&
-            (part.approval as { approved?: boolean })?.approved === true
-        ) ?? false
+      if (!lastMessage?.parts?.length) {
+        return false;
+      }
+
+      const approvalPart = lastMessage.parts.find(
+        (part) =>
+          "state" in part &&
+          part.state === "approval-responded" &&
+          "approval" in part &&
+          (part.approval as { approved?: boolean })?.approved === true
       );
+
+      if (!approvalPart) {
+        return false;
+      }
+
+      const approvalId =
+        "approval" in approvalPart
+          ? (approvalPart as { approval?: { id?: string } }).approval?.id
+          : undefined;
+      const toolCallId =
+        "toolCallId" in approvalPart && approvalPart.toolCallId
+          ? String(approvalPart.toolCallId)
+          : undefined;
+      const approvalKey = approvalId ?? toolCallId;
+
+      if (!approvalKey) {
+        return false;
+      }
+
+      const hasOutput = lastMessage.parts.some(
+        (part) =>
+          "state" in part &&
+          (part.state === "output-available" ||
+            part.state === "output-denied" ||
+            part.state === "output-error")
+      );
+
+      if (hasOutput || autoApprovedToolCallsRef.current.has(approvalKey)) {
+        return false;
+      }
+
+      autoApprovedToolCallsRef.current.add(approvalKey);
+      return true;
     },
     transport: new DefaultChatTransport({
       api: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/api/chat`,
@@ -331,7 +367,6 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
       isReadonly,
       isNewChat,
       isLoading,
-      votes,
       currentModelId,
       showGroqKeyAlert,
     ]

@@ -1,22 +1,29 @@
-User: I am craving for some dish that has nuts in it
+I am craving for something crispy, saucy
 
-AI: You have three options with nuts:
+For something crispy and saucy, I'd recommend:
 
-    Chicken Cashew Nuts (PKR 680/plate) - chinese, non-vegetarian, mild spice, allergens nuts, soy
-    Kung Pao Chicken (PKR 600/plate) - chinese, non-vegetarian, medium spice, allergens nuts, soy
-    Chicken Korma (PKR 1300/serving) - desi, non-vegetarian, mild spice, allergens dairy, nuts
+    Spicy Honey Wings (Desi Style) for PKR 650/serving, a specialty dish with a fusion of flavors
+    Dynamite Chicken for PKR 700/serving, a spicy and saucy option
+    Chicken Nuggets for PKR 400/serving, a milder but still crispy choice
+    Butter Chicken Loaded Fries for PKR 650/plate, a unique twist on crispy fries with saucy butter chicken
 
-These dishes can be paired with Schezwan Fried Rice, Egg Fried Rice, or Garlic Naan.
+do nuggets comes with sauce?
 
-I cant decide between chicken cashew nuts and korma. What do you suggest? Which one of them is your restaurant speciality
+    Chicken Nuggets come with a pairing option for Ketchup & Dips Set, which includes tomato ketchup, chili garlic sauce, and mayo for PKR 100/set.
+    You can also consider other saucy options like the Spicy Honey Wings (Desi Style) or the BBQ Chicken Wings, but if you're specifically looking for nuggets, the Chicken Nuggets with the Ketchup & Dips Set might be the way to go.
 
-Both Chicken Cashew Nuts and Chicken Korma are our specialty dishes.
+I wanna order Chicken Nuggets with the Ketchup & Dips Set
 
-    Chicken Cashew Nuts is a Chinese dish with mild spice, containing nuts, and priced at PKR 680/plate.
-    Chicken Korma is a Desi dish with mild spice, containing nuts and dairy, and priced at PKR 1300/serving. Both are specialty dishes, so it depends on your preference for Chinese or Desi cuisine.
+    The Chicken Nuggets come with a serving of nuggets for PKR 400.
+    The Ketchup & Dips Set is a shareable set for PKR 100. To confirm, you'd like to order 1 serving of Chicken Nuggets and 1 Ketchup & Dips Set, correct? I can place the order using the placeOrder tool once you approve.
 
-User: what should i order along with the cashew nuts
+Yes, I would like to order 1 serving of Chicken Nuggets and 1 Ketchup & Dips Set.
 
-AI: Based on our menu, I suggest ordering the Chicken Cashew Nuts, as it's one of our specialty dishes. Unfortunately, we don't have Korma on our menu.
+I'll confirm your order:
 
-To go along with the Chicken Cashew Nuts, I recommend ordering the Schezwan Fried Rice, as it's a suggested pairing. The price for the Chicken Cashew Nuts is PKR 680/plate, and the Schezwan Fried Rice is PKR 500/plate.
+    1 serving of Chicken Nuggets
+    1 Ketchup & Dips Set I'll place your order using the placeOrder tool.
+
+Done
+
+I think there's been a misunderstanding. Unfortunately, I need to let you know that Chicken Nuggets and the Ketchup & Dips Set are not available on our menu. Would you like me to suggest some crispy and saucy options from our menu?

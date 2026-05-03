@@ -105,9 +105,14 @@ export async function searchMenuByVector(
   restaurantId?: string,
   limit: number = DEFAULT_LIMIT
 ): Promise<VectorSearchResult[]> {
+  const normalizedRestaurantId =
+    typeof restaurantId === "string" && restaurantId.trim().length > 0
+      ? restaurantId.trim()
+      : undefined;
+
   traceLog("retrieval.vector_search.started", {
     query,
-    restaurantId,
+    restaurantId: normalizedRestaurantId,
     limit,
     embeddingModel: EMBEDDING_MODEL,
   });
@@ -119,7 +124,7 @@ export async function searchMenuByVector(
   // Cosine similarity search via PGVector's <=> operator
   // Lower distance = more similar, so we order ascending
   // Similarity = 1 - distance
-  const results = restaurantId
+  const results = normalizedRestaurantId
     ? await sql`
         SELECT
           mi."id",
@@ -137,7 +142,7 @@ export async function searchMenuByVector(
           1 - (mie."embedding" <=> ${vectorLiteral}::vector) AS similarity
         FROM "MenuItemEmbedding" mie
         JOIN "MenuItem" mi ON mi."id" = mie."menuItemId"
-        WHERE mie."restaurantId" = ${restaurantId}
+        WHERE mie."restaurantId" = ${normalizedRestaurantId}
           AND mie."model" = ${EMBEDDING_MODEL}
           AND mi."isAvailable" = true
         ORDER BY mie."embedding" <=> ${vectorLiteral}::vector ASC
@@ -184,7 +189,7 @@ export async function searchMenuByVector(
 
   traceLog("retrieval.vector_search.completed", {
     query,
-    restaurantId,
+    restaurantId: normalizedRestaurantId,
     limit,
     resultCount: mappedResults.length,
     results: mappedResults.map((item) => ({
@@ -219,7 +224,7 @@ export async function buildVectorMenuContext(
   return results
     .map(
       (item) =>
-        `- ${item.name}: ${item.cuisineType}, ${item.dietary}, spice ${item.spiceLevel}, allergens ${item.allergens.length ? item.allergens.join(", ") : "none"}, ingredients ${item.ingredients.join(", ")}, pairings ${item.pairings.join(", ") || "none"}, serving ${item.serving}${item.unitLabel !== item.serving ? ` (${item.unitLabel})` : ""}, price PKR ${item.pricePkr}/${item.unitLabel}${item.specialty ? ", specialty" : ""}`
+        `- ${item.name}: ${item.cuisineType}, ${item.dietary}, spice ${item.spiceLevel}, allergens ${item.allergens.length ? item.allergens.join(", ") : "none"}, ingredients ${item.ingredients.join(", ")}, pairings ${item.pairings.join(", ") || "none"}, serving ${item.serving}${item.unitLabel === item.serving ? "" : ` (${item.unitLabel})`}, price PKR ${item.pricePkr}/${item.unitLabel}${item.specialty ? ", specialty" : ""}`
     )
     .join("\n");
 }
@@ -238,18 +243,25 @@ export async function fetchMenuItemsByName(
   names: string[],
   restaurantId?: string
 ): Promise<VectorSearchResult[]> {
-  if (names.length === 0) return [];
+  if (names.length === 0) {
+    return [];
+  }
+
+  const normalizedRestaurantId =
+    typeof restaurantId === "string" && restaurantId.trim().length > 0
+      ? restaurantId.trim()
+      : undefined;
 
   // Deduplicate & cap
   const uniqueNames = [...new Set(names)].slice(0, MAX_RECALL_ITEMS);
 
   traceLog("retrieval.name_lookup.started", {
     names: uniqueNames,
-    restaurantId,
+    restaurantId: normalizedRestaurantId,
   });
 
   try {
-    const results = restaurantId
+    const results = normalizedRestaurantId
       ? await sql`
           SELECT
             "id", "name", "ingredients", "allergens", "dietary",
@@ -258,7 +270,7 @@ export async function fetchMenuItemsByName(
           FROM "MenuItem"
           WHERE "name" ILIKE ANY(${uniqueNames})
             AND "isAvailable" = true
-            AND "restaurantId" = ${restaurantId}
+            AND "restaurantId" = ${normalizedRestaurantId}
           LIMIT ${MAX_RECALL_ITEMS}
         `
       : await sql`
@@ -298,10 +310,9 @@ export async function fetchMenuItemsByName(
   } catch (error) {
     traceError("retrieval.name_lookup.failed", {
       names: uniqueNames,
-      restaurantId,
+      restaurantId: normalizedRestaurantId,
       error,
     });
     return [];
   }
 }
-

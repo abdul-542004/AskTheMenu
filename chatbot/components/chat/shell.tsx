@@ -138,6 +138,7 @@ export function ChatShell() {
                   setMessages={setMessages}
                   status={status}
                   stop={stop}
+                  tableSlug={tableSlug}
                 />
               )}
             </div>

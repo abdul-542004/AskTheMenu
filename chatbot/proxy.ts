@@ -1,5 +1,5 @@
-import { getToken } from "next-auth/jwt";
 import { type NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 import { guestRegex, isDevelopmentEnvironment } from "@/lib/constants";
 import { hasDatabaseUrl } from "@/lib/db/url";
 
@@ -33,17 +33,16 @@ export async function proxy(request: NextRequest) {
   }
 
   if (
-    pathname === "/" ||
-    pathname.startsWith("/chat/") ||
-    pathname.startsWith("/menu") ||
-    pathname.startsWith("/kitchen")
+    (pathname === "/" ||
+      pathname.startsWith("/chat/") ||
+      pathname.startsWith("/menu") ||
+      pathname.startsWith("/kitchen")) &&
+    !token
   ) {
-    if (!token) {
-      const redirectUrl = `${pathname}${request.nextUrl.search}`;
-      const guestUrl = new URL("/api/auth/guest", request.url);
-      guestUrl.searchParams.set("redirectUrl", redirectUrl);
-      return NextResponse.redirect(guestUrl);
-    }
+    const redirectUrl = `${pathname}${request.nextUrl.search}`;
+    const guestUrl = new URL("/api/auth/guest", request.url);
+    guestUrl.searchParams.set("redirectUrl", redirectUrl);
+    return NextResponse.redirect(guestUrl);
   }
 
   return NextResponse.next();

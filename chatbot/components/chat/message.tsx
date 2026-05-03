@@ -21,6 +21,123 @@ import { MessageReasoning } from "./message-reasoning";
 import { PreviewAttachment } from "./preview-attachment";
 import { Weather } from "./weather";
 
+type PlaceOrderInput = {
+  items?: Array<{
+    name?: string;
+    quantity?: number;
+    notes?: string;
+  }>;
+  customerNote?: string;
+};
+
+type PlaceOrderOutput = {
+  success?: boolean;
+  error?: string;
+  orderId?: string;
+  tableLabel?: string;
+  summary?: string;
+  subtotalPkr?: number;
+  gstAmountPkr?: number;
+  totalPkr?: number;
+};
+
+function formatPkr(value?: number) {
+  return typeof value === "number"
+    ? `PKR ${value.toLocaleString("en-PK")}`
+    : "-";
+}
+
+function OrderToolPreview({ input }: { input: PlaceOrderInput }) {
+  const items = input.items ?? [];
+
+  return (
+    <div className="space-y-3">
+      <div>
+        <h4 className="font-medium text-muted-foreground text-xs uppercase tracking-wide">
+          Order
+        </h4>
+        <div className="mt-2 divide-y rounded-md border">
+          {items.length > 0 ? (
+            items.map((item) => (
+              <div
+                className="flex items-start gap-3 px-3 py-2 text-sm"
+                key={`${item.name ?? "item"}-${item.quantity ?? 1}-${item.notes ?? ""}`}
+              >
+                <span className="flex h-6 min-w-6 items-center justify-center rounded-md bg-muted font-semibold text-xs tabular-nums">
+                  {item.quantity ?? 1}x
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="font-medium">{item.name ?? "Menu item"}</p>
+                  {item.notes && (
+                    <p className="mt-0.5 text-muted-foreground text-xs">
+                      {item.notes}
+                    </p>
+                  )}
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="px-3 py-2 text-muted-foreground text-sm">
+              No items listed
+            </p>
+          )}
+        </div>
+      </div>
+
+      {input.customerNote && (
+        <div className="rounded-md bg-muted/50 px-3 py-2 text-sm">
+          <span className="font-medium text-muted-foreground">Note: </span>
+          {input.customerNote}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function OrderToolOutput({ output }: { output: PlaceOrderOutput }) {
+  if (output.success === false) {
+    return (
+      <div className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-destructive text-sm">
+        {output.error ?? "Order could not be placed."}
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-3 text-sm">
+      <div className="rounded-md border border-emerald-200 bg-emerald-50 px-3 py-2 text-emerald-800 dark:border-emerald-900/60 dark:bg-emerald-950/40 dark:text-emerald-200">
+        Order sent to the kitchen
+      </div>
+      <div className="grid gap-1 rounded-md bg-muted/50 px-3 py-2">
+        {output.tableLabel && (
+          <div className="flex justify-between gap-3">
+            <span className="text-muted-foreground">Table</span>
+            <span className="font-medium">{output.tableLabel}</span>
+          </div>
+        )}
+        <div className="flex justify-between gap-3">
+          <span className="text-muted-foreground">Subtotal</span>
+          <span className="font-medium tabular-nums">
+            {formatPkr(output.subtotalPkr)}
+          </span>
+        </div>
+        <div className="flex justify-between gap-3">
+          <span className="text-muted-foreground">GST</span>
+          <span className="font-medium tabular-nums">
+            {formatPkr(output.gstAmountPkr)}
+          </span>
+        </div>
+        <div className="flex justify-between gap-3 border-t pt-1">
+          <span className="text-muted-foreground">Total</span>
+          <span className="font-semibold tabular-nums">
+            {formatPkr(output.totalPkr)}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const PurePreviewMessage = ({
   addToolApprovalResponse,
   chatId,
@@ -210,6 +327,79 @@ const PurePreviewMessage = ({
                   >
                     Allow
                   </button>
+                </div>
+              )}
+            </ToolContent>
+          </Tool>
+        </div>
+      );
+    }
+
+    if (type === "tool-placeOrder") {
+      const { toolCallId, state } = part;
+      const approvalId = (part as { approval?: { id: string } }).approval?.id;
+      const input = (part.input ?? {}) as PlaceOrderInput;
+      const output = part.output as PlaceOrderOutput | undefined;
+      const isDenied =
+        state === "output-denied" ||
+        (state === "approval-responded" &&
+          (part as { approval?: { approved?: boolean } }).approval?.approved ===
+            false);
+      const widthClass = "w-[min(100%,450px)]";
+
+      return (
+        <div className={widthClass} key={toolCallId}>
+          <Tool className="w-full" defaultOpen={true}>
+            <ToolHeader
+              state={state}
+              title="Place order"
+              type="tool-placeOrder"
+            />
+            <ToolContent>
+              {(state === "input-available" ||
+                state === "approval-requested" ||
+                state === "approval-responded") &&
+                !isDenied && <OrderToolPreview input={input} />}
+              {isDenied && (
+                <div className="px-1 py-1 text-muted-foreground text-sm">
+                  Order was not sent.
+                </div>
+              )}
+              {state === "approval-requested" && approvalId && (
+                <div className="flex items-center justify-end gap-2 border-t pt-3">
+                  <button
+                    className="rounded-md px-3 py-1.5 text-muted-foreground text-sm transition-colors hover:bg-muted hover:text-foreground"
+                    onClick={() => {
+                      addToolApprovalResponse({
+                        id: approvalId,
+                        approved: false,
+                        reason: "User cancelled the order",
+                      });
+                    }}
+                    type="button"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="rounded-md bg-primary px-3 py-1.5 text-primary-foreground text-sm transition-colors hover:bg-primary/90"
+                    onClick={() => {
+                      addToolApprovalResponse({
+                        id: approvalId,
+                        approved: true,
+                      });
+                    }}
+                    type="button"
+                  >
+                    Confirm order
+                  </button>
+                </div>
+              )}
+              {state === "output-available" && output && (
+                <OrderToolOutput output={output} />
+              )}
+              {state === "output-error" && (
+                <div className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-destructive text-sm">
+                  {part.errorText ?? "Order could not be placed."}
                 </div>
               )}
             </ToolContent>

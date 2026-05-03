@@ -1,6 +1,6 @@
 import { auth } from "@/app/(auth)/auth";
-import { getChatById, getMessagesByChatId } from "@/lib/db/queries";
 import { getAnonymousUserId } from "@/lib/db/anonymous-user";
+import { getChatById, getMessagesByChatId } from "@/lib/db/queries";
 import { getDatabaseUrl } from "@/lib/db/url";
 import { convertToUIMessages, isUUID } from "@/lib/utils";
 

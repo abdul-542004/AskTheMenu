@@ -176,10 +176,7 @@ export async function rewriteQueryForRetrieval(
  *
  * Falls back gracefully if the model doesn't follow the format.
  */
-function parseRewriteOutput(
-  raw: string,
-  fallbackQuery: string
-): RewriteResult {
+function parseRewriteOutput(raw: string, fallbackQuery: string): RewriteResult {
   const lines = raw.trim().split("\n").filter(Boolean);
 
   let searchQuery = fallbackQuery;

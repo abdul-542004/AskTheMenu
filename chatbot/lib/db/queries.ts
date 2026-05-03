@@ -42,7 +42,9 @@ import { generateHashedPassword } from "./utils";
 // a connection at module import time (prevents blocking routes).
 let __db: ReturnType<typeof drizzle> | undefined;
 function initDb() {
-  if (__db) return __db;
+  if (__db) {
+    return __db;
+  }
 
   const databaseUrl = getDatabaseUrl();
   const isSupabasePooler = isSupabasePoolerUrl(databaseUrl);
@@ -64,12 +66,10 @@ const db = new Proxy(
   {
     get(_, prop) {
       const real = initDb();
-      // @ts-expect-error dynamic proxy
       return (real as any)[prop];
     },
     apply(_, thisArg, args) {
       const real = initDb();
-      // @ts-expect-error dynamic proxy
       return (real as any).apply(thisArg, args);
     },
   }

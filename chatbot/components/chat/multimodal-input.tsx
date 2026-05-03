@@ -70,6 +70,7 @@ function setCookie(name: string, value: string) {
 
 function PureMultimodalInput({
   chatId,
+  tableSlug,
   input,
   setInput,
   status,
@@ -88,6 +89,7 @@ function PureMultimodalInput({
   isLoading,
 }: {
   chatId: string;
+  tableSlug?: string | null;
   input: string;
   setInput: Dispatch<SetStateAction<string>>;
   status: UseChatHelpers<ChatMessage>["status"];
@@ -216,10 +218,11 @@ function PureMultimodalInput({
   const [slashIndex, setSlashIndex] = useState(0);
 
   const submitForm = useCallback(() => {
+    const targetChatPath = tableSlug ? `/chat/${tableSlug}` : `/chat/${chatId}`;
     window.history.pushState(
       {},
       "",
-      `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/chat/${chatId}`
+      `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${targetChatPath}`
     );
 
     sendMessage({
@@ -254,6 +257,7 @@ function PureMultimodalInput({
     setLocalStorageInput,
     width,
     chatId,
+    tableSlug,
   ]);
 
   const uploadFile = useCallback(async (file: File) => {
@@ -395,6 +399,7 @@ function PureMultimodalInput({
             chatId={chatId}
             selectedVisibilityType={selectedVisibilityType}
             sendMessage={sendMessage}
+            tableSlug={tableSlug}
           />
         )}
 
