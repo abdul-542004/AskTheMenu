@@ -67,6 +67,34 @@ function getStreamContext() {
 export { getStreamContext };
 
 const hasDatabase = Boolean(getDatabaseUrl());
+const orderApprovalContinuationPrompt = `An approved placeOrder tool has just been executed.
+If the tool output says success is true, respond with only: "Done - your order has been sent to the kitchen."
+If the tool output says success is false, apologize briefly and mention the error.
+Do not repeat the order, do not ask for confirmation, do not mention tool names, and do not say you are about to place the order.`;
+
+function denyPendingOrderApprovals(messages: ChatMessage[]) {
+  return messages.map((msg) => ({
+    ...msg,
+    parts: msg.parts.map((part) => {
+      if (
+        part.type !== "tool-placeOrder" ||
+        part.state !== "approval-requested"
+      ) {
+        return part;
+      }
+
+      return {
+        ...part,
+        state: "output-denied" as const,
+        approval: {
+          id: part.approval.id,
+          approved: false,
+          reason: "User changed the order before confirming.",
+        },
+      };
+    }),
+  })) as ChatMessage[];
+}
 
 export async function POST(request: Request) {
   let requestBody: PostRequestBody;
@@ -203,6 +231,19 @@ export async function POST(request: Request) {
       ];
     }
 
+    if (!hasToolApprovalContinuation && message?.role === "user") {
+      uiMessages = denyPendingOrderApprovals(uiMessages);
+      if (shouldPersistChat) {
+        await Promise.all(
+          uiMessages
+            .filter((msg) =>
+              messagesFromDb.some((dbMessage) => dbMessage.id === msg.id)
+            )
+            .map((msg) => updateMessage({ id: msg.id, parts: msg.parts }))
+        );
+      }
+    }
+
     const { longitude, latitude, city, country } = geolocation(request);
 
     const requestHints: RequestHints = {
@@ -262,6 +303,9 @@ export async function POST(request: Request) {
           }
         : undefined;
     const activeToolNames: "placeOrder"[] = chatTools ? ["placeOrder"] : [];
+    const followUpToolNames: "placeOrder"[] = hasToolApprovalContinuation
+      ? []
+      : activeToolNames;
 
     traceLog("model.groq.request", {
       operation: "chat_response",
@@ -288,7 +332,13 @@ export async function POST(request: Request) {
           system: chatSystemPrompt,
           messages: modelMessages,
           stopWhen: stepCountIs(5),
-          experimental_activeTools: activeToolNames,
+          activeTools: activeToolNames,
+          prepareStep: hasToolApprovalContinuation
+            ? () => ({
+                activeTools: followUpToolNames,
+                system: orderApprovalContinuationPrompt,
+              })
+            : undefined,
           tools: chatTools,
           experimental_telemetry: {
             isEnabled: isProductionEnvironment,

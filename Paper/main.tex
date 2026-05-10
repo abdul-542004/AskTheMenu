@@ -1,0 +1,104 @@
+%% 
+%% AskTheMenu: An AI-Powered Conversational Menu Assistant
+%% Using Retrieval-Augmented Generation
+%%
+%% Based on Elsevier CAS double-column template
+%% 
+
+\documentclass[a4paper,fleqn]{cas-dc}
+
+\usepackage[numbers]{natbib}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{algorithm}
+\usepackage{algcompatible}
+%%%Author macros
+\def\tsc#1{\csdef{#1}{\textsc{\lowercase{#1}}\xspace}}
+\tsc{WGM}
+\tsc{QE}
+%%%
+
+\begin{document}
+\let\WriteBookmarks\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}
+
+% Short title
+\shorttitle{AskTheMenu: RAG-Based Conversational Menu Assistant}
+
+% Short author
+\shortauthors{Author et~al.}
+
+% Main title
+\title[mode = title]{AskTheMenu: An AI-Powered Conversational Menu Assistant Using Retrieval-Augmented Generation}
+
+% Title footnote
+\tnotemark[1]
+
+% Title footnote text
+\tnotetext[1]{This document presents the design and evaluation of AskTheMenu, a RAG-based chatbot for restaurant menu assistance.}
+
+% First author
+\author[1]{Author Name}
+\cormark[1]
+\fnmark[1]
+\ead{author@university.edu}
+
+\credit{Conceptualization, Methodology, Software, Writing -- Original Draft}
+
+\affiliation[1]{organization={Department of Computer Science},
+            addressline={University Name},
+            city={City},
+            postcode={00000},
+            state={State},
+            country={Country}}
+
+% Corresponding author text
+\cortext[cor1]{Corresponding author}
+
+% Footnote text
+\fntext[fn1]{Undergraduate Final Year Project.}
+
+% Abstract
+\begin{abstract}
+Restaurant menus can overwhelm diners with too many choices, especially when they have specific dietary restrictions, allergen concerns, or taste preferences. Traditional solutions --- printed descriptions and waiter recommendations --- are limited by staff availability and inconsistent knowledge. In this paper, we present AskTheMenu, an AI-powered conversational menu assistant that uses Retrieval-Augmented Generation (RAG) to help diners navigate restaurant menus through natural language interaction. The system allows customers to scan a QR code at their table, open a chat interface, and ask questions such as ``what is good for someone who likes spicy food and is allergic to dairy?'' Unlike generic Large Language Models (LLMs) that may hallucinate menu items, AskTheMenu grounds every response in actual menu data retrieved from a vector database using semantic similarity search. Our architecture combines Gemini text embeddings (3072 dimensions), pgvector-based cosine similarity retrieval over Supabase, a multi-turn query rewriting mechanism, and a Gemma 4 LLM for response generation. We also implement direct order placement through structured tool calling and a real-time kitchen dashboard. Evaluation on a 100-item menu across 50 test interactions shows 93.3\% factual accuracy, 100\% grounding rate (zero hallucinated dishes), 85\% average retrieval precision, and an average response latency of approximately 1 second. The system demonstrates that RAG is a practical and effective approach for building domain-specific conversational assistants where factual accuracy is critical.
+\end{abstract}
+
+% Research highlights
+\begin{highlights}
+\item RAG-based chatbot achieving 93.3\% factual accuracy for restaurant menu assistance
+\item Multi-turn query rewriting preserves conversational context across dialogue turns
+\item Complete end-to-end system: QR scan $\rightarrow$ chat $\rightarrow$ order $\rightarrow$ kitchen dashboard
+\item 100\% grounding rate with zero hallucinated menu items
+\end{highlights}
+
+% Keywords
+\begin{keywords}
+Retrieval-Augmented Generation \sep Large Language Models \sep Chatbot \sep Vector Database \sep Restaurant Technology \sep Natural Language Processing
+\end{keywords}
+
+\maketitle
+
+% ============================
+% Include Part 1: Intro, Literature Review, Methodology
+% ============================
+\input{paper-part1}
+
+% ============================
+% Include Part 2: Architecture, Implementation, Results, Conclusion
+% ============================
+\input{paper-part2}
+
+% ============================
+% Credits and Bibliography
+% ============================
+\printcredits
+
+\bibliographystyle{cas-model2-names}
+\bibliography{askthemenu-refs}
+
+\end{document}

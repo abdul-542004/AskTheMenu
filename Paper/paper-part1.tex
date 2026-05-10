@@ -1,0 +1,159 @@
+% Part 1: Abstract through System Architecture
+
+
+\section{Introduction}\label{sec:intro}
+
+Dining at a restaurant should be an enjoyable experience, yet many customers face what psychologists call \emph{decision fatigue} when confronted with extensive menus. Traditional solutions such as printed descriptions or waiter recommendations are limited by staff availability, language barriers, and inconsistent knowledge about ingredients and allergens. With the rapid progress of Large Language Models (LLMs) \cite{Brown2020GPT3, Touvron2023LLaMA} and conversational AI \cite{Ni2023ChatbotSurvey}, there is a clear opportunity to build intelligent assistants that help diners navigate menus in a natural, conversational way.
+
+However, using a general-purpose LLM directly for menu assistance poses a fundamental problem: the model may \emph{hallucinate} dishes, prices, or allergen information that does not exist on the restaurant's actual menu \cite{Huang2023Hallucination}. This is unacceptable in a food-service context where incorrect allergen information could endanger a customer's health.
+
+Retrieval-Augmented Generation (RAG) \cite{Lewis2020RAG,AWS2024RAG} addresses this challenge by grounding the LLM's responses in a retrieved set of relevant documents from a trusted knowledge base. Instead of relying solely on the model's parametric memory, the system first retrieves menu items that are semantically relevant to the user's query, and then feeds those items as context to the LLM for answer generation. This design also supports source attribution and easier knowledge updates, both of which are important in operational settings where menu availability, prices, and allergen information may change over time \cite{AWS2024RAG}.
+
+In this paper, we present \textbf{AskTheMenu}, an AI-powered conversational menu assistant built on a RAG architecture. A diner scans a QR code at their table, opens a chat interface in their mobile browser, and interacts with the menu using natural language. The system retrieves relevant dishes from a vector database and generates grounded, personalized recommendations. It supports dietary filtering, allergen awareness, budget constraints, spice preferences, and even direct order placement to the kitchen.
+
+The main contributions of this work are:
+\begin{enumerate}
+    \item A complete RAG pipeline tailored for structured restaurant menu data, using Gemini embeddings and cosine similarity search over pgvector.
+    \item A multi-turn conversational query rewriting mechanism that maintains context across dialogue turns.
+    \item An end-to-end system integrating QR-based table routing, real-time chat, order placement, and a live kitchen dashboard.
+    \item An empirical evaluation demonstrating high retrieval accuracy and response relevance across diverse query categories.
+\end{enumerate}
+
+The rest of this paper is organized as follows: Section~\ref{sec:litreview} reviews related work. Section~\ref{sec:methodology} describes the RAG methodology and algorithms. Section~\ref{sec:architecture} presents the system architecture. Section~\ref{sec:implementation} covers implementation details. Section~\ref{sec:results} reports results and analysis. Section~\ref{sec:comparative} provides a comparative analysis, and Section~\ref{sec:conclusion} concludes the paper.
+
+
+\section{Literature Review}\label{sec:litreview}
+
+\subsection{Large Language Models}
+The Transformer architecture \cite{Vaswani2017Attention} revolutionized natural language processing by introducing self-attention mechanisms that capture long-range dependencies. Building on this, GPT-3 \cite{Brown2020GPT3} demonstrated that scaling language models to 175 billion parameters enables impressive few-shot learning. More recent open-weight models such as LLaMA \cite{Touvron2023LLaMA}, Gemma \cite{Gemma2024}, and Mixtral \cite{Jiang2024Mixtral} have made high-quality LLMs accessible to the broader research community. These models form the generative backbone of modern conversational AI systems.
+
+\subsection{Retrieval-Augmented Generation}
+Lewis et al.\ \cite{Lewis2020RAG} introduced RAG as a paradigm that combines a neural retriever with a sequence-to-sequence generator, using a dense non-parametric memory alongside the model's learned parametric knowledge. The retriever fetches relevant passages from an external knowledge base, and the generator conditions its output on both the query and the retrieved passages. This approach significantly reduces hallucination compared to purely parametric models \cite{Huang2023Hallucination, Tonmoy2024Hallucination}.
+
+Recent surveys \cite{Gao2024RAGSurvey, Fan2024RAGSurvey2} categorize RAG systems along three axes: the retrieval strategy, the augmentation method, and the generation model, and describe the progression from naive RAG toward advanced and modular RAG architectures. Practitioner-maintained research maps further show the breadth of current work across RAG enhancement, retrieval improvement, evaluation, embeddings, and domain-specific RAG \cite{Aishwarya2026RAGTable}. Advances such as Self-RAG \cite{Asai2024SelfRAG} add self-reflection mechanisms where the model decides when to retrieve and critiques its own outputs. REPLUG \cite{Shi2024RAGEval} treats the LLM as a black box and prepends retrieved documents, showing gains even without fine-tuning.
+
+Recent work also emphasizes that retrieved context must be not only relevant but sufficient to answer the user's query. Google Research describes sufficient context as context that contains all necessary information for a definitive answer, and reports that RAG systems may still hallucinate when retrieved context is incomplete or contradictory \cite{Rashtchian2025SufficientContextBlog}. This distinction is especially relevant for restaurant assistants because a retrieved dish may be topically related to an allergen or dietary request without containing enough evidence to recommend it safely.
+
+\subsection{Dense Retrieval and Vector Databases}
+Dense Passage Retrieval (DPR) \cite{Karpukhin2020DPR} replaced traditional sparse retrieval (e.g., TF-IDF, BM25) with learned dense embeddings, achieving superior performance on open-domain QA benchmarks. Sentence-BERT \cite{Reimers2019SentenceBERT} further popularized dense embeddings for semantic similarity tasks.
+
+Efficient similarity search at scale is enabled by approximate nearest neighbor (ANN) algorithms such as HNSW \cite{Malkov2020HNSW}, implemented in libraries like FAISS \cite{Johnson2021FAISS}. Purpose-built vector databases have emerged as critical infrastructure for RAG systems \cite{Pan2024VectorDB}. PostgreSQL's pgvector extension brings vector search directly into relational databases, combining the benefits of structured queries with semantic similarity search \cite{Guo2022pgvector}.
+
+Modern embedding models such as Gecko \cite{Lee2024GeminiEmbed} from Google produce high-dimensional vectors (up to 3072 dimensions) that capture rich semantic information, enabling nuanced retrieval even for domain-specific queries.
+
+\subsection{Conversational AI and Chatbots}
+The evolution of chatbots from rule-based systems to neural dialogue models is well documented \cite{Adamopoulou2020Chatbot, Ni2023ChatbotSurvey}. Open-domain systems like BlenderBot \cite{Roller2021BlenderBot} showed that combining retrieval, knowledge grounding, and persona consistency leads to more engaging conversations. Chain-of-thought prompting \cite{Wei2022ChainOfThought} further improved reasoning capabilities of LLMs in multi-step tasks.
+
+\subsection{Food Recommendation and Restaurant Technology}
+AI-powered food recommendation systems have been explored for personalized dietary suggestions \cite{Pecune2021FoodChatbot, Palasundram2021FoodRec}. QR-code-based contactless ordering gained significant adoption during the COVID-19 pandemic \cite{Sharma2021QR}. Industry chatbots have demonstrated the viability of AI assistants in customer-facing roles \cite{Okuda2024FoodAI}. However, most existing restaurant chatbots are either rule-based menu navigators or simple keyword matchers. AskTheMenu differentiates itself by employing a full RAG pipeline with semantic search, enabling natural language queries such as ``something spicy for two people under 1500 rupees.''
+
+
+\section{Methodology}\label{sec:methodology}
+
+This section describes the RAG methodology underlying AskTheMenu, including the mathematical formulations and algorithms used for retrieval and generation.
+
+\subsection{Overview of the RAG Pipeline}
+
+The RAG pipeline in AskTheMenu follows the standard retrieve-augment-generate pattern used in practical RAG systems \cite{AWS2024RAG}:
+
+\begin{enumerate}
+    \item \textbf{Indexing}: Menu items are converted into dense vector embeddings and stored in a vector database.
+    \item \textbf{Retrieval}: Given a user query, the system computes its embedding and retrieves the top-$k$ most similar menu items.
+    \item \textbf{Generation}: The retrieved menu items are injected into the LLM's prompt as context, and the model generates a grounded response.
+\end{enumerate}
+
+\subsection{Document Embedding}
+
+Each menu item $d_i$ is represented as a structured text document containing its name, ingredients, allergens, dietary classification, spice level, cuisine type, price, and pairings. This structured text is passed through an embedding model $E$ to produce a dense vector:
+
+\begin{equation}\label{eq:embedding}
+    \mathbf{v}_i = E(d_i) \in \mathbb{R}^{n}
+\end{equation}
+
+\noindent where $n = 3072$ is the embedding dimension of the Gemini embedding model \cite{Choi2026GeminiEmbedding2} used in our implementation. The embedding function $E$ is a pre-trained neural network that maps variable-length text to a fixed-dimensional vector space where semantic similarity is preserved.
+
+\subsection{Similarity Search}
+
+Given a user query $q$, we compute its embedding $\mathbf{v}_q = E(q)$ and retrieve the top-$k$ most similar documents using cosine similarity:
+
+\begin{equation}\label{eq:cosine}
+    \text{sim}(\mathbf{v}_q, \mathbf{v}_i) = \frac{\mathbf{v}_q \cdot \mathbf{v}_i}{\|\mathbf{v}_q\| \cdot \|\mathbf{v}_i\|}
+\end{equation}
+
+The retrieval function returns the set of $k$ documents with the highest similarity scores:
+
+\begin{equation}\label{eq:topk}
+    \mathcal{R}(q, k) = \underset{d_i \in \mathcal{D}}{\text{top-}k} \;\; \text{sim}(\mathbf{v}_q, \mathbf{v}_i)
+\end{equation}
+
+\noindent where $\mathcal{D}$ is the set of all menu item documents. In our implementation, $k = 5$ was chosen empirically to balance context richness with prompt length constraints.
+
+\subsection{Augmented Generation}
+
+The retrieved documents $\mathcal{R}(q, k)$ are concatenated into a context string $C$ and injected into the system prompt alongside the user's query. The LLM generates a response conditioned on both:
+
+\begin{equation}\label{eq:generation}
+    r = \text{LLM}(q \mid C, S)
+\end{equation}
+
+\noindent where $S$ is the system prompt containing behavioral instructions (e.g., ``only recommend items from the menu'', ``mention allergens when relevant''), and $C = \text{format}(\mathcal{R}(q, k))$ is the formatted context of retrieved menu items.
+
+\subsection{Multi-Turn Query Rewriting}
+
+In a multi-turn conversation, the user's latest message often lacks context from earlier turns. For example, after discussing dairy-free options, a user might simply ask ``something spicy?'' --- which alone is insufficient for accurate retrieval. Query rewriting has been shown to improve retrieval-augmented LLM pipelines by reformulating the user's input into a search query that better matches the knowledge source \cite{Ma2023QueryRewriting}.
+
+We employ a \textbf{query rewriting} step that uses a lightweight LLM call to reformulate the latest user message into a standalone search query. The rewriter takes the last 10 messages (5 conversation turns) and produces:
+
+\begin{enumerate}
+    \item A \textbf{search query} $q'$ that incorporates relevant constraints from conversation history.
+    \item A \textbf{recall list} of dish names mentioned in earlier turns, ensuring previously discussed items remain in the context.
+\end{enumerate}
+
+Formally, given conversation history $H = [m_1, m_2, \ldots, m_t]$ and latest user message $m_t$:
+
+\begin{equation}\label{eq:rewrite}
+    (q', \mathcal{L}) = \text{Rewrite}(m_t, H)
+\end{equation}
+
+\noindent where $q'$ is the rewritten query used for retrieval and $\mathcal{L}$ is the set of recalled dish names. The final context combines results from both the similarity search on $q'$ and any items in $\mathcal{L}$ that were not already retrieved.
+
+\subsection{Algorithm: RAG Pipeline}
+
+Algorithm~\ref{alg:rag} presents the complete RAG pipeline for processing a single user message in a multi-turn conversation.
+
+\begin{algorithm}
+\caption{AskTheMenu RAG Pipeline}\label{alg:rag}
+\begin{algorithmic}[1]
+\REQUIRE User message $m_t$, conversation history $H$, menu embeddings $\mathcal{V}$, embedding model $E$, language model $\text{LLM}$, system prompt $S$, top-$k$ parameter
+\ENSURE Generated response $r$
+
+\STATE $(q', \mathcal{L}) \leftarrow \text{Rewrite}(m_t, H)$ \COMMENT{Query rewriting}
+\STATE $\mathbf{v}_q \leftarrow E(q')$ \COMMENT{Embed rewritten query}
+\STATE $\mathcal{R} \leftarrow \text{TopK}(\mathbf{v}_q, \mathcal{V}, k)$ \COMMENT{Cosine similarity search}
+\STATE $\mathcal{R}' \leftarrow \mathcal{R} \cup \text{Lookup}(\mathcal{L})$ \COMMENT{Add recalled items}
+\STATE $C \leftarrow \text{Format}(\mathcal{R}')$ \COMMENT{Build context string}
+\STATE $P \leftarrow S \oplus C$ \COMMENT{Combine system prompt with context}
+\STATE $r \leftarrow \text{LLM}(m_t \mid P, H)$ \COMMENT{Generate grounded response}
+\Return $r$
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Algorithm: Menu Ingestion}
+
+Algorithm~\ref{alg:ingest} describes how the menu knowledge base is built during the ingestion phase.
+
+\begin{algorithm}
+\caption{Menu Data Ingestion}\label{alg:ingest}
+\begin{algorithmic}[1]
+\REQUIRE Raw menu data $M$, embedding model $E$, database $\text{DB}$
+\ENSURE Populated vector store
+
+\STATE $\text{items} \leftarrow \text{Parse}(M)$ \COMMENT{Extract structured menu items}
+\FOR{each item $d_i$ in items}
+    \STATE Validate fields (name, price, allergens, dietary, etc.)
+    \STATE $\text{text}_i \leftarrow \text{FormatForEmbedding}(d_i)$
+    \STATE $\mathbf{v}_i \leftarrow E(\text{text}_i)$
+    \STATE $\text{DB.insert}(d_i, \mathbf{v}_i)$ \COMMENT{Store item and its embedding}
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}

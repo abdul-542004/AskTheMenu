@@ -169,6 +169,12 @@ const PurePreviewMessage = ({
 
   const isUser = message.role === "user";
   const isAssistant = message.role === "assistant";
+  const hasCompletedPlaceOrder = message.parts?.some(
+    (part) =>
+      part.type === "tool-placeOrder" &&
+      part.state === "output-available" &&
+      (part.output as PlaceOrderOutput | undefined)?.success !== false
+  );
 
   const hasAnyContent = message.parts?.some(
     (part) =>
@@ -231,6 +237,10 @@ const PurePreviewMessage = ({
     }
 
     if (type === "text") {
+      if (hasCompletedPlaceOrder) {
+        return null;
+      }
+
       return (
         <MessageContent
           className={cn("text-[13px] leading-[1.65]", {

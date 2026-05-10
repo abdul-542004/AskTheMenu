@@ -24,6 +24,13 @@ type MessagesProps = {
   onEditMessage?: (message: ChatMessage) => void;
 };
 
+function hasPendingPlaceOrder(message: ChatMessage) {
+  return message.parts?.some(
+    (part) =>
+      part.type === "tool-placeOrder" && part.state === "approval-requested"
+  );
+}
+
 function PureMessages({
   addToolApprovalResponse,
   chatId,
@@ -59,6 +66,15 @@ function PureMessages({
 
   const hasMessages = isMounted && messages.length > 0;
   const showGreeting = isMounted && messages.length === 0 && !isLoading;
+  const visibleMessages = messages.filter((message, index) => {
+    if (message.role !== "assistant" || !hasPendingPlaceOrder(message)) {
+      return true;
+    }
+
+    return !messages
+      .slice(index + 1)
+      .some((laterMessage) => laterMessage.role === "user");
+  });
 
   const prevChatIdRef = useRef(chatId);
   useEffect(() => {
@@ -84,12 +100,12 @@ function PureMessages({
         style={isArtifactVisible ? { scrollbarWidth: "none" } : undefined}
       >
         <div className="mx-auto flex min-h-full min-w-0 max-w-4xl flex-col gap-5 px-2 py-6 md:gap-7 md:px-4">
-          {messages.map((message, index) => (
+          {visibleMessages.map((message, index) => (
             <PreviewMessage
               addToolApprovalResponse={addToolApprovalResponse}
               chatId={chatId}
               isLoading={
-                status === "streaming" && messages.length - 1 === index
+                status === "streaming" && visibleMessages.length - 1 === index
               }
               isReadonly={isReadonly}
               key={message.id}

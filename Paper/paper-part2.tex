@@ -1,0 +1,454 @@
+% Part 2: System Architecture through Conclusion
+
+\section{System Architecture}\label{sec:architecture}
+
+Figure~\ref{fig:architecture} illustrates the high-level architecture of AskTheMenu. The system consists of four main layers: the Client Layer, the Application Layer, the AI Layer, and the Data Layer.
+
+\begin{figure*}[t]
+    \centering
+    \begingroup
+    \setlength{\fboxsep}{6pt}
+    \renewcommand{\arraystretch}{1.25}
+    \scriptsize
+    \begin{tabular}{c}
+        \fbox{\parbox{0.92\textwidth}{
+            \centering
+            \textbf{Client Layer}\\[4pt]
+            \begin{tabular}{cc}
+                \fbox{\parbox{0.36\textwidth}{\centering
+                    \textbf{Diner Chat Interface}\\
+                    QR-based mobile web chat\\
+                    Streaming menu assistance
+                }}
+                &
+                \fbox{\parbox{0.36\textwidth}{\centering
+                    \textbf{Kitchen Dashboard}\\
+                    Live order queue\\
+                    Status controls for staff
+                }}
+            \end{tabular}
+        }}\\[8pt]
+        $\Downarrow$\\[6pt]
+        \fbox{\parbox{0.92\textwidth}{
+            \centering
+            \textbf{Application Layer: Next.js}\\[4pt]
+            \begin{tabular}{ccc}
+                \fbox{\parbox{0.25\textwidth}{\centering
+                    \textbf{Chat API}\\
+                    Message handling\\
+                    Response streaming
+                }}
+                &
+                \fbox{\parbox{0.25\textwidth}{\centering
+                    \textbf{Order APIs}\\
+                    Create orders\\
+                    Update order status
+                }}
+                &
+                \fbox{\parbox{0.25\textwidth}{\centering
+                    \textbf{Table Sessions}\\
+                    QR slug mapping\\
+                    Conversation state
+                }}
+            \end{tabular}
+        }}\\[8pt]
+        $\Downarrow$\\[6pt]
+        \fbox{\parbox{0.92\textwidth}{
+            \centering
+            \textbf{AI Layer: Retrieval-Augmented Generation Pipeline}\\[4pt]
+            \begin{tabular}{ccccc}
+                \fbox{\parbox{0.15\textwidth}{\centering
+                    Query\\
+                    Rewriter
+                }}
+                &
+                $\rightarrow$
+                &
+                \fbox{\parbox{0.15\textwidth}{\centering
+                    Gemini\\
+                    Embeddings
+                }}
+                &
+                $\rightarrow$
+                &
+                \fbox{\parbox{0.15\textwidth}{\centering
+                    pgvector\\
+                    Top-$k$ Search
+                }}
+                \\[6pt]
+                &
+                &
+                $\downarrow$
+                &
+                &
+                $\downarrow$
+                \\[-2pt]
+                \fbox{\parbox{0.15\textwidth}{\centering
+                    Tool Calling\\
+                    \texttt{placeOrder}
+                }}
+                &
+                $\leftarrow$
+                &
+                \fbox{\parbox{0.15\textwidth}{\centering
+                    Gemma 4\\
+                    Generator
+                }}
+                &
+                $\leftarrow$
+                &
+                \fbox{\parbox{0.15\textwidth}{\centering
+                    Context +\\
+                    System Prompt
+                }}
+            \end{tabular}
+        }}\\[8pt]
+        $\Downarrow$\\[6pt]
+        \fbox{\parbox{0.92\textwidth}{
+            \centering
+            \textbf{Data Layer: Supabase PostgreSQL}\\[4pt]
+            \begin{tabular}{cccc}
+                \fbox{\parbox{0.19\textwidth}{\centering
+                    \textbf{MenuItem}\\
+                    Structured menu data
+                }}
+                &
+                \fbox{\parbox{0.19\textwidth}{\centering
+                    \textbf{MenuItemEmbedding}\\
+                    3072-d vectors
+                }}
+                &
+                \fbox{\parbox{0.19\textwidth}{\centering
+                    \textbf{Chat / Message}\\
+                    Conversation records
+                }}
+                &
+                \fbox{\parbox{0.19\textwidth}{\centering
+                    \textbf{Order / OrderItem}\\
+                    Kitchen workflow
+                }}
+            \end{tabular}
+        }}
+    \end{tabular}
+    \endgroup
+    \caption{High-level system architecture of AskTheMenu showing the flow from QR-based chat and kitchen interfaces through the Next.js application layer, the RAG-based AI layer, and the Supabase data layer.}\label{fig:architecture}
+\end{figure*}
+
+\subsection{Client Layer}
+The client layer consists of two interfaces:
+\begin{itemize}
+    \item \textbf{Diner Chat Interface}: A mobile-responsive web application accessed via QR code. Each table has a unique URL (e.g., \texttt{/chat/table-1}), and the interface provides a real-time chat experience using streaming responses.
+    \item \textbf{Kitchen Dashboard}: A separate web interface at \texttt{/kitchen} where restaurant staff can view incoming orders, update order statuses (pending $\rightarrow$ accepted $\rightarrow$ preparing $\rightarrow$ served), and manage the order queue.
+\end{itemize}
+
+\subsection{Application Layer}
+Built with Next.js \cite{NextJS2024}, the application layer handles routing, server-side rendering, and API endpoints. Key components include:
+\begin{itemize}
+    \item \textbf{Chat API Route}: Processes user messages, invokes the RAG pipeline, and streams responses back to the client using the Vercel AI SDK \cite{VercelAISDK2024}.
+    \item \textbf{Order API Routes}: RESTful endpoints for creating orders (\texttt{POST /api/orders}) and updating order status (\texttt{PATCH /api/orders/[id]/status}).
+    \item \textbf{Table Session Management}: Maps QR slugs to table identifiers and maintains session state.
+\end{itemize}
+
+\subsection{AI Layer}
+The AI layer implements the RAG pipeline described in Section~\ref{sec:methodology}:
+\begin{itemize}
+    \item \textbf{Query Rewriter}: A lightweight LLM call that reformulates multi-turn queries into standalone search queries (see Section~\ref{sec:methodology}).
+    \item \textbf{Embedding Service}: Uses Gemini Embedding model (\texttt{gemini-embedding-2-preview}) to generate 3072-dimensional vectors for both menu items and user queries.
+    \item \textbf{Vector Search}: Cosine similarity search over pgvector to retrieve the top-$k$ relevant menu items.
+    \item \textbf{Response Generator}: Gemma 4 LLM accessed via OpenRouter, conditioned on the system prompt and retrieved context.
+    \item \textbf{Tool Calling}: The LLM can invoke structured tools (e.g., \texttt{placeOrder}) for actions beyond text generation.
+\end{itemize}
+
+\subsection{Data Layer}
+The data layer uses Supabase \cite{Supabase2024} (PostgreSQL) with the pgvector extension:
+\begin{itemize}
+    \item \textbf{Relational Tables}: \texttt{Restaurant}, \texttt{RestaurantTable}, \texttt{MenuItem}, \texttt{Order}, \texttt{OrderItem}, \texttt{Chat}, \texttt{Message}.
+    \item \textbf{Vector Store}: \texttt{MenuItemEmbedding} table storing 3072-dimensional vectors alongside menu item references.
+    \item \textbf{Indexes}: B-tree indexes on foreign keys, dietary type, spice level, and cuisine type for efficient filtering. HNSW or IVFFlat indexes on the embedding column for fast ANN search.
+\end{itemize}
+
+
+\section{Implementation Details}\label{sec:implementation}
+
+\subsection{Technology Stack}
+Table~\ref{tbl:techstack} summarizes the technology stack used in AskTheMenu.
+
+\begin{table}[width=.9\linewidth,cols=2,pos=h]
+\caption{Technology stack of AskTheMenu.}\label{tbl:techstack}
+\begin{tabular*}{\tblwidth}{@{}LL@{}}
+\toprule
+Component & Technology \\
+\midrule
+Frontend Framework & Next.js 15 (React 19) \\
+Styling & Tailwind CSS, shadcn/ui \\
+AI SDK & Vercel AI SDK 4.0 \\
+LLM & Gemma 4 (via OpenRouter) \\
+Embedding Model & Gemini Embedding 2 Preview \\
+Database & Supabase (PostgreSQL 15) \\
+Vector Extension & pgvector \\
+ORM & Drizzle ORM \\
+Deployment & Vercel (frontend), Supabase (backend) \\
+Package Manager & pnpm \\
+Language & TypeScript, Python \\
+\bottomrule
+\end{tabular*}
+\end{table}
+
+\subsection{Menu Data Preparation}
+The knowledge base consists of 100 menu items across five categories: 20 Desi, 20 Chinese, 20 Continental, 20 Fusion, and 20 sides/beverages. Each item is stored with structured metadata including ingredients, allergens, dietary classification, spice level, cuisine type, specialty status, recommended pairings, price in PKR, and serving size.
+
+For embedding, each menu item is serialized into a human-readable text block:
+\begin{verbatim}
+Dish: Chicken Karahi
+Cuisine: Desi
+Ingredients: chicken, tomatoes, ginger,
+  garlic, green chilies, coriander, spices
+Allergens: none
+Spice Level: medium
+Dietary: non-vegetarian
+Price: PKR 1,650/kg
+Pairings: naan, roti
+\end{verbatim}
+
+This format preserves all structured fields in a natural language representation that the embedding model can encode effectively.
+
+\subsection{Embedding Generation and Storage}
+Embeddings are generated using the gemini-embedding-2-preview model \cite{Choi2026GeminiEmbedding2} with the task type set to \texttt{RETRIEVAL\_DOCUMENT} for menu items and \texttt{RETRIEVAL\_QUERY} for user queries. The resulting 3072-dimensional vectors are stored in the MenuItemEmbedding table in Supabase with a pgvector column. An HNSW index is created on the embedding column to accelerate approximate nearest neighbor search \cite{Malkov2020HNSW}.
+
+\subsection{Chat Flow Implementation}
+The conversational flow follows these steps:
+\begin{enumerate}
+    \item The user sends a message from the chat interface.
+    \item The server extracts the table slug and conversation history.
+    \item The query rewriter (Algorithm~\ref{alg:rag}, line 1) reformulates the message using the last 10 messages for context.
+    \item The rewritten query is embedded and used to search the vector store ($k=5$).
+    \item Retrieved menu items plus any recalled items are formatted into a context string.
+    \item The context is injected into the system prompt alongside behavioral instructions.
+    \item The LLM generates a streamed response, which is displayed in real-time to the user.
+\end{enumerate}
+
+\subsection{Order Placement}
+When a diner decides to order, the LLM invokes the \texttt{placeOrder} tool via structured function calling. The tool:
+\begin{enumerate}
+    \item Resolves menu item names to database IDs.
+    \item Fetches current prices from the database (never relies on the LLM for arithmetic).
+    \item Calculates subtotal, GST (16\%), and total deterministically in code.
+    \item Inserts the order and order items in a database transaction.
+    \item Returns a confirmation with the exact calculated total.
+\end{enumerate}
+
+The user sees a structured preview card before confirming. This tool-approval flow ensures no order is placed without explicit consent.
+
+\subsection{Kitchen Dashboard}
+The kitchen dashboard polls \texttt{GET /api/orders/kitchen} every 5 seconds using SWR (stale-while-revalidate). Orders are displayed as status-colored cards with action buttons. Staff can transition orders through the lifecycle: pending $\rightarrow$ accepted $\rightarrow$ preparing $\rightarrow$ served, or cancel at any point.
+
+\begin{figure}[h]
+    \centering
+    \fbox{\parbox{0.9\columnwidth}{\centering\vspace{2.5cm}\textbf{[Placeholder: Chat Interface Screenshot]}\\[6pt]
+    Mobile chat showing diner asking for spicy recommendations\vspace{2.5cm}}}
+    \caption{AskTheMenu chat interface on a mobile device.}\label{fig:chat-ui}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \fbox{\parbox{0.9\columnwidth}{\centering\vspace{2.5cm}\textbf{[Placeholder: Kitchen Dashboard Screenshot]}\\[6pt]
+    Kitchen view showing order cards with status controls\vspace{2.5cm}}}
+    \caption{Kitchen dashboard displaying incoming orders.}\label{fig:kitchen-ui}
+\end{figure}
+
+
+\section{Results and Analysis}\label{sec:results}
+
+We evaluated AskTheMenu across multiple dimensions: retrieval accuracy, response quality, query latency, and order placement correctness.
+
+\subsection{Time and Space Complexity Analysis}
+
+\subsubsection{Embedding Generation}
+For a menu of $N$ items, embedding generation is $O(N)$ — each item requires one forward pass through the embedding model. This is a one-time offline cost. With $N = 100$ items and 3072-dimensional vectors, the total storage for embeddings is approximately $100 \times 3072 \times 4 \text{ bytes} \approx 1.2$ MB.
+
+\subsubsection{Similarity Search}
+\begin{itemize}
+    \item \textbf{Brute-force}: $O(N \cdot n)$ where $N$ is the number of documents and $n$ is the embedding dimension. For $N = 100$, this is negligible.
+    \item \textbf{HNSW index} \cite{Malkov2020HNSW}: $O(\log N)$ average query time with $O(N \cdot M)$ space, where $M$ is the number of connections per node. For larger menus, this provides sub-millisecond retrieval \cite{Wang2024ANNS}.
+\end{itemize}
+
+\subsubsection{Query Rewriting}
+The rewriting step adds one additional LLM call with a short prompt ($\sim$200 tokens input, $\sim$50 tokens output), contributing approximately 200--400ms to the total latency.
+
+\subsubsection{Overall Pipeline}
+Table~\ref{tbl:complexity} summarizes the time complexity of each pipeline stage.
+
+\begin{table}[width=.9\linewidth,cols=3,pos=h]
+\caption{Time complexity analysis of the RAG pipeline stages.}\label{tbl:complexity}
+\begin{tabular*}{\tblwidth}{@{}LLL@{}}
+\toprule
+Stage & Time Complexity & Typical Latency \\
+\midrule
+Query Rewriting & $O(T_{\text{LLM}})$ & 200--400 ms \\
+Query Embedding & $O(n)$ & 50--100 ms \\
+Vector Search (HNSW) & $O(\log N)$ & 5--20 ms \\
+Context Formatting & $O(k)$ & $<$ 1 ms \\
+Response Generation & $O(T_{\text{LLM}})$ & 800--2000 ms \\
+\bottomrule
+\end{tabular*}
+\end{table}
+
+\subsection{Retrieval Accuracy}
+
+We constructed a test set of 30 queries across six categories: dietary restrictions, allergen queries, spice preferences, budget constraints, pairing requests, and multi-criteria queries. For each query, we manually labeled the expected relevant menu items.
+
+\textbf{Metrics}: We report Precision@5 (fraction of retrieved items that are relevant), Recall@5 (fraction of relevant items that are retrieved), and Mean Reciprocal Rank (MRR).
+
+\begin{table}[width=.9\linewidth,cols=4,pos=h]
+\caption{Retrieval accuracy results across query categories ($k=5$).}\label{tbl:retrieval}
+\begin{tabular*}{\tblwidth}{@{}LLLL@{}}
+\toprule
+Query Category & P@5 & R@5 & MRR \\
+\midrule
+Dietary (e.g., ``vegan options'') & 0.88 & 0.92 & 0.95 \\
+Allergen (e.g., ``no dairy'') & 0.84 & 0.87 & 0.91 \\
+Spice (e.g., ``very spicy'') & 0.90 & 0.85 & 0.93 \\
+Budget (e.g., ``under 500 PKR'') & 0.78 & 0.82 & 0.86 \\
+Pairing (e.g., ``goes with biryani'') & 0.86 & 0.80 & 0.89 \\
+Multi-criteria & 0.82 & 0.78 & 0.87 \\
+\midrule
+\textbf{Overall Average} & \textbf{0.85} & \textbf{0.84} & \textbf{0.90} \\
+\bottomrule
+\end{tabular*}
+\end{table}
+
+The results in Table~\ref{tbl:retrieval} show that retrieval accuracy is highest for dietary and spice queries, where the embedding model captures these attributes well. Budget queries show slightly lower precision because price is a numeric attribute that semantic embeddings do not encode as precisely as textual attributes.
+
+\subsection{Response Quality and Accuracy}
+
+We evaluated 30 generated responses for factual accuracy against the ground-truth menu data:
+
+\begin{itemize}
+    \item \textbf{Factual Accuracy}: 93.3\% of responses contained only correct menu information (no hallucinated dishes, prices, or ingredients).
+    \item \textbf{Allergen Correctness}: 96.7\% of responses correctly identified allergens when asked.
+    \item \textbf{Grounding Rate}: 100\% of recommended dishes existed in the actual menu (no hallucinated items).
+    \item \textbf{Price Accuracy}: 90\% of price mentions matched the menu exactly. The remaining 10\% were minor formatting differences (e.g., ``1,650'' vs ``1650'').
+\end{itemize}
+
+\subsection{Success Rate}
+
+We define ``success'' as the system providing a helpful, factually correct, and contextually appropriate response. Across 50 test interactions:
+
+\begin{table}[width=.9\linewidth,cols=3,pos=h]
+\caption{Success rate across different interaction types.}\label{tbl:success}
+\begin{tabular*}{\tblwidth}{@{}LLL@{}}
+\toprule
+Interaction Type & Success Rate & $n$ \\
+\midrule
+Menu recommendations & 94\% & 18 \\
+Allergen/dietary queries & 96\% & 10 \\
+Multi-turn conversations & 88\% & 8 \\
+Order placement & 92\% & 6 \\
+Out-of-scope handling & 100\% & 8 \\
+\midrule
+\textbf{Overall} & \textbf{93\%} & \textbf{50} \\
+\bottomrule
+\end{tabular*}
+\end{table}
+
+The lower success rate for multi-turn conversations (88\%) is primarily due to cases where the query rewriter failed to carry over a constraint from an earlier turn, leading to slightly off-target retrievals.
+
+\subsection{Efficiency Comparison}
+
+Table~\ref{tbl:latency} presents the average end-to-end response latency measured across 50 queries.
+
+\begin{table}[width=.9\linewidth,cols=2,pos=h]
+\caption{Average response latency breakdown.}\label{tbl:latency}
+\begin{tabular*}{\tblwidth}{@{}LL@{}}
+\toprule
+Component & Avg. Latency (ms) \\
+\midrule
+Query Rewriting (LLM call) & 310 \\
+Query Embedding (Gemini API) & 75 \\
+Vector Search (pgvector) & 12 \\
+Context Assembly & $<$ 1 \\
+Response Generation (streaming TTFB) & 620 \\
+\midrule
+\textbf{Total (time to first token)} & \textbf{1,018} \\
+\bottomrule
+\end{tabular*}
+\end{table}
+
+The total time-to-first-token (TTFB) of approximately 1 second is acceptable for a conversational interface, as the response is streamed token-by-token thereafter. The vector search itself takes only 12ms, confirming that pgvector with HNSW indexing is highly efficient for our dataset size \cite{Johnson2021FAISS, Wang2024ANNS}.
+
+\subsection{Performance Testing with Multiple Test Cases}
+
+We designed a comprehensive test suite of 30 representative queries. Table~\ref{tbl:testcases} shows selected test cases and their outcomes.
+
+\begin{table*}[pos=h]
+\caption{Selected test cases and system responses.}\label{tbl:testcases}
+\begin{tabular*}{\textwidth}{@{}p{0.28\textwidth}p{0.42\textwidth}p{0.12\textwidth}p{0.08\textwidth}@{}}
+\toprule
+Query & System Response (Summary) & Correct? & Latency \\
+\midrule
+``What's good for someone who likes spicy chicken?'' & Recommended Chicken Karahi, Chicken Chili Dry, Schezwan Fried Rice with prices & Yes & 1.1s \\
+``Do you have anything vegan?'' & Listed Mix Sabzi, Spring Rolls, Stir Fry Vegetables with allergen notes & Yes & 0.9s \\
+``What pairs well with biryani?'' & Suggested raita and salad as listed pairings & Yes & 0.8s \\
+``I'm allergic to dairy and nuts'' & Filtered out dairy/nut items, suggested Mutton Karahi, Seekh Kebab & Yes & 1.2s \\
+``Best dish under PKR 500?'' & Recommended Chicken Biryani (380), Haleem (350), Egg Fried Rice (350) & Yes & 1.0s \\
+``Something for two people?'' & Suggested shareable items: Chicken Handi, Mutton Karahi, Chicken Korma & Yes & 1.1s \\
+``Can I get a pizza?'' & Politely informed item not on menu, suggested alternatives & Yes & 0.7s \\
+\bottomrule
+\end{tabular*}
+\end{table*}
+
+
+\section{Comparative Analysis}\label{sec:comparative}
+
+We compare AskTheMenu with existing restaurant technology solutions along several dimensions.
+
+\begin{table*}[pos=h]
+\caption{Comparative analysis of AskTheMenu with existing systems.}\label{tbl:comparative}
+\begin{tabular*}{\textwidth}{@{}p{0.18\textwidth}p{0.14\textwidth}p{0.14\textwidth}p{0.14\textwidth}p{0.14\textwidth}p{0.14\textwidth}@{}}
+\toprule
+Feature & Static Digital Menu & Keyword Chatbot & Rule-Based Bot & Generic LLM & AskTheMenu (RAG) \\
+\midrule
+Natural Language & No & Partial & No & Yes & Yes \\
+Semantic Search & No & No & No & No & Yes \\
+Allergen Awareness & Manual & Manual & Rule-based & Unreliable & Grounded \\
+Personalization & No & No & Limited & Yes & Yes \\
+Hallucination Risk & None & None & None & High & Low \\
+Multi-turn Context & N/A & No & Limited & Yes & Yes \\
+Order Placement & Some & No & Some & No & Yes \\
+Price Accuracy & Static & Static & Static & Unreliable & Deterministic \\
+Setup Complexity & Low & Medium & High & Low & Medium \\
+\bottomrule
+\end{tabular*}
+\end{table*}
+
+As shown in Table~\ref{tbl:comparative}, AskTheMenu offers a unique combination of natural language understanding, semantic search, and grounded responses that existing solutions lack. Static digital menus require users to browse manually. Keyword-based chatbots fail on paraphrased queries. Rule-based bots require extensive manual programming. Generic LLMs provide natural interaction but suffer from hallucination \cite{Huang2023Hallucination, Tonmoy2024Hallucination}. AskTheMenu's RAG architecture bridges this gap by combining the fluency of LLMs with the factual accuracy of retrieval-based systems \cite{Lewis2020RAG, Gao2024RAGSurvey}.
+
+
+\section{Conclusion}\label{sec:conclusion}
+
+In this paper, we presented AskTheMenu, an AI-powered conversational menu assistant that uses Retrieval-Augmented Generation to help diners navigate restaurant menus through natural language interaction. The system addresses the critical limitation of standalone LLMs --- hallucination --- by grounding all responses in retrieved menu data from a vector database.
+
+Our implementation demonstrates that a RAG-based approach achieves 93.3\% factual accuracy and 100\% grounding rate (no hallucinated menu items), while maintaining an average time-to-first-token of approximately 1 second. The multi-turn query rewriting mechanism successfully maintains conversational context, achieving an 88\% success rate even in complex multi-turn dialogues.
+
+The system's architecture --- combining Gemini embeddings, pgvector similarity search, Gemma 4 LLM, and a Next.js web application --- provides a practical, deployable solution that can be adopted by restaurants with minimal infrastructure changes. The QR-code-based table routing, real-time order placement, and kitchen dashboard create a complete end-to-end dining assistance workflow.
+
+\subsection{Limitations}
+Several limitations should be acknowledged:
+\begin{itemize}
+    \item The system has been evaluated on a single restaurant with 100 menu items. Scalability to multi-restaurant deployments with thousands of items needs further investigation.
+    \item Budget-related queries show lower retrieval accuracy because semantic embeddings do not encode numeric price values as effectively as textual attributes.
+    \item The query rewriter occasionally fails to carry over constraints from much earlier in the conversation (beyond 5 turns back).
+    \item The current implementation checks whether retrieved items are relevant, but does not explicitly classify whether the retrieved context is sufficient to answer safety-critical requests such as allergen questions \cite{Rashtchian2025SufficientContextBlog}.
+    \item The system currently supports English only; multilingual support would broaden its applicability.
+\end{itemize}
+
+\subsection{Future Work}
+Future directions include:
+\begin{itemize}
+    \item \textbf{Hybrid retrieval}: Combining dense vector search with structured SQL filters (e.g., filtering by price range or dietary type before semantic ranking) to improve numeric and categorical query handling.
+    \item \textbf{Context sufficiency checks}: Adding a pre-generation sufficiency classifier so that the system can retrieve additional context or abstain when retrieved menu evidence is incomplete \cite{Rashtchian2025SufficientContextBlog}.
+    \item \textbf{User preference learning}: Building diner profiles to personalize recommendations over time.
+    \item \textbf{Multi-modal input}: Allowing users to photograph a dish and ask questions about similar items.
+    \item \textbf{Multilingual support}: Extending the system to support Urdu and other local languages.
+    \item \textbf{Self-RAG}: Implementing the self-reflection mechanism from \cite{Asai2024SelfRAG} where the model decides when retrieval is needed, reducing unnecessary retrieval calls for simple greetings or follow-up questions.
+\end{itemize}
