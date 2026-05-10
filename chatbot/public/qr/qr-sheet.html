@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AskTheMenu — QR Codes</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background: #f8f9fa;
+      padding: 2rem;
+      color: #1a1a2e;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+      font-size: 1.8rem;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      text-align: center;
+      color: #6b7280;
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .card img {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 1rem;
+      display: block;
+    }
+    .card h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.25rem;
+    }
+    .card .url {
+      font-size: 0.7rem;
+      color: #9ca3af;
+      word-break: break-all;
+      margin-bottom: 0.5rem;
+    }
+    .card .instruction {
+      font-size: 0.85rem;
+      color: #6366f1;
+      font-weight: 500;
+    }
+    .print-btn {
+      display: block;
+      margin: 0 auto 2rem;
+      padding: 0.6rem 1.5rem;
+      background: #6366f1;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .print-btn:hover { background: #4f46e5; }
+    @media print {
+      .print-btn { display: none; }
+      body { background: white; padding: 0.5rem; }
+      .grid { gap: 1rem; }
+      .card { border: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body>
+  <h1>🍽 AskTheMenu</h1>
+  <p class="subtitle">Scan a QR code to view the menu and place your order</p>
+  <button class="print-btn" onclick="window.print()">🖨 Print QR Codes</button>
+  <div class="grid">
+    
+    <div class="card">
+      <img src="./table-1.png" alt="QR code for Table 1" />
+      <h2>Table 1</h2>
+      <p class="url">https://askthemenu.vercel.app/chat/table-1</p>
+      <p class="instruction">Scan to view menu &amp; order</p>
+    </div>
+
+    <div class="card">
+      <img src="./table-2.png" alt="QR code for Table 2" />
+      <h2>Table 2</h2>
+      <p class="url">https://askthemenu.vercel.app/chat/table-2</p>
+      <p class="instruction">Scan to view menu &amp; order</p>
+    </div>
+
+    <div class="card">
+      <img src="./table-3.png" alt="QR code for Table 3" />
+      <h2>Table 3</h2>
+      <p class="url">https://askthemenu.vercel.app/chat/table-3</p>
+      <p class="instruction">Scan to view menu &amp; order</p>
+    </div>
+
+    <div class="card">
+      <img src="./table-4.png" alt="QR code for Table 4" />
+      <h2>Table 4</h2>
+      <p class="url">https://askthemenu.vercel.app/chat/table-4</p>
+      <p class="instruction">Scan to view menu &amp; order</p>
+    </div>
+
+    <div class="card">
+      <img src="./table-5.png" alt="QR code for Table 5" />
+      <h2>Table 5</h2>
+      <p class="url">https://askthemenu.vercel.app/chat/table-5</p>
+      <p class="instruction">Scan to view menu &amp; order</p>
+    </div>
+  </div>
+</body>
+</html>

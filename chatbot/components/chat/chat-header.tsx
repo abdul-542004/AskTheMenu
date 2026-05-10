@@ -32,13 +32,17 @@ function PureChatHeader({
 
   return (
     <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-border/50 border-b bg-background/95 px-4 backdrop-blur md:px-6">
-      <div className="flex min-w-0 flex-col">
-        <span className="truncate font-semibold text-[15px] text-foreground">
-          AskTheMenu
-        </span>
-        <span className="truncate text-muted-foreground text-xs">
-          {tableLabel || "Restaurant table"}
-        </span>
+      <div className="flex min-w-0 items-center gap-3">
+        <div className="flex flex-col">
+          <span className="truncate font-semibold text-[15px] text-foreground">
+            AskTheMenu
+          </span>
+        </div>
+        {tableSlug && (
+          <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 font-medium text-primary text-xs ring-1 ring-primary/20">
+            🍽 {tableLabel}
+          </span>
+        )}
       </div>
       <div className="flex items-center gap-2">
         {!isReadonly && tableSlug && (

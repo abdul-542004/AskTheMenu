@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { getMenuItemsFromDatabase } from "@/lib/db/queries";
 import { hasDatabaseUrl } from "@/lib/db/url";
@@ -128,7 +129,7 @@ function groupBySection(items: readonly PageMenuItem[]) {
   return grouped;
 }
 
-export default async function MenuPage() {
+async function MenuPageContent() {
   const { items, source } = await getPageMenuItems();
   const grouped = groupBySection(items);
 
@@ -227,5 +228,19 @@ export default async function MenuPage() {
         })}
       </div>
     </main>
+  );
+}
+
+export default function MenuPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col items-center justify-center px-4 py-6">
+          <p className="text-muted-foreground text-sm">Loading menu…</p>
+        </main>
+      }
+    >
+      <MenuPageContent />
+    </Suspense>
   );
 }
