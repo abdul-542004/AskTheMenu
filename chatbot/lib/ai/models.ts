@@ -27,10 +27,21 @@ export const chatModels: ChatModel[] = [
     provider: "groq",
     description: "Groq-hosted Llama 3.3 70B model",
   },
+  {
+    id: "openai/gpt-oss-120b",
+    name: "GPT-OSS 120B",
+    provider: "openai",
+    description: "OpenAI-hosted GPT-OSS 120B model",
+  },
 ];
 
 export const modelCapabilities: Record<string, ModelCapabilities> = {
   "llama-3.3-70b-versatile": {
+    tools: true,
+    vision: false,
+    reasoning: false,
+  },
+  "openai/gpt-oss-120b": {
     tools: true,
     vision: false,
     reasoning: false,
