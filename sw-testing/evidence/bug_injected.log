@@ -1,0 +1,53 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-8.3.3, pluggy-1.7.0 -- C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\venv\Scripts\python.exe
+metadata: {'Python': '3.12.10', 'Platform': 'Windows-11-10.0.26300-SP0', 'Packages': {'pytest': '8.3.3', 'pluggy': '1.7.0'}, 'Plugins': {'base-url': '2.1.0', 'html': '4.1.1', 'metadata': '3.1.1', 'playwright': '0.6.2'}, 'Base URL': ''}
+rootdir: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing
+configfile: pytest.ini
+plugins: base-url-2.1.0, html-4.1.1, metadata-3.1.1, playwright-0.6.2
+collecting ... collected 3 items
+
+tests/test_menu_page.py::test_menu_page_loads_with_items[chromium] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\bug_injected\FAIL_test_menu_page_loads_with_items_chromium_.png
+FAILED [ 33%]
+tests/test_menu_page.py::test_menu_page_loads_with_items[firefox] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\bug_injected\FAIL_test_menu_page_loads_with_items_firefox_.png
+FAILED [ 66%]
+tests/test_menu_page.py::test_menu_page_loads_with_items[webkit] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\bug_injected\FAIL_test_menu_page_loads_with_items_webkit_.png
+FAILED  [100%]
+
+================================== FAILURES ===================================
+__________________ test_menu_page_loads_with_items[chromium] __________________
+tests\test_menu_page.py:14: in test_menu_page_loads_with_items
+    expect(page.get_by_role("heading", level=1)).to_have_text("Restaurant Menu")
+E   AssertionError: Locator expected to have text 'Restaurant Menu'
+E   Actual value: Unavailable menu 
+E   Call log:
+E     - LocatorAssertions.to_have_text with timeout 20000ms
+E     -   - waiting for get_by_role("heading", level=1)
+E     -     23 × locator resolved to <h1 class="font-semibold text-2xl tracking-tight">Unavailable menu</h1>
+E     -        - unexpected value "Unavailable menu"
+__________________ test_menu_page_loads_with_items[firefox] ___________________
+tests\test_menu_page.py:14: in test_menu_page_loads_with_items
+    expect(page.get_by_role("heading", level=1)).to_have_text("Restaurant Menu")
+E   AssertionError: Locator expected to have text 'Restaurant Menu'
+E   Actual value: Unavailable menu 
+E   Call log:
+E     - LocatorAssertions.to_have_text with timeout 20000ms
+E     -   - waiting for get_by_role("heading", level=1)
+E     -     23 × locator resolved to <h1 class="font-semibold text-2xl tracking-tight">Unavailable menu</h1>
+E     -        - unexpected value "Unavailable menu"
+___________________ test_menu_page_loads_with_items[webkit] ___________________
+tests\test_menu_page.py:14: in test_menu_page_loads_with_items
+    expect(page.get_by_role("heading", level=1)).to_have_text("Restaurant Menu")
+E   AssertionError: Locator expected to have text 'Restaurant Menu'
+E   Actual value: Unavailable menu 
+E   Call log:
+E     - LocatorAssertions.to_have_text with timeout 20000ms
+E     -   - waiting for get_by_role("heading", level=1)
+E     -     23 × locator resolved to <h1 class="font-semibold text-2xl tracking-tight">Unavailable menu</h1>
+E     -        - unexpected value "Unavailable menu"
+- generated xml file: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\reports\bug_injected.xml -
+- Generated html report: file:///C:/MyWorks/AskTheMenu-main/AskTheMenu-main/sw-testing/reports/bug_injected.html -
+=========================== short test summary info ===========================
+FAILED tests/test_menu_page.py::test_menu_page_loads_with_items[chromium] - A...
+FAILED tests/test_menu_page.py::test_menu_page_loads_with_items[firefox] - As...
+FAILED tests/test_menu_page.py::test_menu_page_loads_with_items[webkit] - Ass...
+======================== 3 failed in 72.21s (0:01:12) =========================

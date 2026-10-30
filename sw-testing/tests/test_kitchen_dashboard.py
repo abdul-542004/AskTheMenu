@@ -1,105 +1,99 @@
-"""
-Feature 3 – Kitchen Dashboard (E2E Tests)
-==========================================
-Tests the kitchen order management dashboard at /kitchen: loading,
-order card display, and handling errors.
-
-Tests:
-  1. [Positive] Kitchen dashboard page loads with correct title
-  2. [Positive] Kitchen dashboard displays order cards or empty state
-  3. [Negative] Kitchen dashboard handles missing database gracefully
-"""
+"""Feature 3: actual order cards/status transitions and polling error recovery."""
+import re
 
 import pytest
-from playwright.sync_api import Page, expect
+from playwright.sync_api import expect
+
+from support import kitchen_order
+
+# These tests use the browser UI; api_context is also used to confirm saved changes.
+pytestmark = pytest.mark.e2e
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Test 1 – Positive: Kitchen dashboard loads
-# ─────────────────────────────────────────────────────────────────────────────
-@pytest.mark.e2e
 @pytest.mark.positive
-def test_kitchen_dashboard_loads(page: Page):
-    """
-    GIVEN  a staff member navigates to /kitchen
-    WHEN   the page finishes loading
-    THEN   the page title contains "Kitchen" and the main content is visible
-    """
+def test_kitchen_dashboard_loads(page):
+    # TC-07 (positive): staff should see the dashboard and usable order filters.
     page.goto("/kitchen")
-
-    # The page should contain "Kitchen" somewhere in its content
-    page.wait_for_load_state("networkidle")
-
-    # Check page has loaded (either kitchen dashboard or a status message)
-    body_text = page.locator("body").text_content()
-    assert body_text is not None, "Page body should have content"
-
-    # The page title metadata should reference Kitchen
-    title = page.title()
-    assert "Kitchen" in title or "AskTheMenu" in title, \
-        f"Page title should reference Kitchen or AskTheMenu, got: {title}"
+    expect(page.get_by_role("heading", name="Kitchen Dashboard", exact=True)).to_be_visible()
+    # Filter labels include order counts, so match the start of each button's name.
+    for name in ("All Orders", "Active", "Completed"):
+        expect(page.get_by_role("button", name=re.compile(rf"^{name}\b"))).to_be_enabled()
+    expect(page.get_by_text("Live orders · auto-refreshes every 5s", exact=True)).to_be_visible()
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Test 2 – Positive: Dashboard shows orders or empty state
-# ─────────────────────────────────────────────────────────────────────────────
-@pytest.mark.e2e
 @pytest.mark.positive
-def test_kitchen_shows_orders_or_empty_state(page: Page):
-    """
-    GIVEN  a staff member is on the /kitchen page
-    WHEN   the dashboard content has loaded
-    THEN   either order cards are displayed OR an informational message is shown
-           (no raw error or blank page)
-    """
+def test_kitchen_renders_order_and_updates_status(page, api_context, order_factory):
+    # TC-08 (positive): display an order and update it using the kitchen buttons.
+    # The fixture creates our own order and removes it after the test.
+    order = order_factory(note="Kitchen UI verification")
     page.goto("/kitchen")
-    page.wait_for_load_state("networkidle")
+    # Select our exact order ID rather than an unrelated order already on the page.
+    card = page.locator(f"[data-order-id='{order['orderId']}']")
+    expect(card).to_be_visible()
+    # Verify the table, customer note, dishes, naan quantity and total price.
+    expect(card).to_contain_text("Table 1")
+    expect(card).to_contain_text(order["customerNote"])
+    expect(card).to_contain_text("Chicken Karahi")
+    expect(card).to_contain_text("Garlic Naan")
+    expect(card).to_contain_text("2×")
+    expect(card).to_contain_text(f"PKR {order['totalPkr']:,}")
+    # Follow the normal staff workflow: accept, prepare, then mark the order served.
+    for button, status in (("Accept", "accepted"), ("Start Preparing", "preparing"), ("Mark Served", "served")):
+        # Capture the PATCH request sent by the button click.
+        with page.expect_response(lambda r: r.request.method == "PATCH" and order["orderId"] in r.url) as changed:
+            card.get_by_role("button", name=button, exact=True).click()
+        assert changed.value.status == 200, changed.value.text()
+        # Read the order through the API to confirm the change was saved on the server.
+        assert kitchen_order(api_context, order["orderId"])["status"] == status
+        if status != "served":
+            expect(card.get_by_test_id("order-status")).to_have_text(status.title())
+    # A served order should leave Active and appear under Completed without action buttons.
+    expect(card).to_have_count(0)
+    page.get_by_role("button", name=re.compile(r"^Completed\b")).click()
+    expect(card.get_by_test_id("order-status")).to_have_text("Served")
+    expect(card.get_by_role("button")).to_have_count(0)
+    # Refresh to confirm the served status is saved, rather than only changed on screen.
+    page.reload()
+    page.get_by_role("button", name=re.compile(r"^Completed\b")).click()
+    expect(card.get_by_test_id("order-status")).to_have_text("Served")
 
-    body = page.locator("body")
-    body_text = body.text_content() or ""
 
-    # The page should have SOME meaningful content — not blank
-    assert len(body_text.strip()) > 0, "Kitchen page should not be blank"
-
-    # It should show either orders or a configuration/empty message
-    has_orders = page.locator("article, [class*='card'], [class*='order']").count() > 0
-    has_status_msg = any(
-        kw in body_text.lower()
-        for kw in ["no orders", "no pending", "database", "loading", "configured", "kitchen"]
-    )
-    assert has_orders or has_status_msg, \
-        "Kitchen should show order cards or an informational status message"
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-# Test 3 – Negative: Dashboard handles API error gracefully
-# ─────────────────────────────────────────────────────────────────────────────
-@pytest.mark.e2e
 @pytest.mark.negative
-def test_kitchen_handles_api_failure_gracefully(page: Page):
-    """
-    GIVEN  the kitchen API endpoint returns a 500 error
-    WHEN   the /kitchen page tries to fetch orders via client-side polling
-    THEN   the page does NOT crash and displays a user-friendly state
-    """
-    # Intercept the client-side SWR polling call and return 500
-    page.route("**/api/orders/kitchen", lambda route: route.fulfill(
-        status=500,
-        content_type="application/json",
-        body='{"error": "Simulated server error"}'
-    ))
+def test_kitchen_handles_api_failure_gracefully(page, api_context, order_factory):
+    # TC-09 (negative): failed requests should show an error and keep the last saved order.
+    order = order_factory(note="Polling failure preservation")
+    intercepted = []
 
+    def fail(route):
+        # Record the refresh request, then replace its response with a simulated HTTP 500.
+        intercepted.append(route.request.url)
+        route.fulfill(status=500, json={"error": "Simulated kitchen outage"})
+
+    # Register interception before opening the page so its first refresh is covered.
+    page.route("**/api/orders/kitchen", fail)
     page.goto("/kitchen")
-    page.wait_for_load_state("networkidle")
-
-    # Give polling a moment to fire
-    page.wait_for_timeout(3000)
-
-    # Page should NOT show an unhandled exception or be blank
-    body_text = page.locator("body").text_content() or ""
-    assert len(body_text.strip()) > 0, "Page should not be blank on API failure"
-
-    # Verify no raw stack trace is visible
-    assert "Traceback" not in body_text, "No raw stack trace should be visible"
-    assert "Unhandled Runtime Error" not in body_text or True, \
-        "Page should handle the error gracefully"
+    banner = page.get_by_test_id("kitchen-polling-error")
+    expect(banner).to_be_visible()
+    expect(banner).to_contain_text("Showing the last available orders")
+    # This proves the error was actually simulated, rather than checking an unused mock.
+    assert intercepted, "The polling failure route must be exercised"
+    card = page.locator(f"[data-order-id='{order['orderId']}']")
+    expect(card).to_be_visible()
+    # A rejected update must preserve the order's confirmed status.
+    # Also simulate a failed status change when the staff member clicks Accept.
+    page.route(f"**/api/orders/{order['orderId']}/status", lambda r: r.fulfill(status=500, json={"error": "Rejected update"}))
+    with page.expect_response(lambda r: r.request.method == "PATCH" and order["orderId"] in r.url) as rejected:
+        card.get_by_role("button", name="Accept", exact=True).click()
+    assert rejected.value.status == 500
+    # The error should be visible, and both the UI and server should still say Pending.
+    expect(page.get_by_test_id("kitchen-status-error")).to_have_text("Could not update the order. Please try again.")
+    expect(card.get_by_test_id("order-status")).to_have_text("Pending")
+    assert kitchen_order(api_context, order["orderId"])["status"] == "pending"
+    # Remove the refresh mock so Retry reaches the real API again.
+    page.unroute("**/api/orders/kitchen", fail)
+    with page.expect_response("**/api/orders/kitchen") as recovered:
+        banner.get_by_role("button", name="Retry", exact=True).click()
+    # Successful recovery should remove the refresh error and keep the order visible.
+    assert recovered.value.status == 200
+    expect(banner).to_have_count(0)
+    expect(card).to_be_visible()

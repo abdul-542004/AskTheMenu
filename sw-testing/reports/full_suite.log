@@ -1,0 +1,102 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-8.3.3, pluggy-1.7.0 -- C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\venv\Scripts\python.exe
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.10', 'Platform': 'Windows-11-10.0.26300-SP0', 'Packages': {'pytest': '8.3.3', 'pluggy': '1.7.0'}, 'Plugins': {'base-url': '2.1.0', 'html': '4.1.1', 'metadata': '3.1.1', 'playwright': '0.6.2'}, 'Base URL': ''}
+rootdir: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing
+configfile: pytest.ini
+testpaths: tests
+plugins: base-url-2.1.0, html-4.1.1, metadata-3.1.1, playwright-0.6.2
+collecting ... collected 46 items
+
+tests/test_api_crud.py::test_create_order_with_valid_data PASSED         [  2%]
+tests/test_api_crud.py::test_read_kitchen_orders PASSED                  [  4%]
+tests/test_api_crud.py::test_update_order_status PASSED                  [  6%]
+tests/test_api_crud.py::test_delete_owned_chat PASSED                    [  8%]
+tests/test_chat_interface.py::test_chat_page_loads_with_input_and_send_button[chromium] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_chat_page_loads_with_input_and_send_button_chromium_.png
+PASSED [ 10%]
+tests/test_chat_interface.py::test_send_message_and_receive_ai_response[chromium] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_send_message_and_receive_ai_response_chromium_.png
+PASSED [ 13%]
+tests/test_chat_interface.py::test_empty_message_is_not_sent[chromium] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_empty_message_is_not_sent_chromium_.png
+PASSED [ 15%]
+tests/test_kitchen_dashboard.py::test_kitchen_dashboard_loads[chromium] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_kitchen_dashboard_loads_chromium_.png
+PASSED [ 17%]
+tests/test_kitchen_dashboard.py::test_kitchen_renders_order_and_updates_status[chromium] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_kitchen_renders_order_and_updates_status_chromium_.png
+PASSED [ 19%]
+tests/test_kitchen_dashboard.py::test_kitchen_handles_api_failure_gracefully[chromium] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_kitchen_handles_api_failure_gracefully_chromium_.png
+PASSED [ 21%]
+tests/test_menu_page.py::test_menu_page_loads_with_items[chromium] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_menu_page_loads_with_items_chromium_.png
+PASSED [ 23%]
+tests/test_menu_page.py::test_category_anchor_scrolls_to_section[chromium] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_category_anchor_scrolls_to_section_chromium_.png
+PASSED [ 26%]
+tests/test_menu_page.py::test_nonexistent_page_returns_404[chromium] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_nonexistent_page_returns_404_chromium_.png
+PASSED [ 28%]
+tests/test_network_mocking.py::test_mock_empty_api_response[chromium] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_mock_empty_api_response_chromium_.png
+PASSED [ 30%]
+tests/test_network_mocking.py::test_mock_server_error_response[chromium] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_mock_server_error_response_chromium_.png
+PASSED [ 32%]
+tests/test_qr_table_routing.py::test_qr_page_loads_with_table_codes[chromium] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_qr_page_loads_with_table_codes_chromium_.png
+PASSED [ 34%]
+tests/test_qr_table_routing.py::test_table_link_navigates_to_chat[chromium] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_table_link_navigates_to_chat_chromium_.png
+PASSED [ 36%]
+tests/test_qr_table_routing.py::test_invalid_table_slug_handles_gracefully[chromium] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_invalid_table_slug_handles_gracefully_chromium_.png
+PASSED [ 39%]
+tests/test_chat_interface.py::test_chat_page_loads_with_input_and_send_button[firefox] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_chat_page_loads_with_input_and_send_button_firefox_.png
+PASSED [ 41%]
+tests/test_chat_interface.py::test_send_message_and_receive_ai_response[firefox] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_send_message_and_receive_ai_response_firefox_.png
+PASSED [ 43%]
+tests/test_chat_interface.py::test_empty_message_is_not_sent[firefox] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_empty_message_is_not_sent_firefox_.png
+PASSED [ 45%]
+tests/test_kitchen_dashboard.py::test_kitchen_dashboard_loads[firefox] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_kitchen_dashboard_loads_firefox_.png
+PASSED [ 47%]
+tests/test_kitchen_dashboard.py::test_kitchen_renders_order_and_updates_status[firefox] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_kitchen_renders_order_and_updates_status_firefox_.png
+PASSED [ 50%]
+tests/test_kitchen_dashboard.py::test_kitchen_handles_api_failure_gracefully[firefox] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_kitchen_handles_api_failure_gracefully_firefox_.png
+PASSED [ 52%]
+tests/test_menu_page.py::test_menu_page_loads_with_items[firefox] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_menu_page_loads_with_items_firefox_.png
+PASSED [ 54%]
+tests/test_menu_page.py::test_category_anchor_scrolls_to_section[firefox] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_category_anchor_scrolls_to_section_firefox_.png
+PASSED [ 56%]
+tests/test_menu_page.py::test_nonexistent_page_returns_404[firefox] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_nonexistent_page_returns_404_firefox_.png
+PASSED [ 58%]
+tests/test_network_mocking.py::test_mock_empty_api_response[firefox] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_mock_empty_api_response_firefox_.png
+PASSED [ 60%]
+tests/test_network_mocking.py::test_mock_server_error_response[firefox] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_mock_server_error_response_firefox_.png
+PASSED [ 63%]
+tests/test_qr_table_routing.py::test_qr_page_loads_with_table_codes[firefox] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_qr_page_loads_with_table_codes_firefox_.png
+PASSED [ 65%]
+tests/test_qr_table_routing.py::test_table_link_navigates_to_chat[firefox] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_table_link_navigates_to_chat_firefox_.png
+PASSED [ 67%]
+tests/test_qr_table_routing.py::test_invalid_table_slug_handles_gracefully[firefox] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_invalid_table_slug_handles_gracefully_firefox_.png
+PASSED [ 69%]
+tests/test_chat_interface.py::test_chat_page_loads_with_input_and_send_button[webkit] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_chat_page_loads_with_input_and_send_button_webkit_.png
+PASSED [ 71%]
+tests/test_chat_interface.py::test_send_message_and_receive_ai_response[webkit] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_send_message_and_receive_ai_response_webkit_.png
+PASSED [ 73%]
+tests/test_chat_interface.py::test_empty_message_is_not_sent[webkit] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_empty_message_is_not_sent_webkit_.png
+PASSED [ 76%]
+tests/test_kitchen_dashboard.py::test_kitchen_dashboard_loads[webkit] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_kitchen_dashboard_loads_webkit_.png
+PASSED [ 78%]
+tests/test_kitchen_dashboard.py::test_kitchen_renders_order_and_updates_status[webkit] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_kitchen_renders_order_and_updates_status_webkit_.png
+PASSED [ 80%]
+tests/test_kitchen_dashboard.py::test_kitchen_handles_api_failure_gracefully[webkit] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_kitchen_handles_api_failure_gracefully_webkit_.png
+PASSED [ 82%]
+tests/test_menu_page.py::test_menu_page_loads_with_items[webkit] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_menu_page_loads_with_items_webkit_.png
+PASSED  [ 84%]
+tests/test_menu_page.py::test_category_anchor_scrolls_to_section[webkit] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_category_anchor_scrolls_to_section_webkit_.png
+PASSED [ 86%]
+tests/test_menu_page.py::test_nonexistent_page_returns_404[webkit] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_nonexistent_page_returns_404_webkit_.png
+PASSED [ 89%]
+tests/test_network_mocking.py::test_mock_empty_api_response[webkit] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_mock_empty_api_response_webkit_.png
+PASSED [ 91%]
+tests/test_network_mocking.py::test_mock_server_error_response[webkit] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_mock_server_error_response_webkit_.png
+PASSED [ 93%]
+tests/test_qr_table_routing.py::test_qr_page_loads_with_table_codes[webkit] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_qr_page_loads_with_table_codes_webkit_.png
+PASSED [ 95%]
+tests/test_qr_table_routing.py::test_table_link_navigates_to_chat[webkit] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_table_link_navigates_to_chat_webkit_.png
+PASSED [ 97%]
+tests/test_qr_table_routing.py::test_invalid_table_slug_handles_gracefully[webkit] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\PASS_test_invalid_table_slug_handles_gracefully_webkit_.png
+PASSED [100%]
+
+- generated xml file: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\reports\full_suite.xml -
+- Generated html report: file:///C:/MyWorks/AskTheMenu-main/AskTheMenu-main/sw-testing/reports/test_report.html -
+======================= 46 passed in 271.74s (0:04:31) ========================

@@ -1,104 +1,82 @@
-"""
-Feature 1 – Chat Interface (E2E Tests)
-=======================================
-Tests the core chat page at /chat/table-1: loading, sending messages,
-and handling empty input.
-
-Tests:
-  1. [Positive] Chat page loads with input field and send button
-  2. [Positive] User can type and send a message, receives AI response
-  3. [Negative] Submitting an empty message does NOT send a request
-"""
+"""Feature 1: real chat rendering, live response/persistence, blank input rejection."""
+import re
 
 import pytest
-import re
-from playwright.sync_api import Page, expect
+from playwright.sync_api import expect
+
+# This marker groups all tests in this file under: pytest -m e2e.
+# The page fixture gives each test a fresh browser tab. expect() waits for the UI.
+pytestmark = pytest.mark.e2e
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Test 1 – Positive: Chat page loads correctly
-# ─────────────────────────────────────────────────────────────────────────────
-@pytest.mark.e2e
 @pytest.mark.positive
-def test_chat_page_loads_with_input_and_send_button(page: Page):
-    """
-    GIVEN  a diner navigates to /chat/table-1
-    WHEN   the page finishes loading
-    THEN   the multimodal input field and send button are visible
-    """
+def test_chat_page_loads_with_input_and_send_button(page):
+    # TC-01 (positive): a diner should see the main chat controls for Table 1.
     page.goto("/chat/table-1")
+    # The input should accept text, but Send should stay disabled while it is empty.
+    expect(page.get_by_test_id("multimodal-input")).to_be_editable()
+    expect(page.get_by_test_id("send-button")).to_be_visible()
+    expect(page.get_by_test_id("send-button")).to_be_disabled()
+    # Open the model selector and check both available model choices.
+    selector = page.get_by_test_id("model-selector")
+    expect(selector).to_contain_text("GPT-OSS 120B")
+    selector.click()
+    expect(page.get_by_role("option", name=re.compile(r"GPT-OSS 120B"))).to_be_visible()
+    expect(page.get_by_role("option", name=re.compile(r"GPT-OSS 20B"))).to_be_visible()
+    page.keyboard.press("Escape")  # Close the dropdown after checking it.
 
-    input_field = page.locator("[data-testid='multimodal-input']")
-    send_button = page.locator("[data-testid='send-button']")
 
-    expect(input_field).to_be_visible(timeout=15_000)
-    expect(send_button).to_be_visible(timeout=15_000)
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-# Test 2 – Positive: Sending a message and receiving a response
-# ─────────────────────────────────────────────────────────────────────────────
-@pytest.mark.e2e
 @pytest.mark.positive
-def test_send_message_and_receive_ai_response(page: Page):
-    """
-    GIVEN  a diner is on the chat page
-    WHEN   they type "Hello" and click send
-    THEN   the input clears and an assistant response appears
-    """
+def test_send_message_and_receive_ai_response(page):
+    # TC-02 (positive): send a real message, receive a reply, then refresh the page.
     page.goto("/chat/table-1")
+    field = page.get_by_test_id("multimodal-input")
+    expect(field).to_be_editable()
+    prompt = "Hello. Please reply with a brief greeting only."
+    field.fill(prompt)
+    # Start listening before the click so even a fast chat response is captured.
+    with page.expect_response(lambda r: r.request.method == "POST" and r.url.endswith("/api/chat"), timeout=90_000) as sent:
+        page.get_by_test_id("send-button").click()
+    response = sent.value
+    # HTTP 200 means the request succeeded; wait for the response stream to finish.
+    assert response.status == 200, response.text()
+    response.finished()
+    # Sending should clear the input and add the diner's message to the conversation.
+    expect(field).to_have_value("")
+    expect(page.get_by_test_id("message-user")).to_contain_text(prompt)
+    assistant = page.get_by_test_id("message-assistant").get_by_test_id("message-content")
+    # AI wording can vary. The regex requires some text rather than an exact reply.
+    expect(assistant).to_contain_text(re.compile(r"\S"), timeout=60_000)
+    # Remember the table's conversation ID so we can check it survives a refresh.
+    chat_id = page.evaluate("localStorage.getItem('askthemenu:table-session:table-1')")
+    assert chat_id
+    page.reload()
+    # Both messages and the same conversation ID should still be available.
+    expect(page.get_by_test_id("message-user")).to_contain_text(prompt)
+    expect(page.get_by_test_id("message-assistant").get_by_test_id("message-content")).to_contain_text(re.compile(r"\S"))
+    assert page.evaluate("localStorage.getItem('askthemenu:table-session:table-1')") == chat_id
 
-    input_field = page.locator("[data-testid='multimodal-input']")
-    send_button = page.locator("[data-testid='send-button']")
 
-    expect(input_field).to_be_visible(timeout=15_000)
-
-    input_field.fill("Hello")
-    expect(send_button).to_be_enabled(timeout=5_000)
-    send_button.click()
-
-    # Input should clear after sending
-    expect(input_field).to_have_value("")
-
-    # Wait for assistant response to appear
-    assistant_msg = page.locator("[data-testid='message-assistant']").first
-    expect(assistant_msg).to_be_visible(timeout=60_000)
-
-    # Verify the response has text content
-    content = assistant_msg.text_content()
-    assert content is not None and len(content.strip()) > 0, \
-        "Assistant response should contain text"
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-# Test 3 – Negative: Empty message is not sent
-# ─────────────────────────────────────────────────────────────────────────────
-@pytest.mark.e2e
 @pytest.mark.negative
-def test_empty_message_is_not_sent(page: Page):
-    """
-    GIVEN  a diner is on the chat page with an empty input
-    WHEN   they click the send button without typing anything
-    THEN   no user message bubble appears and the URL does not change
-    """
+def test_empty_message_is_not_sent(page):
+    # TC-03 (negative): blank input must not create a message or call the chat API.
+    calls = []
+    # Record chat POST requests so the test checks network activity as well as the UI.
+    page.on("request", lambda r: calls.append(r.url) if r.method == "POST" and r.url.endswith("/api/chat") else None)
     page.goto("/chat/table-1")
-
-    input_field = page.locator("[data-testid='multimodal-input']")
-    send_button = page.locator("[data-testid='send-button']")
-
-    expect(input_field).to_be_visible(timeout=15_000)
-
-    # Ensure input is empty
-    expect(input_field).to_have_value("")
-
-    # Verify send button is disabled for empty input (negative test validation)
-    expect(send_button).to_be_disabled()
-
-    # Attempting to click with force does not trigger send
-    send_button.click(force=True)
-    page.wait_for_timeout(1500)
-
-    # No user message bubble should appear
-    user_messages = page.locator("[data-testid='message-user']")
-    assert user_messages.count() == 0, \
-        "No user message should appear when input is empty"
+    field, send = page.get_by_test_id("multimodal-input"), page.get_by_test_id("send-button")
+    expect(field).to_be_editable()
+    original_url = page.url
+    # Check both truly empty input and input containing only spaces.
+    for value in ("", "   "):
+        field.fill(value)
+        expect(send).to_be_disabled()
+        # Try the keyboard and the button. force=True does not enable a disabled button.
+        field.press("Enter")
+        send.click(force=True)
+    # Observe a bounded interval to detect an incorrectly scheduled send.
+    page.wait_for_timeout(800)
+    # Nothing should have been sent, displayed as a user bubble, or navigated away.
+    assert calls == [], f"Blank input dispatched chat requests: {calls}"
+    expect(page.get_by_test_id("message-user")).to_have_count(0)
+    assert page.url == original_url

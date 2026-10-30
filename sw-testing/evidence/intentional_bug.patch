@@ -1,0 +1,11 @@
+--- a/chatbot/app/menu/page.tsx
++++ b/chatbot/app/menu/page.tsx
+@@ -138,7 +138,7 @@
+       <header className="mb-6 flex flex-wrap items-start justify-between gap-3">
+         <div>
+           <h1 className="font-semibold text-2xl tracking-tight">
+-            Restaurant Menu
++            Unavailable menu
+           </h1>
+           <p className="mt-1 text-muted-foreground text-sm">
+             Browse all dishes, pairings, dietary tags, allergens, and prices

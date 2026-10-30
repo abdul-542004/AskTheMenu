@@ -1,0 +1,20 @@
+{
+  "application_file": "chatbot/app/menu/page.tsx",
+  "unchanged_test": "tests/test_menu_page.py::test_menu_page_loads_with_items",
+  "original_sha256": "1cec018ac2a5e83feda03c6e39721463d88feabe4eed22b48497fde27f606eff",
+  "unchanged_test_sha256": "69ede8b1019fdec3c9b160190d501625539f7876283de339887d868ebabf310c",
+  "mutated_sha256": "cffeb7b7f926bf4599b1b9f349563eaf3271ad9bcc8df72b08c5b8b69b72bf77",
+  "bug_injected": {
+    "tests": 3,
+    "passed": 0,
+    "failed": 3,
+    "exit_code": 1
+  },
+  "restored_sha256": "1cec018ac2a5e83feda03c6e39721463d88feabe4eed22b48497fde27f606eff",
+  "bug_fixed": {
+    "tests": 3,
+    "passed": 3,
+    "failed": 0,
+    "exit_code": 0
+  }
+}

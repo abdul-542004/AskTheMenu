@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="72.207" timestamp="2026-10-30T01:23:30.807321+05:00" hostname="WIN-GR4E3479I8I"><testcase classname="tests.test_menu_page" name="test_menu_page_loads_with_items[chromium]" time="23.279"><failure message="AssertionError: Locator expected to have text 'Restaurant Menu'&#10;Actual value: Unavailable menu &#10;Call log:&#10;  - LocatorAssertions.to_have_text with timeout 20000ms&#10;  -   - waiting for get_by_role(&quot;heading&quot;, level=1)&#10;  -     23 × locator resolved to &lt;h1 class=&quot;font-semibold text-2xl tracking-tight&quot;&gt;Unavailable menu&lt;/h1&gt;&#10;  -        - unexpected value &quot;Unavailable menu&quot;">tests\test_menu_page.py:14: in test_menu_page_loads_with_items
+    expect(page.get_by_role("heading", level=1)).to_have_text("Restaurant Menu")
+E   AssertionError: Locator expected to have text 'Restaurant Menu'
+E   Actual value: Unavailable menu 
+E   Call log:
+E     - LocatorAssertions.to_have_text with timeout 20000ms
+E     -   - waiting for get_by_role("heading", level=1)
+E     -     23 × locator resolved to &lt;h1 class="font-semibold text-2xl tracking-tight"&gt;Unavailable menu&lt;/h1&gt;
+E     -        - unexpected value "Unavailable menu"</failure></testcase><testcase classname="tests.test_menu_page" name="test_menu_page_loads_with_items[firefox]" time="23.870"><failure message="AssertionError: Locator expected to have text 'Restaurant Menu'&#10;Actual value: Unavailable menu &#10;Call log:&#10;  - LocatorAssertions.to_have_text with timeout 20000ms&#10;  -   - waiting for get_by_role(&quot;heading&quot;, level=1)&#10;  -     23 × locator resolved to &lt;h1 class=&quot;font-semibold text-2xl tracking-tight&quot;&gt;Unavailable menu&lt;/h1&gt;&#10;  -        - unexpected value &quot;Unavailable menu&quot;">tests\test_menu_page.py:14: in test_menu_page_loads_with_items
+    expect(page.get_by_role("heading", level=1)).to_have_text("Restaurant Menu")
+E   AssertionError: Locator expected to have text 'Restaurant Menu'
+E   Actual value: Unavailable menu 
+E   Call log:
+E     - LocatorAssertions.to_have_text with timeout 20000ms
+E     -   - waiting for get_by_role("heading", level=1)
+E     -     23 × locator resolved to &lt;h1 class="font-semibold text-2xl tracking-tight"&gt;Unavailable menu&lt;/h1&gt;
+E     -        - unexpected value "Unavailable menu"</failure></testcase><testcase classname="tests.test_menu_page" name="test_menu_page_loads_with_items[webkit]" time="23.084"><failure message="AssertionError: Locator expected to have text 'Restaurant Menu'&#10;Actual value: Unavailable menu &#10;Call log:&#10;  - LocatorAssertions.to_have_text with timeout 20000ms&#10;  -   - waiting for get_by_role(&quot;heading&quot;, level=1)&#10;  -     23 × locator resolved to &lt;h1 class=&quot;font-semibold text-2xl tracking-tight&quot;&gt;Unavailable menu&lt;/h1&gt;&#10;  -        - unexpected value &quot;Unavailable menu&quot;">tests\test_menu_page.py:14: in test_menu_page_loads_with_items
+    expect(page.get_by_role("heading", level=1)).to_have_text("Restaurant Menu")
+E   AssertionError: Locator expected to have text 'Restaurant Menu'
+E   Actual value: Unavailable menu 
+E   Call log:
+E     - LocatorAssertions.to_have_text with timeout 20000ms
+E     -   - waiting for get_by_role("heading", level=1)
+E     -     23 × locator resolved to &lt;h1 class="font-semibold text-2xl tracking-tight"&gt;Unavailable menu&lt;/h1&gt;
+E     -        - unexpected value "Unavailable menu"</failure></testcase></testsuite></testsuites>

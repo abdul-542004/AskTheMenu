@@ -1,0 +1,18 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-8.3.3, pluggy-1.7.0 -- C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\venv\Scripts\python.exe
+metadata: {'Python': '3.12.10', 'Platform': 'Windows-11-10.0.26300-SP0', 'Packages': {'pytest': '8.3.3', 'pluggy': '1.7.0'}, 'Plugins': {'base-url': '2.1.0', 'html': '4.1.1', 'metadata': '3.1.1', 'playwright': '0.6.2'}, 'Base URL': ''}
+rootdir: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing
+configfile: pytest.ini
+plugins: base-url-2.1.0, html-4.1.1, metadata-3.1.1, playwright-0.6.2
+collecting ... collected 3 items
+
+tests/test_menu_page.py::test_menu_page_loads_with_items[chromium] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\bug_fixed\PASS_test_menu_page_loads_with_items_chromium_.png
+PASSED [ 33%]
+tests/test_menu_page.py::test_menu_page_loads_with_items[firefox] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\bug_fixed\PASS_test_menu_page_loads_with_items_firefox_.png
+PASSED [ 66%]
+tests/test_menu_page.py::test_menu_page_loads_with_items[webkit] Screenshot: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\screenshots\bug_fixed\PASS_test_menu_page_loads_with_items_webkit_.png
+PASSED  [100%]
+
+- generated xml file: C:\MyWorks\AskTheMenu-main\AskTheMenu-main\sw-testing\reports\bug_fixed.xml -
+- Generated html report: file:///C:/MyWorks/AskTheMenu-main/AskTheMenu-main/sw-testing/reports/bug_fixed.html -
+============================= 3 passed in 11.04s ==============================

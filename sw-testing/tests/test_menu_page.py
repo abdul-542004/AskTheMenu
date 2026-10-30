@@ -1,85 +1,49 @@
-"""
-Feature 2 – Menu Page (E2E Tests)
-==================================
-Tests the restaurant menu browser at /menu: loading, category navigation,
-and handling a non-existent menu page.
-
-Tests:
-  1. [Positive] Menu page loads and displays restaurant items
-  2. [Positive] Category anchor links scroll to correct section
-  3. [Negative] Navigating to a non-existent menu subpage shows 404
-"""
+"""Feature 2: menu content, category navigation, and missing-route handling."""
+import re
 
 import pytest
-from playwright.sync_api import Page, expect
+from playwright.sync_api import expect
+
+# Mark these as end-to-end tests because they interact with the website in a browser.
+pytestmark = pytest.mark.e2e
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Test 1 – Positive: Menu page loads with items
-# ─────────────────────────────────────────────────────────────────────────────
-@pytest.mark.e2e
 @pytest.mark.positive
-def test_menu_page_loads_with_items(page: Page):
-    """
-    GIVEN  a user navigates to /menu
-    WHEN   the page finishes loading
-    THEN   the heading "Restaurant Menu" is visible and menu item cards exist
-    """
+def test_menu_page_loads_with_items(page):
+    # TC-04 (positive): the menu should display its heading and useful dish details.
     page.goto("/menu")
+    # The intentional-bug demo changes the website heading; this expectation stays the same.
+    expect(page.get_by_role("heading", level=1)).to_have_text("Restaurant Menu")
+    # Each article is a dish card. Check the first card's name, PKR price and allergens.
+    cards = page.locator("article")
+    expect(cards.first).to_be_visible()
+    expect(cards.first.locator("h3")).not_to_be_empty()
+    expect(cards.first).to_contain_text(re.compile(r"PKR\s+[\d,]+"))  # For example: PKR 1,650.
+    expect(cards.first).to_contain_text("Allergens:")
+    # Every menu category should have a visible navigation link.
+    for anchor in ("desi-cuisines", "chinese", "continental", "fusion", "staple"):
+        expect(page.locator(f"a[href='#{anchor}']")).to_be_visible()
 
-    heading = page.locator("h1", has_text="Restaurant Menu")
-    expect(heading).to_be_visible(timeout=15_000)
 
-    # At least one article card should be rendered (menu items)
-    items = page.locator("article")
-    expect(items.first).to_be_visible(timeout=15_000)
-    assert items.count() > 0, "Menu page should display at least one item card"
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-# Test 2 – Positive: Category anchors navigate to sections
-# ─────────────────────────────────────────────────────────────────────────────
-@pytest.mark.e2e
 @pytest.mark.positive
-def test_category_anchor_scrolls_to_section(page: Page):
-    """
-    GIVEN  a user is on the /menu page
-    WHEN   they click the "Chinese" category anchor
-    THEN   the page scrolls to the Chinese section heading
-    """
+def test_category_anchor_scrolls_to_section(page):
+    # TC-05 (positive): category links should take the diner to the matching section.
     page.goto("/menu")
-
-    # Wait for the page to load
-    heading = page.locator("h1", has_text="Restaurant Menu")
-    expect(heading).to_be_visible(timeout=15_000)
-
-    # Click the Chinese category anchor
-    chinese_link = page.locator("a[href='#chinese']")
-    expect(chinese_link).to_be_visible(timeout=5_000)
-    chinese_link.click()
-
-    # The Chinese section heading should now be in view
-    chinese_section = page.locator("section#chinese h2")
-    expect(chinese_section).to_be_visible(timeout=5_000)
-
-    # Verify the URL hash changed
-    assert "#chinese" in page.url, "URL should contain #chinese after clicking anchor"
+    for anchor in ("chinese", "continental", "fusion", "staple", "desi-cuisines"):
+        link = page.locator(f"a[href='#{anchor}']")
+        # Bring the navigation link back into view after the previous category click.
+        link.scroll_into_view_if_needed()
+        link.click()
+        # Check both the URL fragment and the section's position on the screen.
+        expect(page).to_have_url(re.compile(rf"#{anchor}$"))
+        expect(page.locator(f"section#{anchor} h2")).to_be_in_viewport()
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Test 3 – Negative: Non-existent menu subpage returns 404
-# ─────────────────────────────────────────────────────────────────────────────
-@pytest.mark.e2e
 @pytest.mark.negative
-def test_nonexistent_page_returns_404(page: Page):
-    """
-    GIVEN  a user navigates to /menu/does-not-exist
-    WHEN   the server processes the request
-    THEN   a 404 status or "not found" message is shown
-    """
+def test_nonexistent_page_returns_404(page):
+    # TC-06 (negative): a menu URL that does not exist should show a proper 404 page.
     response = page.goto("/menu/does-not-exist")
-
-    # Next.js returns 404 for non-existent routes
-    assert response is not None
-    assert response.status == 404, \
-        f"Expected 404 for non-existent page, got {response.status}"
+    # Check the server response and the message the diner actually sees.
+    assert response.status == 404
+    expect(page.get_by_role("heading", name="404", exact=True)).to_be_visible()
+    expect(page.get_by_text("This page could not be found.", exact=True)).to_be_visible()

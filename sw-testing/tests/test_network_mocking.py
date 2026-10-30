@@ -1,100 +1,76 @@
-"""
-Network Mocking Tests
-======================
-Tests that the frontend handles mocked/broken API responses gracefully
-using Playwright's route interception (network mocking).
-
-Tests:
-  1. [Mock] Chat API returns empty data → page handles without crashing
-  2. [Mock] Chat API returns 500 error  → error message shown to user
-"""
+"""Two real route interceptions, explicit alerts, and successful retry checks."""
+import json
 
 import pytest
-import re
-from playwright.sync_api import Page, expect
+from playwright.sync_api import expect
+
+# Both tests simulate an unsuccessful response, so they share mock and negative markers.
+pytestmark = [pytest.mark.mock, pytest.mark.negative]
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Test 1 – Mock: Empty data response
-# ─────────────────────────────────────────────────────────────────────────────
-@pytest.mark.mock
-@pytest.mark.negative
-def test_mock_empty_api_response(page: Page):
-    """
-    GIVEN  the chat API is mocked to return an empty response (no AI content)
-    WHEN   a user sends a message
-    THEN   the page does NOT crash and remains interactive
-    """
-    # Mock the chat API to return a 200 with empty streaming data
-    page.route("**/api/chat", lambda route: route.fulfill(
-        status=200,
-        content_type="text/plain",
-        body=""
-    ))
+def verify_recovery(page, status, body, alert_text):
+    # Shared steps for TC-17 and TC-18; each supplies a different simulated response.
+    intercepted = []
 
+    def broken(route):
+        # Save the submitted request data, then provide our response instead of the server's.
+        intercepted.append(route.request.post_data_json)
+        route.fulfill(status=status, content_type="text/event-stream" if status == 200 else "application/json", body=body)
+
+    # Register the mock before opening the chat page or sending a message.
+    page.route("**/api/chat", broken)
     page.goto("/chat/table-1")
+    field = page.get_by_test_id("multimodal-input")
+    expect(field).to_be_editable()
+    field.fill("Hello")
+    # Listen before clicking Send so we can inspect the response to this exact action.
+    with page.expect_response(lambda r: r.request.method == "POST" and r.url.endswith("/api/chat")) as mocked:
+        page.get_by_test_id("send-button").click()
+    # Confirm our mock was used once and received the message we typed.
+    assert mocked.value.status == status
+    assert len(intercepted) == 1
+    assert intercepted[0]["message"]["parts"][0]["text"] == "Hello"
+    # The app should explain the problem and keep the input usable.
+    alert = page.get_by_test_id("toast").filter(has_text=alert_text)
+    expect(alert).to_be_visible()
+    expect(alert).to_have_attribute("role", "alert")
+    expect(field).to_be_editable()
+    # Replace the failed response with a successful simulated reply for the retry.
+    page.unroute("**/api/chat", broken)
+    retried = []
+    # The chat expects streamed events: start a message, add text, then finish it.
+    parts = [{"type": "start", "messageId": "recovered-assistant"},
+             {"type": "text-start", "id": "answer"},
+             {"type": "text-delta", "id": "answer", "delta": "Connection restored. How can I help?"},
+             {"type": "text-end", "id": "answer"},
+             {"type": "finish", "finishReason": "stop"}]
+    # Each event is a data: line followed by a blank line, as in a normal chat stream.
+    stream = "".join(f"data: {json.dumps(part)}\n\n" for part in parts) + "data: [DONE]\n\n"
 
-    input_field = page.locator("[data-testid='multimodal-input']")
-    send_button = page.locator("[data-testid='send-button']")
+    def healthy(route):
+        # Provide the valid stream and the header required by the app's chat library.
+        retried.append(route.request.post_data_json)
+        route.fulfill(status=200, content_type="text/event-stream", headers={"x-vercel-ai-ui-message-stream": "v1"}, body=stream)
 
-    expect(input_field).to_be_visible(timeout=15_000)
-
-    input_field.fill("What do you recommend?")
-    send_button.click()
-
-    # Wait a moment for the response handling to complete
-    page.wait_for_timeout(5000)
-
-    # Page should not crash — the input should still be usable
-    expect(input_field).to_be_visible()
-
-    # No unhandled errors should appear
-    body_text = page.locator("body").text_content() or ""
-    assert "Unhandled Runtime Error" not in body_text, \
-        "Page should not show unhandled runtime error on empty response"
+    # Make a second send to prove the page recovers after the earlier problem.
+    page.route("**/api/chat", healthy)
+    field.fill("Try again")
+    expect(page.get_by_test_id("send-button")).to_be_enabled()
+    with page.expect_response(lambda r: r.request.method == "POST" and r.url.endswith("/api/chat")) as recovered:
+        page.get_by_test_id("send-button").click()
+    # The reply should appear, the input should clear and the input should remain editable.
+    assert recovered.value.status == 200
+    assert len(retried) == 1
+    expect(page.get_by_test_id("message-assistant").get_by_test_id("message-content")).to_have_text("Connection restored. How can I help?")
+    expect(field).to_have_value("")
+    expect(field).to_be_editable()
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Test 2 – Mock: Server error (500) response
-# ─────────────────────────────────────────────────────────────────────────────
-@pytest.mark.mock
-@pytest.mark.negative
-def test_mock_server_error_response(page: Page):
-    """
-    GIVEN  the chat API is mocked to return a 500 Internal Server Error
-    WHEN   a user sends a message
-    THEN   the page shows an error/trouble message and does NOT crash
-    """
-    # Mock the chat API to return 500
-    page.route("**/api/chat", lambda route: route.fulfill(
-        status=500,
-        content_type="application/json",
-        body='{"error": "Internal server error"}'
-    ))
+def test_mock_empty_api_response(page):
+    # TC-17: return HTTP 200 with no content and check the no-response notification.
+    verify_recovery(page, 200, "", "No response was received. Please try again.")
 
-    page.goto("/chat/table-1")
 
-    input_field = page.locator("[data-testid='multimodal-input']")
-    send_button = page.locator("[data-testid='send-button']")
-
-    expect(input_field).to_be_visible(timeout=15_000)
-
-    input_field.fill("Show me the menu")
-    send_button.click()
-
-    # Wait for error handling
-    page.wait_for_timeout(5000)
-
-    # The page should show some kind of error indication
-    error_pattern = re.compile(r"error|failed|trouble|something went wrong", re.IGNORECASE)
-    error_element = page.locator("body").filter(has_text=error_pattern)
-
-    # The page should still be functional (input visible)
-    expect(input_field).to_be_visible()
-
-    # Verify the page handled the error (shows error text or toast)
-    body_text = page.locator("body").text_content() or ""
-
-    # At minimum, the page should not show an unhandled exception
-    assert "Unhandled Runtime Error" not in body_text, \
-        "Page should handle 500 error gracefully without unhandled exception"
+def test_mock_server_error_response(page):
+    # TC-18: return HTTP 500 with an error message and check that it is shown to the user.
+    verify_recovery(page, 500, json.dumps({"error": "Internal server error"}), "Internal server error")
